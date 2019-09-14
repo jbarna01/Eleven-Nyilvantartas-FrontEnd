@@ -1,0 +1,11 @@
+.menu-gomb {
+  margin: 0px 10px;
+  width: 100px;
+  color: #595959;
+  font-weight: bold;
+}
+
+.kilepes-gomb {
+  float: right;
+  margin-right: 40px;
+}
