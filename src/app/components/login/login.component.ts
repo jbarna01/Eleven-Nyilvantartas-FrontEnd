@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {CoreService} from "../../services/core.service";
+import {Component, Input, OnInit } from '@angular/core';
+import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -12,18 +12,21 @@ export class LoginComponent implements OnInit {
   public password = '';
 
   @Input('paramData') public isBelepve;
-  @Output() public childEvent = new EventEmitter();
 
-
-  constructor(private core: CoreService) { }
-
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
+
   }
 
   belepes() {
-    if ((this.userName == 'jbarna') && (this.password = 'bb11JJ22')) {
-      this.childEvent.emit('OK');
+    if ((this.userName == '1') && (this.password = '1')) {
+      console.log('Belépve');
+      this.isBelepve = true;
+      this.router.navigate(['cimsor',1])
+
+    } else {
+      console.log('Nem sikerült.')
     }
   }
 

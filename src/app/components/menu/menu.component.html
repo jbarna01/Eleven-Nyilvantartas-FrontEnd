@@ -1,17 +1,17 @@
 <mat-card class="prg_fejlec">
-  <button *ngIf="isBelepve" class="menu-gomb" mat-stroked-button [matMenuTriggerFor]="aboveMenu">Above</button>
+  <button *ngIf="isBelepve" class="menu-gomb" mat-stroked-button [matMenuTriggerFor]="aboveMenu">Első</button>
   <mat-menu #aboveMenu="matMenu" yPosition="above">
     <button mat-menu-item>Item 1</button>
     <button mat-menu-item>Item 2</button>
   </mat-menu>
 
-  <button class="menu-gomb" mat-stroked-button="" [matMenuTriggerFor]="belowMenu">Below</button>
+  <button class="menu-gomb" mat-stroked-button="" [matMenuTriggerFor]="belowMenu">Második</button>
   <mat-menu #belowMenu="matMenu" yPosition="below">
     <button mat-menu-item>Item 1</button>
     <button mat-menu-item>Item 2</button>
   </mat-menu>
 
-  <button class="menu-gomb" mat-stroked-button [matMenuTriggerFor]="beforeMenu">Before</button>
+  <button class="menu-gomb" mat-stroked-button [matMenuTriggerFor]="beforeMenu">Harmadik</button>
   <mat-menu #beforeMenu="matMenu" xPosition="before">
     <button mat-menu-item>Item 1</button>
     <button mat-menu-item>Item 2</button>
