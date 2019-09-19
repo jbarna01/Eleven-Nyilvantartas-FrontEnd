@@ -1,0 +1,8 @@
+<mat-toolbar color="primary" class="navbar">
+  <div *ngIf="!isBelepve">Eleven nyílvántartó rendszer</div>
+  <div style="cursor:pointer;" *ngIf="isBelepve" (click)="hallagoiLista()">Hallgatók</div>
+  <div *ngIf="isBelepve">
+    <span (click)="torzs()" >Törzs</span>
+    <span (click)="logout()">Kilépés</span>
+  </div>
+</mat-toolbar>
