@@ -34,4 +34,7 @@ import { HallgatokComponent } from './components/hallgatok/hallgatok.component';
   bootstrap: [AppComponent]
 })
 export class AppModule {
+
+  public isBelepveGlobal = false;
+
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, ParamMap, Router} from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
+import {GlobalsService} from "../../services/globals.service";
 
 @Component({
   selector: 'app-cimsor',
@@ -8,21 +9,17 @@ import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 })
 export class CimsorComponent implements OnInit {
 
-  public isBelepve;
+  isBelepve: boolean;
 
-  constructor(private route: ActivatedRoute, private router: Router) {
-    this.isBelepve = false;
+  constructor(private route: ActivatedRoute, private router: Router, private global: GlobalsService ) {
   }
 
   ngOnInit() {
-    this.route.paramMap.subscribe((params: ParamMap) => {
-      let isLogin = parseInt(params.get('isBelepve'));
-      this.isBelepve = isLogin==1?true:false;
-    })
+    this.global.isBelepve.subscribe(isBelepve => this.isBelepve = isBelepve)
   }
 
   hallagoiLista() {
-    console.log("Hallagtói lista")
+    this.router.navigate(['hallgatok'])
   }
 
   torzs() {
@@ -30,7 +27,7 @@ export class CimsorComponent implements OnInit {
   }
 
   logout() {
-    this.isBelepve = false;
+    this.global.changeLogin(false);
     this.router.navigate([''])
   }
 
