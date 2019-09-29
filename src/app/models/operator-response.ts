@@ -1,6 +1,6 @@
 import { Jogok } from "./Jogok";
 
-export class Operator {
+export class OperatorResponse {
 
   id:         number;
   vezetekNev: string;
