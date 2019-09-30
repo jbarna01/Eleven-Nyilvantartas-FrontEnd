@@ -20,16 +20,19 @@ export class CimsorComponent implements OnInit {
 
   ngOnInit() {
     this.global.isBelepve.subscribe(isBelepve => this._isBelepve = isBelepve);
-    let teljesNev = this.route.snapshot.paramMap.get('belepetFelhasznalo');
-    this._teljesNev = teljesNev;
+    this.global.teljesNev.subscribe(teljesNev => this._teljesNev = teljesNev);
+    if (!this._isBelepve) {
+      console.log('Nincs belépve senki');
+      this.router.navigate(['']);
+    }
   }
 
-  hallagoiLista() {
-    this.router.navigate(['hallgatok'])
+  hallgatoiLista() {
+    this.router.navigate(['hallgatok']);
   }
 
   torzs() {
-    console.log("Törzsadat")
+    this.router.navigate(['operatorok']);
   }
 
   logout() {

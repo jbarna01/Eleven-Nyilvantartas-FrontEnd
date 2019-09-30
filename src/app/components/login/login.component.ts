@@ -49,7 +49,8 @@ export class LoginComponent implements OnInit {
           console.log('Belépve');
           this._global.changeLogin(true);
           this._teljesNev = this._operator.vezetekNev + ' ' + this._operator.keresztNev;
-          this._router.navigate(['/cimsor',{belepetFelhasznalo: this._teljesNev}])
+          this._global.setTeljesNev(this._teljesNev);
+          this._router.navigate(['/cimsor'])
         } else {
           this.uzenetek('Sikertelen belépés!');
         }
