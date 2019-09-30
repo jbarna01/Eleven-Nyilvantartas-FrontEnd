@@ -1,8 +1,10 @@
 <mat-toolbar color="primary" class="navbar">
-  <div *ngIf="!isBelepve">Eleven nyílvántartó rendszer</div>
-  <div style="cursor:pointer;" *ngIf="isBelepve" (click)="hallagoiLista()">Hallgatók</div>
-  <div *ngIf="isBelepve">
+  <div *ngIf="!_isBelepve">Eleven nyílvántartó rendszer</div>
+  <div style="cursor:pointer;" *ngIf="_isBelepve" (click)="hallagoiLista()">Hallgatók</div>
+  <div *ngIf="_isBelepve">
     <span (click)="torzs()" >Törzs</span>
     <span (click)="logout()">Kilépés</span>
+    <span>{{ '(' + _teljesNev + ')' }}</span>
   </div>
 </mat-toolbar>
+

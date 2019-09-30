@@ -14,13 +14,12 @@ import {HttpParams} from "@angular/common/http";
 
 export class LoginComponent implements OnInit {
 
-  private userName = '';
-  private password = '';
-  private operator: Operator;
-  // private currentOperatorSubject: BehaviorSubject<Operator>;
-  // public currentOperator: Observable<Operator>;
-  private isBelepve: boolean;
-  private params: HttpParams;
+  private _userName = '';
+  private _password = '';
+  private _operator: Operator;
+  private _isBelepve: boolean;
+  private _params: HttpParams;
+  private _teljesNev: string;
 
   constructor(
               private _route: ActivatedRoute,
@@ -31,25 +30,26 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this._global.isBelepve.subscribe(isBelepve => this.isBelepve = isBelepve)
+    this._global.isBelepve.subscribe(isBelepve => this._isBelepve = isBelepve)
   }
 
   belepes() {
 
-  this.operator = new Operator();
+  this._operator = new Operator();
 
-    if (this.userName) {
-      this.operator.username = this.userName;
-      this.operator.password = this.password;
+    if (this._userName) {
+      this._operator.username = this._userName;
+      this._operator.password = this._password;
 
-      this.params = this.setParameters(this.userName, this.password);
+      this._params = this.setParameters(this._userName, this._password);
 
-      this._operatorService.loginOperatorGET(this.params).subscribe( operator => {
-        this.operator = operator
-        if (this.operator != null) {
+      this._operatorService.loginOperatorGET(this._params).subscribe( operator => {
+        this._operator = operator
+        if (this._operator != null) {
           console.log('Belépve');
           this._global.changeLogin(true);
-          this._router.navigate(['cimsor',1])
+          this._teljesNev = this._operator.vezetekNev + ' ' + this._operator.keresztNev;
+          this._router.navigate(['/cimsor',{belepetFelhasznalo: this._teljesNev}])
         } else {
           this.uzenetek('Sikertelen belépés!');
         }

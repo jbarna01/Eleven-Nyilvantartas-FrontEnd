@@ -9,13 +9,19 @@ import {GlobalsService} from "../../services/globals.service";
 })
 export class CimsorComponent implements OnInit {
 
-  isBelepve: boolean;
+  private _isBelepve: boolean;
+  private _teljesNev: string;
 
-  constructor(private route: ActivatedRoute, private router: Router, private global: GlobalsService ) {
+  constructor(
+          private route: ActivatedRoute,
+          private router: Router,
+          private global: GlobalsService ) {
   }
 
   ngOnInit() {
-    this.global.isBelepve.subscribe(isBelepve => this.isBelepve = isBelepve)
+    this.global.isBelepve.subscribe(isBelepve => this._isBelepve = isBelepve);
+    let teljesNev = this.route.snapshot.paramMap.get('belepetFelhasznalo');
+    this._teljesNev = teljesNev;
   }
 
   hallagoiLista() {
