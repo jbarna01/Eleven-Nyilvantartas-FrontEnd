@@ -1,0 +1,15 @@
+mat-table {
+  width: 80%;
+  margin: 20px auto;
+}
+
+mat-header-cell {
+  background-color: cornflowerblue;
+  font-weight: bold;
+  color: darkblue;
+  font-size: 14px;
+}
+
+mat-cell {
+  cursor: pointer;
+}

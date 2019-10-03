@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {Operator} from "../../models/Operator";
 import {OperatorService} from "../../services/operator.service";
-import {CoreService} from "../../services/core.service";
 import {GlobalsService} from "../../services/globals.service";
 import {Router} from "@angular/router";
+import {MatTableDataSource, MatSort, MatPaginator} from "@angular/material";
+import {MatDialog} from "@angular/material/dialog";
+import {OperatorDialogComponent} from "./operator-dialog/operator-dialog.component";
 
 @Component({
   selector: 'app-operatorok',
@@ -12,12 +14,19 @@ import {Router} from "@angular/router";
 })
 export class OperatorokComponent implements OnInit {
 
-  operatorokLista: Operator[];
+  // operatorokLista: Operator[];
+  operatorokLista =  new MatTableDataSource<Operator>();
   isBelepve: boolean;
+  displayedHeadColums: string[] = ['id', 'vezeteknev', 'keresztnev', 'username', 'password', 'aktiv', 'edit', 'delete'];
+  displayedRowColums: string[] = ['id', 'vezeteknev', 'keresztnev', 'username', 'password', 'aktiv', 'edit', 'delete'];
+
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(private operatorService: OperatorService,
               private global: GlobalsService,
-              private router: Router) { }
+              private router: Router,
+              private dialog: MatDialog) { }
 
   ngOnInit() {
     this.global.isBelepve.subscribe(isBelepve => this.isBelepve = isBelepve)
@@ -25,10 +34,23 @@ export class OperatorokComponent implements OnInit {
       console.log('Nincs belépve senki');
       this.router.navigate(['']);
     } else {
-      this.operatorService.getOperatorok().subscribe(operatorok => {
-        this.operatorokLista = operatorok;
+        this.operatorService.getOperatorok().subscribe(operatorok => {
+        this.operatorokLista = new MatTableDataSource(operatorok);
+        this.operatorokLista.sort = this.sort;
+          this.operatorokLista.paginator = this.paginator;
       })
     }
   }
 
+  private felhasznaloKivalaszt(row) {
+    console.log(row);
+  }
+
+  applyFilter(filterValue: string) {
+    this.operatorokLista.filter = filterValue.trim().toLowerCase();
+  }
+
+  openOperatorDialog(id: string) {
+    this.dialog.open(OperatorDialogComponent)
+  }
 }

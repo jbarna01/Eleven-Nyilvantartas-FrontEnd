@@ -12,6 +12,7 @@ import { LoginComponent } from './components/login/login.component';
 import { OperatorokComponent } from './components/operatorok/operatorok.component';
 import { CimsorComponent } from './components/cimsor/cimsor.component';
 import { HallgatokComponent } from './components/hallgatok/hallgatok.component';
+import { OperatorDialogComponent } from './components/operatorok/operator-dialog/operator-dialog.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,9 @@ import { HallgatokComponent } from './components/hallgatok/hallgatok.component';
     OperatorokComponent,
     CimsorComponent,
     HallgatokComponent,
+    OperatorDialogComponent,
   ],
+  entryComponents: [OperatorDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
