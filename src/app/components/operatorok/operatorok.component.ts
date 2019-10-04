@@ -5,7 +5,7 @@ import {GlobalsService} from "../../services/globals.service";
 import {Router} from "@angular/router";
 import {MatTableDataSource, MatSort, MatPaginator} from "@angular/material";
 import {MatDialog} from "@angular/material/dialog";
-import {OperatorDialogComponent} from "./operator-dialog/operator-dialog.component";
+import {DialogsComponent} from "./dialogs/dialogs.component";
 
 @Component({
   selector: 'app-operatorok',
@@ -50,7 +50,11 @@ export class OperatorokComponent implements OnInit {
     this.operatorokLista.filter = filterValue.trim().toLowerCase();
   }
 
-  openOperatorDialog(id: string) {
-    this.dialog.open(OperatorDialogComponent)
+  operatorTorlese(id: string) {
+    this.dialog.open(DialogsComponent)
+  }
+
+  operatorKarbantartasa(operator: Operator) {
+
   }
 }

@@ -33,7 +33,8 @@ import {MatTooltipModule} from "@angular/material/tooltip";
       MatSortModule,
       MatCheckboxModule,
       MatDialogModule,
-      MatTooltipModule
+      MatTooltipModule,
+      MatCardModule
   ]
 
   @NgModule({
