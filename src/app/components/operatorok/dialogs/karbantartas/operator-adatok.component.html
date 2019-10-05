@@ -1,0 +1,36 @@
+<h2 mat-dialog-title>Operátor karbantartás</h2>
+<mat-dialog-content>
+
+  <mat-card class="dialog_ablak">
+    <mat-card-content>
+      <mat-grid-list cols="2" rowHeight="80px" class="mat-grid-li">
+        <mat-grid-tile class="mat-grid-tit">
+          <mat-form-field class="form">
+            <input [(ngModel)] = "_operator.vezetekNev" class="input_text" matInput placeholder="Vezetéknév:" >
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile class="mat-grid-tit">
+          <mat-form-field class="form">
+            <input [(ngModel)] = "_operator.keresztNev" class="input_text" matInput placeholder="Keresztnév:" >
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile class="mat-grid-tit">
+          <mat-form-field class="form">
+            <input [(ngModel)] = "_operator.username" class="input_text" matInput placeholder="Felhasználó név:" >
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile class="mat-grid-tit">
+            <mat-checkbox [checked]="_operator.aktiv=='A'" labelPosition="before">Aktív felhasználó</mat-checkbox>
+        </mat-grid-tile>
+        <mat-grid-tile class="mat-grid-tit">
+            <button mat-raised-button (click)="jelszoValtoztatas(_operator)">Jelszó változtatás</button>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-card-content>
+  </mat-card>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close="false">Mégse</button>
+  <button mat-raised-button mat-dialog-close="true">Mentés</button>
+</mat-dialog-actions>

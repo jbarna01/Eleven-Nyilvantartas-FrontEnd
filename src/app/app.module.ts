@@ -12,8 +12,9 @@ import { LoginComponent } from './components/login/login.component';
 import { OperatorokComponent } from './components/operatorok/operatorok.component';
 import { CimsorComponent } from './components/cimsor/cimsor.component';
 import { HallgatokComponent } from './components/hallgatok/hallgatok.component';
-import {DialogsComponent} from "./components/operatorok/dialogs/dialogs.component";
-
+import {OperatorTorlesComponent} from "./components/operatorok/dialogs/torles/operator-torles.component";
+import { OperatorAdatokComponent } from './components/operatorok/dialogs/karbantartas/operator-adatok.component';
+import { JelszoModositasComponent } from './components/operatorok/dialogs/jelszo-modositas/jelszo-modositas.component';
 
 @NgModule({
   declarations: [
@@ -23,9 +24,11 @@ import {DialogsComponent} from "./components/operatorok/dialogs/dialogs.componen
     OperatorokComponent,
     CimsorComponent,
     HallgatokComponent,
-    DialogsComponent
+    OperatorTorlesComponent,
+    OperatorAdatokComponent,
+    JelszoModositasComponent
   ],
-  entryComponents: [DialogsComponent],
+  entryComponents: [OperatorTorlesComponent, OperatorAdatokComponent, JelszoModositasComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

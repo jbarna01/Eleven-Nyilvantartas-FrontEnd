@@ -47,7 +47,7 @@
 
     <ng-container matColumnDef="delete">
       <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
-      <mat-cell *matCellDef="let element" (click)="operatorTorlese(element.id.toString())">
+      <mat-cell *matCellDef="let element" (click)="operatorTorlese(element)">
         <mat-icon style="color: red" matTooltip="Operátor törlése({{element.vezetekNev + ' ' + element.keresztNev}})" matTooltipShowDelay="500" matTooltipHideDelay="500" matTooltipPosition="right">highlight_off</mat-icon>
       </mat-cell>
     </ng-container>
@@ -59,6 +59,3 @@
 
   <mat-paginator [pageSizeOptions]='[5, 10, 20]' showFirstLastButtons></mat-paginator>
 </div>
-<!--<p *ngFor="let operator of operatorokLista">-->
-<!--  {{ operator.id }} {{ operator.vezetekNev }} {{ operator.keresztNev }} {{ operator.aktiv }}  {{ operator.username }} {{ operator.password }}-->
-<!-- </p>-->

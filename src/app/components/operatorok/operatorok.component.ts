@@ -5,7 +5,8 @@ import {GlobalsService} from "../../services/globals.service";
 import {Router} from "@angular/router";
 import {MatTableDataSource, MatSort, MatPaginator} from "@angular/material";
 import {MatDialog} from "@angular/material/dialog";
-import {DialogsComponent} from "./dialogs/dialogs.component";
+import {OperatorTorlesComponent} from "./dialogs/torles/operator-torles.component";
+import {OperatorAdatokComponent} from "./dialogs/karbantartas/operator-adatok.component";
 
 @Component({
   selector: 'app-operatorok',
@@ -50,11 +51,19 @@ export class OperatorokComponent implements OnInit {
     this.operatorokLista.filter = filterValue.trim().toLowerCase();
   }
 
-  operatorTorlese(id: string) {
-    this.dialog.open(DialogsComponent)
+  operatorTorlese(_operator: Operator) {
+    let dialogRef = this.dialog.open(OperatorTorlesComponent, {data: _operator});
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialaog válasz: ${result}`);
+    })
   }
 
-  operatorKarbantartasa(operator: Operator) {
+  operatorKarbantartasa(_operator: Operator) {
+    let dialogRef = this.dialog.open(OperatorAdatokComponent, {data: _operator});
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialaog válasz: ${result}`);
+    })
   }
 }
