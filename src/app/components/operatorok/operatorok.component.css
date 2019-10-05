@@ -13,3 +13,13 @@ mat-header-cell {
 mat-cell {
   cursor: pointer;
 }
+
+mat-form-field {
+  width: 80%;
+  margin-top: 20px;
+  margin-left: 10%;
+}
+ .mat-column-edit, .mat-column-delete {
+   color: #f0f0f0;
+   width: 20px;
+ }

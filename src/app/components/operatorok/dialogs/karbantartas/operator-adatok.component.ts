@@ -12,11 +12,15 @@ import {JelszoModositasComponent} from "../jelszo-modositas/jelszo-modositas.com
 export class OperatorAdatokComponent implements OnInit {
 
   private _operator: __Operator;
+  private _ujOperator: boolean;
+  private _ujJelszo1: string;
+  private _ujJelszo2: string;
 
   constructor(@Inject(MAT_DIALOG_DATA) private operator: __Operator,
               private router: Router,
               private dialog: MatDialog) {
     this._operator = operator;
+    this._ujOperator = this._operator.id == null;
   }
   ngOnInit() {
   }

@@ -39,14 +39,14 @@
     </ng-container>
 
     <ng-container matColumnDef="edit">
-      <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>szerekszt</mat-header-cell>
       <mat-cell *matCellDef="let element" (click)="operatorKarbantartasa(element)">
         <mat-icon color="primary" matTooltip="Operátor módosítás" matTooltipShowDelay="500" matTooltipHideDelay="500" matTooltipPosition="right">create</mat-icon>
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="delete">
-      <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>töröl</mat-header-cell>
       <mat-cell *matCellDef="let element" (click)="operatorTorlese(element)">
         <mat-icon style="color: red" matTooltip="Operátor törlése({{element.vezetekNev + ' ' + element.keresztNev}})" matTooltipShowDelay="500" matTooltipHideDelay="500" matTooltipPosition="right">highlight_off</mat-icon>
       </mat-cell>
