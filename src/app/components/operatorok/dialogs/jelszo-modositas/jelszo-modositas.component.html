@@ -1,1 +1,31 @@
-<p>jelszo-modositas works!</p>
+<h2 mat-dialog-title>Jelszó módosítás</h2>
+<mat-dialog-content>
+
+  <mat-card class="dialog_ablak">
+    <mat-card-content>
+      <mat-grid-list cols="1" rowHeight="80px" class="mat-grid-li">
+        <mat-grid-tile class="mat-grid-tit">
+          <mat-form-field class="form">
+            <input [(ngModel)] = "_aktualisJelszo" matInput placeholder="Aktuális jelszó:" type="password">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile class="mat-grid-tit">
+          <mat-form-field class="form">
+            <input [(ngModel)] = "_ujJelszo1" matInput placeholder="Új jelszó:" type="password">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile class="mat-grid-tit">
+          <mat-form-field class="form">
+            <input [(ngModel)] = "_ujJelszo2" matInput placeholder="Új jelszó ismét:" type="password">
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-card-content>
+  </mat-card>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close="false">Mégse</button>
+  <button mat-raised-button mat-dialog-close="true">Módosítás</button>
+</mat-dialog-actions>
+

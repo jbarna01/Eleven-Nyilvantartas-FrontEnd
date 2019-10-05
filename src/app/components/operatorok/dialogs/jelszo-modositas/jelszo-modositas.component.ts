@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class JelszoModositasComponent implements OnInit {
 
+  _aktualisJelszo: string;
+  _ujJelszo1: string;
+  _ujJelszo2: string;
+
   constructor() { }
 
   ngOnInit() {
