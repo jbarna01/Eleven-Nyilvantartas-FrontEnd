@@ -9,8 +9,8 @@ import {__BaseService} from "./base-service";
 })
 export class OperatorService extends __BaseService{
 
-  urlOperetorok:string = 'http://localhost:8080/operatorok';
-  urlLoginOperetor:string = 'http://localhost:8080/loginOperator';
+  urlOperetorok:string = 'http://localhost:8099/operatorok';
+  urlLoginOperetor:string = 'http://localhost:8099/loginOperator';
 
   constructor(http:HttpClient) {
     super(http);
