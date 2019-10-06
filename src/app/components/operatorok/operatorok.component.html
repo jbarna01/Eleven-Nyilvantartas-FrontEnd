@@ -7,7 +7,7 @@
 
   <mat-table [dataSource]='operatorokLista' matSort class="mat-elevation-z8">
     <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>NO.</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>NO.</mat-header-cell>
       <mat-cell *matCellDef="let element">{{ element.id }}</mat-cell>
     </ng-container>
 
@@ -27,26 +27,26 @@
     </ng-container>
 
     <ng-container matColumnDef="password">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Jelszó</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>Jelszó</mat-header-cell>
       <mat-cell *matCellDef="let element">{{ element.password }}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="aktiv">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Aktív</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>Aktív</mat-header-cell>
       <mat-cell *matCellDef="let element">
         <mat-icon style="color: green">{{ element.aktiv=='A'?'radio_button_checked':'radio_button_unchecked' }}</mat-icon>
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="edit">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>szerekszt</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>szerekszt</mat-header-cell>
       <mat-cell *matCellDef="let element" (click)="operatorKarbantartasa(element)">
         <mat-icon color="primary" matTooltip="Operátor módosítás" matTooltipShowDelay="500" matTooltipHideDelay="500" matTooltipPosition="right">create</mat-icon>
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="delete">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>töröl</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>töröl</mat-header-cell>
       <mat-cell *matCellDef="let element" (click)="operatorTorlese(element)">
         <mat-icon style="color: red" matTooltip="Operátor törlése({{element.vezetekNev + ' ' + element.keresztNev}})" matTooltipShowDelay="500" matTooltipHideDelay="500" matTooltipPosition="right">highlight_off</mat-icon>
       </mat-cell>
