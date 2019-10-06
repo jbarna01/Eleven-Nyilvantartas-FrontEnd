@@ -7,6 +7,10 @@ import {BehaviorSubject} from "rxjs/index";
 })
 export class GlobalsService {
 
+  private belepettFelhasznaloId = new BehaviorSubject<number>(0);
+  felhasznalId = this.belepettFelhasznaloId.asObservable();
+
+
   private isBelepveStatus = new BehaviorSubject<boolean>(false);
   isBelepve = this.isBelepveStatus.asObservable();
 
@@ -18,6 +22,10 @@ export class GlobalsService {
 
   changeLogin(loginStatus: boolean) {
     this.isBelepveStatus.next(loginStatus);
+  }
+
+  setFelhasznaloId(felhasznloId: number) {
+    this.belepettFelhasznaloId.next(felhasznloId);
   }
 
   setTeljesNev(teljesNev: string) {

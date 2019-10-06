@@ -6,17 +6,17 @@
       <mat-grid-list cols="1" rowHeight="80px" class="mat-grid-li">
         <mat-grid-tile class="mat-grid-tit">
           <mat-form-field class="form">
-            <input [(ngModel)] = "_aktualisJelszo" matInput placeholder="Aktuális jelszó:" type="password">
+            <input [(ngModel)] = "_aktualisJelszo" matInput placeholder="Aktuális jelszó:" type="password" autocomplete="new-password">
           </mat-form-field>
         </mat-grid-tile>
         <mat-grid-tile class="mat-grid-tit">
           <mat-form-field class="form">
-            <input [(ngModel)] = "_ujJelszo1" matInput placeholder="Új jelszó:" type="password">
+            <input [(ngModel)] = "_ujJelszo1" matInput placeholder="Új jelszó:" type="password" autocomplete="new-password">
           </mat-form-field>
         </mat-grid-tile>
         <mat-grid-tile class="mat-grid-tit">
           <mat-form-field class="form">
-            <input [(ngModel)] = "_ujJelszo2" matInput placeholder="Új jelszó ismét:" type="password">
+            <input [(ngModel)] = "_ujJelszo2" matInput placeholder="Új jelszó ismét:" type="password" autocomplete="new-password">
           </mat-form-field>
         </mat-grid-tile>
       </mat-grid-list>
@@ -26,6 +26,6 @@
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-raised-button mat-dialog-close="false">Mégse</button>
-  <button mat-raised-button mat-dialog-close="true">Módosítás</button>
+  <button mat-raised-button mat-dialog-close="true" (click)="jelszoMentese()">Módosítás</button>
 </mat-dialog-actions>
 

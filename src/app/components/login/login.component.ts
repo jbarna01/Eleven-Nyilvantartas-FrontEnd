@@ -1,10 +1,10 @@
 import {Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {GlobalsService} from "../../services/globals.service";
-import {OperatorService} from "../../services/operator.service";
-import {Operator} from "../../models/Operator";
-import {MatSnackBar} from "@angular/material";
-import {HttpParams} from "@angular/common/http";
+import {ActivatedRoute, Router} from '@angular/router';
+import {GlobalsService} from '../../services/globals.service';
+import {OperatorService} from '../../services/operator.service';
+import {Operator} from '../../models/Operator';
+import {MatSnackBar} from '@angular/material';
+import {HttpParams} from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -30,27 +30,27 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this._global.isBelepve.subscribe(isBelepve => this._isBelepve = isBelepve)
+    this._global.isBelepve.subscribe(isBelepve => this._isBelepve = isBelepve);
   }
 
   belepes() {
 
   this._operator = new Operator();
-
-    if (this._userName) {
+  if (this._userName) {
       this._operator.username = this._userName;
       this._operator.password = this._password;
 
       this._params = this.setParameters(this._userName, this._password);
 
       this._operatorService.loginOperatorGET(this._params).subscribe( operator => {
-        this._operator = operator
+        this._operator = operator;
         if (this._operator != null) {
           console.log('Belépve');
           this._global.changeLogin(true);
           this._teljesNev = this._operator.vezetekNev + ' ' + this._operator.keresztNev;
           this._global.setTeljesNev(this._teljesNev);
-          this._router.navigate(['/cimsor'])
+          this._global.setFelhasznaloId(this._operator.id);
+          this._router.navigate(['/cimsor']);
         } else {
           this.uzenetek('Sikertelen belépés!');
         }
@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
     const params = new HttpParams()
       .set('username', username)
       .set('password', password);
-    return params
+    return params;
   }
 
 }
