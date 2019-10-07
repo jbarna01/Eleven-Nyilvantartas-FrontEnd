@@ -33,13 +33,11 @@ export class LoginComponent implements OnInit {
     this._global.isBelepve.subscribe(isBelepve => this._isBelepve = isBelepve);
   }
 
-  belepes() {
-
-  this._operator = new Operator();
-  if (this._userName) {
+  private belepes() {
+    this._operator = new Operator();
+    if (this._userName) {
       this._operator.username = this._userName;
       this._operator.password = this._password;
-
       this._params = this.setParameters(this._userName, this._password);
 
       this._operatorService.loginOperatorGET(this._params).subscribe( operator => {
@@ -60,11 +58,11 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  uzenetek(uzenet: string) {
+  private uzenetek(uzenet: string) {
   this._snackBar.open(uzenet, 'Bezár')._dismissAfter(2000);
 }
 
-  setParameters(username: string, password: string): HttpParams {
+  private setParameters(username: string, password: string): HttpParams {
     const params = new HttpParams()
       .set('username', username)
       .set('password', password);

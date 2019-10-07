@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {Operator, Operator as __Operator} from "../../../../models/Operator";
 import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
 import {Router} from "@angular/router";
-import {JelszoModositasComponent} from "../jelszo-modositas/jelszo-modositas.component";
+import {JelszoModositasComponent} from "../jelszoModositas/jelszoModositas.component";
 
 @Component({
   selector: 'app-operator-adatok',
@@ -26,10 +26,10 @@ export class OperatorAdatokComponent implements OnInit {
   }
 
   jelszoValtoztatas(operator: __Operator) {
-    let dialogRef = this.dialog.open(JelszoModositasComponent, {data: operator});
+    let dialogRef = this.dialog.open(JelszoModositasComponent, {disableClose: true});
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialaog válasz: ${result}`);
+     console.log(`Dialaog válasz: ${result}`);
     })
   }
 

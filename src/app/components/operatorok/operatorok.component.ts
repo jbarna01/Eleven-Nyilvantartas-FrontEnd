@@ -38,7 +38,7 @@ export class OperatorokComponent implements OnInit {
         this.operatorService.getOperatorok().subscribe(operatorok => {
         this.operatorokLista = new MatTableDataSource(operatorok);
         this.operatorokLista.sort = this.sort;
-          this.operatorokLista.paginator = this.paginator;
+        this.operatorokLista.paginator = this.paginator;
       })
     }
   }
@@ -51,6 +51,10 @@ export class OperatorokComponent implements OnInit {
     this.operatorokLista.filter = filterValue.trim().toLowerCase();
   }
 
+  /**
+   * Megjeleníti az operátor törlés megerősítéséhez szükséges dialóg ablakot.
+   * @param _operator
+   */
   operatorTorlese(_operator: Operator) {
     let dialogRef = this.dialog.open(OperatorTorlesComponent, {data: _operator});
 
@@ -59,6 +63,10 @@ export class OperatorokComponent implements OnInit {
     })
   }
 
+  /**
+   * A kiválasztott operátor adatait jeleníti meg.
+    * @param _operator
+   */
   operatorKarbantartasa(_operator: Operator) {
     let dialogRef = this.dialog.open(OperatorAdatokComponent, {data: _operator});
 

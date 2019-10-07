@@ -14,7 +14,7 @@ import { CimsorComponent } from './components/cimsor/cimsor.component';
 import { HallgatokComponent } from './components/hallgatok/hallgatok.component';
 import {OperatorTorlesComponent} from "./components/operatorok/dialogs/torles/operator-torles.component";
 import { OperatorAdatokComponent } from './components/operatorok/dialogs/karbantartas/operator-adatok.component';
-import { JelszoModositasComponent } from './components/operatorok/dialogs/jelszo-modositas/jelszo-modositas.component';
+import { JelszoModositasComponent } from './components/operatorok/dialogs/jelszoModositas/jelszoModositas.component';
 
 @NgModule({
   declarations: [
