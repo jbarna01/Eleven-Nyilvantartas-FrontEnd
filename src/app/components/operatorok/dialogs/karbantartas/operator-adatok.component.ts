@@ -12,6 +12,7 @@ import {JelszoModositasComponent} from "../jelszoModositas/jelszoModositas.compo
 export class OperatorAdatokComponent implements OnInit {
 
   private _operator: __Operator;
+  private _jelszoModositasUzenet: string;
   private _ujOperator: boolean;
   private _ujJelszo1: string;
   private _ujJelszo2: string;
@@ -26,11 +27,9 @@ export class OperatorAdatokComponent implements OnInit {
   }
 
   jelszoValtoztatas(operator: __Operator) {
-    let dialogRef = this.dialog.open(JelszoModositasComponent, {disableClose: true});
-
+    let dialogRef = this.dialog.open(JelszoModositasComponent, {data: operator, disableClose: true});
     dialogRef.afterClosed().subscribe(result => {
-     console.log(`Dialaog válasz: ${result}`);
+     result.data?this._jelszoModositasUzenet = '#':null;
     })
   }
-
 }

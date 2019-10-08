@@ -9,7 +9,8 @@ import {__BaseService} from "./base-service";
 })
 export class OperatorService extends __BaseService{
 
-  urlOperetorok:string = 'http://localhost:8099/operatorok';
+  urlOperatorok:string = 'http://localhost:8099/operatorok';
+  urlOperator:string = 'http://localhost:8099/operator/';
   urlLoginOperetor:string = 'http://localhost:8099/loginOperator';
 
   constructor(http:HttpClient) {
@@ -17,7 +18,7 @@ export class OperatorService extends __BaseService{
   }
 
   getOperatorok():Observable<Operator[]> {
-    return this.http.get<Operator[]>(this.urlOperetorok);
+    return this.http.get<Operator[]>(this.urlOperatorok);
   }
 
   loginOperatorGET(params: HttpParams):Observable<Operator> {
@@ -25,7 +26,7 @@ export class OperatorService extends __BaseService{
   }
 
   updateOperatorPassword(operator: Operator):Observable<Operator> {
-    return this.http.put<Operator>(this.urlOperetorok + operator.id, operator);
+    return this.http.put<Operator>(this.urlOperator + operator.id, operator);
   }
 
 }

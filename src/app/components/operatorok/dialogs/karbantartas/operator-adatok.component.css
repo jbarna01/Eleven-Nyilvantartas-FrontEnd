@@ -10,6 +10,13 @@ mat-grid-tile {
 mat-dialog-actions {
   float: right;
 }
+
+.uzenet {
+  color: brown;
+  font-weight: bold;
+  font-size: small;
+}
+
 input {
   width: 90%;
   padding: 2px;

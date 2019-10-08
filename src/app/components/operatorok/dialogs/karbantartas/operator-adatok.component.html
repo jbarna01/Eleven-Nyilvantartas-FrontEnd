@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>{{ _ujOperator?'Új operátor létrehozása':'Operátor módosítása' }}</h2>
+<h2 mat-dialog-title>{{ _ujOperator?'Új operátor létrehozása':'Operátor módosítása'}}</h2>
 <mat-dialog-content>
 
   <mat-card class="dialog_ablak">
@@ -23,7 +23,7 @@
             <mat-checkbox [checked]="_operator.aktiv=='A'" labelPosition="before">Aktív felhasználó</mat-checkbox>
         </mat-grid-tile>
         <mat-grid-tile *ngIf="!_ujOperator" class="mat-grid-tit">
-            <button mat-raised-button (click)="jelszoValtoztatas(_operator)">Jelszó változtatás</button>
+          <button mat-raised-button (click)="jelszoValtoztatas(_operator)"><small class="uzenet">{{ _jelszoModositasUzenet }}</small> Jelszó változtatás</button>
         </mat-grid-tile>
 
         <mat-grid-tile *ngIf="_ujOperator" class="mat-grid-tit">
