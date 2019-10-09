@@ -10,13 +10,24 @@ import {__BaseService} from "./base-service";
 export class OperatorService extends __BaseService{
 
   urlOperatorok:string = 'http://localhost:8099/operatorok';
-  urlOperator:string = 'http://localhost:8099/operator/';
+  urlOperator:string = 'http://localhost:8099/operator';
   urlLoginOperetor:string = 'http://localhost:8099/loginOperator';
 
   constructor(http:HttpClient) {
     super(http);
   }
 
+  /**
+   * A parametérben megadott ID által meghatározott operátort adja vissza.
+   * @param params
+   */
+  getOperator(params: HttpParams):Observable<Operator[]> {
+    return this.http.get<Operator[]>(this.urlOperator + '/' + params.get('id'));
+  }
+
+  /**
+   * Összes operatort visszadja
+   */
   getOperatorok():Observable<Operator[]> {
     return this.http.get<Operator[]>(this.urlOperatorok);
   }

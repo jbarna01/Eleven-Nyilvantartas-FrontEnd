@@ -16,7 +16,7 @@ export class HallgatokComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
-    this.global.isBelepve.subscribe(isBelepve => this.isBelepve = isBelepve)
+    this.global._isBelepve.subscribe(isBelepve => this.isBelepve = isBelepve)
     if (!this.isBelepve) {
       console.log('Nincs belépve senki');
       this.router.navigate(['']);

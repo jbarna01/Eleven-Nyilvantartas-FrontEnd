@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject} from "rxjs/index";
+import {BehaviorSubject, Observable} from "rxjs/index";
 
 
 @Injectable({
@@ -8,16 +8,16 @@ import {BehaviorSubject} from "rxjs/index";
 export class GlobalsService {
 
   private belepettFelhasznaloId = new BehaviorSubject<number>(0);
-  felhasznalId = this.belepettFelhasznaloId.asObservable();
+  _felhasznaloId = this.belepettFelhasznaloId.asObservable();
 
   private isBelepveStatus = new BehaviorSubject<boolean>(false);
-  isBelepve = this.isBelepveStatus.asObservable();
+  _isBelepve = this.isBelepveStatus.asObservable();
 
-  private felhasznaloTeljesNeve = new BehaviorSubject<string>('');
-  teljesNev = this.felhasznaloTeljesNeve.asObservable();
+  private _felhasznaloTeljesNeve = new BehaviorSubject<string>('');
+  _teljesNev = this._felhasznaloTeljesNeve.asObservable();
 
   private _felhasznaloAlapJoga = new BehaviorSubject<string>('');
-  felhasznaloJoga = this._felhasznaloAlapJoga.asObservable();
+  _felhasznaloJoga = this._felhasznaloAlapJoga.asObservable();
 
   constructor() { }
 
@@ -30,7 +30,7 @@ export class GlobalsService {
   }
 
   setTeljesNev(teljesNev: string) {
-    this.felhasznaloTeljesNeve.next(teljesNev);
+    this._felhasznaloTeljesNeve.next(teljesNev);
   }
 
   setFelhasznaloJoga(value: BehaviorSubject<string>) {
