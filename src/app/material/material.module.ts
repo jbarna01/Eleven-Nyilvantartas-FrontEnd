@@ -16,6 +16,7 @@ import {MatSortModule} from "@angular/material/sort";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatSelectModule} from "@angular/material/select";
 
   const MaterialComponents = [
       MatButtonModule,
@@ -34,7 +35,8 @@ import {MatTooltipModule} from "@angular/material/tooltip";
       MatCheckboxModule,
       MatDialogModule,
       MatTooltipModule,
-      MatCardModule
+      MatCardModule,
+      MatSelectModule
   ]
 
   @NgModule({

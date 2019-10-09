@@ -48,6 +48,7 @@ export class LoginComponent implements OnInit {
           this._teljesNev = this._operator.vezetekNev + ' ' + this._operator.keresztNev;
           this._global.setTeljesNev(this._teljesNev);
           this._global.setFelhasznaloId(this._operator.id);
+          this._global.setFelhasznaloJoga(this._operator.jogok[0] == null?'OPERATOR':this._operator.jogok[0]);
           this._router.navigate(['/cimsor']);
         } else {
           this.uzenetek('Sikertelen belépés!');
@@ -68,5 +69,4 @@ export class LoginComponent implements OnInit {
       .set('password', password);
     return params;
   }
-
 }
