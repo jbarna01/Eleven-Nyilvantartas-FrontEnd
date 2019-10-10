@@ -8,6 +8,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {OperatorTorlesComponent} from "./dialogs/torles/operator-torles.component";
 import {OperatorAdatokComponent} from "./dialogs/karbantartas/operator-adatok.component";
 import {HttpParams} from "@angular/common/http";
+import {Jogok} from "../../models/Jogok";
 
 @Component({
   selector: 'app-operatorok',
@@ -16,14 +17,14 @@ import {HttpParams} from "@angular/common/http";
 })
 export class OperatorokComponent implements OnInit {
 
-  operatorokLista =  new MatTableDataSource<Operator>();
-  isBelepve: boolean;
+  _operatorokLista =  new MatTableDataSource<Operator>();
+  _isBelepve: boolean;
   _operatorok = [] as any;
   _felhasznaloId: string;
   _felhasznaloJoga: string;
   _params: HttpParams;
-  displayedHeadColums: string[] = ['id', 'vezeteknev', 'keresztnev', 'username', 'password', 'aktiv', 'edit', 'delete'];
-  displayedRowColums: string[] = ['id', 'vezeteknev', 'keresztnev', 'username', 'password', 'aktiv', 'edit', 'delete'];
+  _displayedHeadColums: string[] = ['id', 'vezeteknev', 'keresztnev', 'username', 'password', 'aktiv', 'edit', 'delete'];
+  _displayedRowColums: string[] = ['id', 'vezeteknev', 'keresztnev', 'username', 'password', 'aktiv', 'edit', 'delete'];
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -33,30 +34,38 @@ export class OperatorokComponent implements OnInit {
               private router: Router,
               private dialog: MatDialog) { }
 
+  /**
+   * Ellenörzi, vhogy van-e belépet felhasználó.
+   * Amennyiben nincs meghívja a operatorLista-t feltöltő metódust.
+   */
   ngOnInit() {
-    this.global._isBelepve.subscribe(isBelepve => this.isBelepve = isBelepve)
-    if (!this.isBelepve) {
+    this.global._isBelepve.subscribe(isBelepve => this._isBelepve = isBelepve)
+    if (!this._isBelepve) {
       this.router.navigate(['']);
     } else {
         this.operatorListaFeltoltese();
     }
   }
 
+  /**
+   * Annak fügvényében tölti az operatoLista-t, hogy a belépet felhasználó
+   * ADMIN vagy nem. Nem ADMIN felhasználó esetén csak a belépet felhasználó adatait adja vissza.
+   */
   private operatorListaFeltoltese() {
     this.global._felhasznaloJoga.subscribe(felhasznaloJoga => this._felhasznaloJoga = felhasznaloJoga.toString());
     if (this._felhasznaloJoga === 'ADMIN') {
       this.operatorService.getOperatorok().subscribe(operatorok => {
-        this.operatorokLista = new MatTableDataSource(operatorok);
-        this.operatorokLista.sort = this.sort;
-        this.operatorokLista.paginator = this.paginator;
+        this._operatorokLista = new MatTableDataSource(operatorok);
+        this._operatorokLista.sort = this.sort;
+        this._operatorokLista.paginator = this.paginator;
       }) ;
     } else {
       this.global._felhasznaloId.subscribe(felhasznalId => this._felhasznaloId = felhasznalId.toString());
       this._params = this.setParameters(this._felhasznaloId);
       this.operatorService.getOperator(this._params).subscribe( operatorok => {
         this._operatorok.push(operatorok);
-        this.operatorokLista = new MatTableDataSource(this._operatorok);
-        this.operatorokLista.sort = this.sort;
+        this._operatorokLista = new MatTableDataSource(this._operatorok);
+        this._operatorokLista.sort = this.sort;
       });
     }
   }
@@ -66,7 +75,7 @@ export class OperatorokComponent implements OnInit {
    * @param filterValue
    */
   private applyFilter(filterValue: string) {
-    this.operatorokLista.filter = filterValue.trim().toLowerCase();
+    this._operatorokLista.filter = filterValue.trim().toLowerCase();
   }
 
   /**

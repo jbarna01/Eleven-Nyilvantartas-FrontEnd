@@ -37,9 +37,20 @@
           </mat-form-field>
         </mat-grid-tile>
 
-        <mat-grid-tile *ngIf="!_ujOperator" class="mat-grid-tit">
+        <mat-grid-tile *ngIf="!_ujOperator && _felhasznaloJoga != 'ADMIN'" class="mat-grid-tit">
           <mat-form-field>
             <input [(ngModel)] = "_operator.jogok[0].megnevezes" class="input_text" readonly matInput placeholder="Jogosultság:" >
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile *ngIf="_ujOperator || _felhasznaloJoga==='ADMIN'" class="mat-grid-tit">
+          <mat-form-field>
+            <mat-label>Jogosultság</mat-label>
+            <mat-select [(value)]="_aktualisJog">
+              <mat-option *ngFor="let jog of _jogokLista" [value]="jog.code">
+                {{ jog.megnevezes }}
+              </mat-option>
+            </mat-select>
           </mat-form-field>
         </mat-grid-tile>
 

@@ -1,11 +1,11 @@
-<app-cimsor *ngIf="isBelepve"></app-cimsor>
+<app-cimsor *ngIf="_isBelepve"></app-cimsor>
 
 <div>
   <mat-form-field>
     <input (keyup)="applyFilter($event.target.value)" matInput placeholder="Szűkités">
   </mat-form-field>
 
-  <mat-table [dataSource]='operatorokLista' matSort class="mat-elevation-z8">
+  <mat-table [dataSource]='_operatorokLista' matSort class="mat-elevation-z8">
     <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef>NO.</mat-header-cell>
       <mat-cell *matCellDef="let element">{{ element.id }}</mat-cell>
@@ -52,8 +52,8 @@
       </mat-cell>
     </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedHeadColums"></mat-header-row>
-    <mat-row (dblclick)="operatorKarbantartasa(row)" *matRowDef="let row; columns: displayedRowColums;"></mat-row>
+    <mat-header-row *matHeaderRowDef="_displayedHeadColums"></mat-header-row>
+    <mat-row (dblclick)="operatorKarbantartasa(row)" *matRowDef="let row; columns: _displayedRowColums;"></mat-row>
 
   </mat-table>
 
