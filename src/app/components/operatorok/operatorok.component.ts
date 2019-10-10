@@ -36,7 +36,6 @@ export class OperatorokComponent implements OnInit {
   ngOnInit() {
     this.global._isBelepve.subscribe(isBelepve => this.isBelepve = isBelepve)
     if (!this.isBelepve) {
-      console.log('Nincs belépve senki');
       this.router.navigate(['']);
     } else {
         this.operatorListaFeltoltese();
@@ -44,8 +43,8 @@ export class OperatorokComponent implements OnInit {
   }
 
   private operatorListaFeltoltese() {
-    this.global._felhasznaloJoga.subscribe(felhasznaloJoga => this._felhasznaloJoga = felhasznaloJoga);
-    if (this._felhasznaloJoga == 'ADMIN') {
+    this.global._felhasznaloJoga.subscribe(felhasznaloJoga => this._felhasznaloJoga = felhasznaloJoga.toString());
+    if (this._felhasznaloJoga === 'ADMIN') {
       this.operatorService.getOperatorok().subscribe(operatorok => {
         this.operatorokLista = new MatTableDataSource(operatorok);
         this.operatorokLista.sort = this.sort;

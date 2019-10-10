@@ -43,7 +43,6 @@ export class LoginComponent implements OnInit {
       this._operatorService.loginOperatorGET(this._params).subscribe( operator => {
         this._operator = operator;
         if (this._operator != null) {
-          console.log('Belépve');
           this._global.changeLogin(true);
           this._teljesNev = this._operator.vezetekNev + ' ' + this._operator.keresztNev;
           this._global.setTeljesNev(this._teljesNev);

@@ -7,8 +7,8 @@ import {BehaviorSubject, Observable} from "rxjs/index";
 })
 export class GlobalsService {
 
-  private belepettFelhasznaloId = new BehaviorSubject<number>(0);
-  _felhasznaloId = this.belepettFelhasznaloId.asObservable();
+  private _belepettFelhasznaloId = new BehaviorSubject<number>(0);
+  _felhasznaloId = this._belepettFelhasznaloId.asObservable();
 
   private isBelepveStatus = new BehaviorSubject<boolean>(false);
   _isBelepve = this.isBelepveStatus.asObservable();
@@ -26,14 +26,14 @@ export class GlobalsService {
   }
 
   setFelhasznaloId(felhasznloId: number) {
-    this.belepettFelhasznaloId.next(felhasznloId);
+    this._belepettFelhasznaloId.next(felhasznloId);
   }
 
   setTeljesNev(teljesNev: string) {
     this._felhasznaloTeljesNeve.next(teljesNev);
   }
 
-  setFelhasznaloJoga(value: BehaviorSubject<string>) {
-    this._felhasznaloAlapJoga = value;
+  setFelhasznaloJoga(felhasznaloJoga: string) {
+    this._felhasznaloAlapJoga.next(felhasznaloJoga);
   }
 }

@@ -22,7 +22,6 @@ export class OperatorAdatokComponent implements OnInit {
               private dialog: MatDialog) {
     this._operator = operator;
     this._ujOperator = this._operator.id == null;
-    console.log(operator.jogok[0].megnevezes)
   }
   ngOnInit() {
   }
