@@ -28,18 +28,30 @@ export class OperatorService extends __BaseService{
   /**
    * Összes operatort visszadja
    */
-  getOperatorok():Observable<Operator[]> {
+  getOperatorokGET():Observable<Operator[]> {
     return this.http.get<Operator[]>(this.urlOperatorok);
   }
 
+  /**
+   * A felhasználó beléptetése
+   * felhasználónév és jelszó alapján.
+   * @param params
+   */
   loginOperatorGET(params: HttpParams):Observable<Operator> {
     return this.http.get<Operator>(this.urlLoginOperetor + '/' + params.get('username') + '/' + params.get('password'));
   }
 
-  updateOperatorPassword(operator: Operator):Observable<Operator> {
-    return this.http.put<Operator>(this.urlOperator + operator.id, operator);
+  /**
+   * A felhasználó jlszóváltoztatása.
+   * @param operator
+   */
+  updateOperatorPUT(operator: Operator):Observable<Operator> {
+    return this.http.put<Operator>(this.urlOperator + '/' + operator.id, operator);
   }
 
+  saveOperatorPOST(operator: Operator) {
+    return this.http.post(this.urlOperator, operator);
+  }
 }
 
 

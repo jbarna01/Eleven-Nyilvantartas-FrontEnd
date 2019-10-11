@@ -23,7 +23,7 @@
             <mat-checkbox [checked]="_operator.aktiv=='A'" labelPosition="before">Aktív felhasználó</mat-checkbox>
         </mat-grid-tile>
         <mat-grid-tile *ngIf="!_ujOperator" class="mat-grid-tit">
-          <button mat-raised-button (click)="jelszoValtoztatas(_operator)"><small class="uzenet">{{ _jelszoModositasUzenet }}</small> Jelszó változtatás</button>
+          <button mat-raised-button (click)="jelszoValtoztatasDialogusAblakMegnyitasa(_operator)"><small class="uzenet">{{ _jelszoModositasUzenet }}</small> Jelszó változtatás</button>
         </mat-grid-tile>
 
         <mat-grid-tile *ngIf="_ujOperator" class="mat-grid-tit">
@@ -47,7 +47,7 @@
           <mat-form-field>
             <mat-label>Jogosultság</mat-label>
             <mat-select [(value)]="_aktualisJog">
-              <mat-option *ngFor="let jog of _jogokLista" [value]="jog.code">
+              <mat-option *ngFor="let jog of _jogokLista" [value]="jog.id">
                 {{ jog.megnevezes }}
               </mat-option>
             </mat-select>
@@ -72,5 +72,5 @@
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-raised-button mat-dialog-close="false">Mégse</button>
-  <button mat-raised-button mat-dialog-close="true">Mentés</button>
+  <button mat-raised-button mat-dialog-close="true" (click)="operatorMentese()">Mentés</button>
 </mat-dialog-actions>

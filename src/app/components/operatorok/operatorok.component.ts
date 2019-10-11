@@ -17,14 +17,14 @@ import {Jogok} from "../../models/Jogok";
 })
 export class OperatorokComponent implements OnInit {
 
-  _operatorokLista =  new MatTableDataSource<Operator>();
-  _isBelepve: boolean;
-  _operatorok = [] as any;
-  _felhasznaloId: string;
-  _felhasznaloJoga: string;
-  _params: HttpParams;
-  _displayedHeadColums: string[] = ['id', 'vezeteknev', 'keresztnev', 'username', 'password', 'aktiv', 'edit', 'delete'];
-  _displayedRowColums: string[] = ['id', 'vezeteknev', 'keresztnev', 'username', 'password', 'aktiv', 'edit', 'delete'];
+  private _operatorokLista =  new MatTableDataSource<Operator>();
+  private _isBelepve: boolean;
+  private _operatorok = [] as any;
+  private _felhasznaloId: string;
+  private _felhasznaloJoga: string;
+  private _params: HttpParams;
+  private _displayedHeadColums: string[] = ['id', 'vezeteknev', 'keresztnev', 'username', 'password', 'aktiv', 'edit', 'delete'];
+  private _displayedRowColums: string[] = ['id', 'vezeteknev', 'keresztnev', 'username', 'password', 'aktiv', 'edit', 'delete'];
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -54,7 +54,7 @@ export class OperatorokComponent implements OnInit {
   private operatorListaFeltoltese() {
     this.global._felhasznaloJoga.subscribe(felhasznaloJoga => this._felhasznaloJoga = felhasznaloJoga.toString());
     if (this._felhasznaloJoga === 'ADMIN') {
-      this.operatorService.getOperatorok().subscribe(operatorok => {
+      this.operatorService.getOperatorokGET().subscribe(operatorok => {
         this._operatorokLista = new MatTableDataSource(operatorok);
         this._operatorokLista.sort = this.sort;
         this._operatorokLista.paginator = this.paginator;

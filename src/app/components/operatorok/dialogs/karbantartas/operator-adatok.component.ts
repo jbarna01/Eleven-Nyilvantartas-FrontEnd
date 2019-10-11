@@ -8,6 +8,7 @@ import {OperatorService} from "../../../../services/operator.service";
 import {JogokService} from "../../../../services/jogok.service";
 import {Jogok} from "../../../../models/Jogok";
 import {MatTableDataSource} from "@angular/material/table";
+import {HttpParams} from "@angular/common/http";
 
 @Component({
   selector: 'app-operator-adatok',
@@ -20,12 +21,15 @@ export class OperatorAdatokComponent implements OnInit {
   private _felhasznaloJoga: string;
   private _aktualisJog: string;
   private _jogokLista: Jogok[];
+  private _jog: Jogok = new Jogok();
   private _jelszoModositasUzenet: string;
   private _ujOperator: boolean;
   private _ujJelszo1: string;
   private _ujJelszo2: string;
+  private _params: HttpParams;
 
   constructor(@Inject(MAT_DIALOG_DATA) private operator: __Operator,
+              private __operatorService: OperatorService,
               private __jogokService: JogokService,
               private __router: Router,
               private __global: GlobalsService,
@@ -35,22 +39,67 @@ export class OperatorAdatokComponent implements OnInit {
   }
   ngOnInit() {
     this.__global._felhasznaloJoga.subscribe(felhasznaloJoga => this._felhasznaloJoga = felhasznaloJoga.toString());
-    this.jogokFeltoltese();
+    this.felhasznaloiJogokBeolvasas();
   }
 
-  jogokFeltoltese() {
+  /**
+   * Az összes használható felhasználójogot beolvassa.
+   */
+  felhasznaloiJogokBeolvasas() {
     if (this._felhasznaloJoga === 'ADMIN') {
-      this._aktualisJog = this._operator.jogok[0].code;
+      this._aktualisJog = this._operator.jogok[0].id;
       this.__jogokService.getJogok().subscribe( jogok => {
         this._jogokLista = jogok;
       });
     }
   }
 
-  jelszoValtoztatas(operator: __Operator) {
+  /**
+   * Megjeleníti a jelszóváltoztató ablakot.
+   * @param operator
+   */
+  jelszoValtoztatasDialogusAblakMegnyitasa(operator: __Operator) {
     let dialogRef = this.__dialog.open(JelszoModositasComponent, {data: operator, disableClose: true});
     dialogRef.afterClosed().subscribe(result => {
      result.data?this._jelszoModositasUzenet = '#':null;
     })
+  }
+
+  /**
+   * Operátor adatok mentése.
+   */
+  operatorMentese() {
+    if (this.mezokEllenorzese()) {
+      this._params = this.setParameters(this._aktualisJog);
+      this.__jogokService.getJogGET(this._params).subscribe(jog => {
+        console.log('jog ******************* jog');
+        console.log(jog);
+        console.log('jog ******************* jog');
+        console.log(jog);
+        this._jog = jog
+        this._operator.jogok[0] = this._jog;
+        console.log('oper ------------------------------------');
+        console.log(this._operator);
+        console.log('oper ------------------------------------');
+        this.__operatorService.updateOperatorPUT(this.operator).subscribe(operator => {
+          this._operator = operator;
+          console.log(this._operator)});
+      });
+    }
+  }
+
+  /**
+   * Mentés előtt az operátor adatainak ellenörzése.
+   * Nem lehet null a következők:
+   *
+   */
+  private mezokEllenorzese(): boolean {
+    return true;
+  }
+
+  private setParameters(id: string): HttpParams {
+    const params = new HttpParams()
+      .set('id', id);
+    return params;
   }
 }
