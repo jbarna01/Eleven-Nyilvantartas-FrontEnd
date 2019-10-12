@@ -43,7 +43,6 @@ export class OperatorAdatokComponent implements OnInit {
     this.__global._felhasznaloJoga.subscribe(felhasznaloJoga => this._felhasznaloJoga = felhasznaloJoga.toString());
     this._aktivFelhasznalo = this._operator.aktiv == 'A' ? true : false;
     this._disabled = this._felhasznaloJoga === 'ADMIN' ? false : true;
-    console.log(this._disabled);
     this.felhasznaloiJogokBeolvasas();
   }
 
@@ -81,8 +80,7 @@ export class OperatorAdatokComponent implements OnInit {
         this._operator.jogok[0] = this._jog;
         this._operator.aktiv = this._aktivFelhasznalo ? 'A' : 'P';
         this.__operatorService.updateOperatorPUT(this.operator).subscribe(operator => {
-          this._operator = operator;
-          console.log(this._operator)});
+          this._operator = operator;});
       });
     }
   }
@@ -96,6 +94,11 @@ export class OperatorAdatokComponent implements OnInit {
     return true;
   }
 
+
+  /**
+   * Beállítja a hívásokhoz szükséges PATH paramétereket állítja be.
+   * @param id
+   */
   private setParameters(id: string): HttpParams {
     const params = new HttpParams()
       .set('id', id);

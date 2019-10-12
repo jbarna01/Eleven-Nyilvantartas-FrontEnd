@@ -1,9 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {OperatorService} from '../../../../services/operator.service';
-import {GlobalsService} from '../../../../services/globals.service';
-import {MatSnackBar} from '@angular/material';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {Operator, Operator as __Operator} from "../../../../models/Operator";
+import {MAT_DIALOG_DATA, MatDialogRef as __MatDialogRef} from "@angular/material/dialog";
+import {GlobalsService as __GlobalsService} from '../../../../services/globals.service';
+import {MatSnackBar as __MatSnackBar} from '@angular/material';
+import {Operator as __Operator} from "../../../../models/Operator";
+import {OperatorService as __OperatorService} from '../../../../services/operator.service';
 
 @Component({
   selector: 'app-jelszo-modositas',
@@ -11,33 +11,38 @@ import {Operator, Operator as __Operator} from "../../../../models/Operator";
   styleUrls: ['./jelszoModositas.component.css']
 })
 export class JelszoModositasComponent implements OnInit {
-  _operator: __Operator;
-  _aktualisJelszo: string;
-  _ujJelszo1: string;
-  _ujJelszo2: string;
-  _dialogRef: MatDialogRef<JelszoModositasComponent>;
+  private _operator: __Operator;
+  private _aktualisJelszo: string = null;
+  private _ujJelszo1: string = null;
+  private _ujJelszo2: string = null;
+  private _dialogRef: __MatDialogRef<JelszoModositasComponent>;
 
   constructor(@Inject(MAT_DIALOG_DATA) private operator: __Operator,
-              private operatorService: OperatorService,
-              private global: GlobalsService,
-              private snackBar: MatSnackBar,
-              private dialogRef: MatDialogRef<JelszoModositasComponent>) {
+              private operatorService: __OperatorService,
+              private global: __GlobalsService,
+              private snackBar: __MatSnackBar,
+              private dialogRef: __MatDialogRef<JelszoModositasComponent>) {
     this._operator = operator;
-    this._aktualisJelszo = null;
-    this._ujJelszo1 = null;
-    this._ujJelszo2 = null;
     this._dialogRef = dialogRef;
   }
 
   ngOnInit() {
   }
 
+  /**
+   * A jelszó mentését indítja.
+   * Első lépésben a megkötéseket ellenörzi le, majd utána történik a jelszó mentése.
+   */
   private jelszoMentese() {
     if (this.aktualisJelszoEllenorzese(this._aktualisJelszo) && this.ujJelszoEllenorzese(this._ujJelszo1, this._ujJelszo2)) {
       this.ujJelszoMentese();
     }
   }
 
+  /**
+   * Ellenörzi, hogy a megadott aktuális jelszó helyes-e!
+   * @param aktualisJelszo, az űrlapon megadott aktuális jelszó.
+   */
   private aktualisJelszoEllenorzese(aktualisJelszo: string):boolean {
     if (this._operator.password === aktualisJelszo) {
       return true;
@@ -48,6 +53,12 @@ export class JelszoModositasComponent implements OnInit {
     }
   }
 
+  /**
+   * Az új jelszavak ellenörzését végzi.
+   * Egyezni kell a két jelszónak, és minimum 6 karakter hosszúnak kell lennie!
+   * @param ujJelszo1.
+   * @param ujJelszo2.
+   */
   private ujJelszoEllenorzese(ujJelszo1: string, ujJelszo2: string):boolean {
     if (ujJelszo1.length < 6) {
       this.uzenetek('Az új jelszónak minimum 6 karakter hosszúnek kell lennie!');
@@ -63,6 +74,10 @@ export class JelszoModositasComponent implements OnInit {
     }
   }
 
+  /**
+   * Menti a felhasználó új jelszavát.
+   * A teljes felhasználó objektum mentése megtörténik.
+   */
   private ujJelszoMentese() {
     this._operator.password = this._ujJelszo1;
     this.operatorService.updateOperatorPUT(this._operator).subscribe(operator => {
@@ -74,6 +89,11 @@ export class JelszoModositasComponent implements OnInit {
       })
   }
 
+  /**
+   * Kiírja az uzenet változóban lévő üzenetett a képernyőre.
+   * 2 másodperc múlva autómatikusan eltünteti!
+    * @param uzenet, a kiírandó üzenet.
+   */
   private uzenetek(uzenet: string) {
     this.snackBar.open(uzenet, 'Bezár')._dismissAfter(2000);
   }

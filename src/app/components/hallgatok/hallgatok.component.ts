@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {GlobalsService} from "../../services/globals.service";
-import {Router} from "@angular/router";
+import {GlobalsService as __GlobalsService} from "../../services/globals.service";
+import {Router as __Router} from "@angular/router";
 
 @Component({
   selector: 'app-hallgatok',
@@ -9,15 +9,14 @@ import {Router} from "@angular/router";
 })
 export class HallgatokComponent implements OnInit {
 
-  isBelepve: boolean;
+  private _isBelepve: boolean;
 
-
-  constructor(private global: GlobalsService,
-              private router: Router) { }
+  constructor(private global: __GlobalsService,
+              private router: __Router) { }
 
   ngOnInit() {
-    this.global._isBelepve.subscribe(isBelepve => this.isBelepve = isBelepve)
-    if (!this.isBelepve) {
+    this.global._isBelepve.subscribe(isBelepve => this._isBelepve = isBelepve)
+    if (!this._isBelepve) {
       this.router.navigate(['']);
     }
   }

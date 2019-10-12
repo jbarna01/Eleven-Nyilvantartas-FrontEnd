@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpParams } from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Operator} from "../models/Operator";
 import {__BaseService} from "./base-service";
+import {HttpClient as __HttpClient, HttpParams as __HttpParams} from "@angular/common/http";
+import {Operator as __Operator} from "../models/Operator";
 
 @Injectable({
   providedIn: 'root'
 })
 export class OperatorService extends __BaseService{
 
-  urlOperatorok:string = 'http://localhost:8099/operatorok';
-  urlOperator:string = 'http://localhost:8099/operator';
-  urlLoginOperetor:string = 'http://localhost:8099/loginOperator';
+  private _urlOperatorok: string = 'http://localhost:8099/operatorok';
+  private _urlOperator: string = 'http://localhost:8099/operator';
+  private _urlLoginOperetor: string = 'http://localhost:8099/loginOperator';
 
-  constructor(http:HttpClient) {
+  constructor(http: __HttpClient) {
     super(http);
   }
 
@@ -21,15 +21,15 @@ export class OperatorService extends __BaseService{
    * A parametérben megadott ID által meghatározott operátort adja vissza.
    * @param params
    */
-  getOperator(params: HttpParams):Observable<Operator[]> {
-    return this.http.get<Operator[]>(this.urlOperator + '/' + params.get('id'));
+  getOperator(params: __HttpParams):Observable<__Operator[]> {
+    return this.http.get<__Operator[]>(this._urlOperator + '/' + params.get('id'));
   }
 
   /**
    * Összes operatort visszadja
    */
-  getOperatorokGET():Observable<Operator[]> {
-    return this.http.get<Operator[]>(this.urlOperatorok);
+  getOperatorokGET():Observable<__Operator[]> {
+    return this.http.get<__Operator[]>(this._urlOperatorok);
   }
 
   /**
@@ -37,25 +37,23 @@ export class OperatorService extends __BaseService{
    * felhasználónév és jelszó alapján.
    * @param params
    */
-  loginOperatorGET(params: HttpParams):Observable<Operator> {
-    return this.http.get<Operator>(this.urlLoginOperetor + '/' + params.get('username') + '/' + params.get('password'));
+  loginOperatorGET(params: __HttpParams):Observable<__Operator> {
+    return this.http.get<__Operator>(this._urlLoginOperetor + '/' + params.get('username') + '/' + params.get('password'));
   }
 
   /**
    * A felhasználó jlszóváltoztatása.
    * @param operator
    */
-  updateOperatorPUT(operator: Operator):Observable<Operator> {
-    return this.http.put<Operator>(this.urlOperator + '/' + operator.id, operator);
+  updateOperatorPUT(operator: __Operator):Observable<__Operator> {
+    return this.http.put<__Operator>(this._urlOperator + '/' + operator.id, operator);
   }
 
-  saveOperatorPOST(operator: Operator) {
-    return this.http.post(this.urlOperator, operator);
-  }
+  // saveOperatorPOST(operator: Operator) {
+  //   return this.http.post(this._urlOperator, operator);
+  // }
 }
 
 
 module OperatorService {
-
-
 }

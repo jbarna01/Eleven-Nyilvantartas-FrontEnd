@@ -1,14 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {Operator} from "../../models/Operator";
-import {OperatorService} from "../../services/operator.service";
-import {GlobalsService} from "../../services/globals.service";
-import {Router} from "@angular/router";
 import {MatTableDataSource, MatSort, MatPaginator} from "@angular/material";
-import {MatDialog} from "@angular/material/dialog";
 import {OperatorTorlesComponent} from "./dialogs/torles/operator-torles.component";
 import {OperatorAdatokComponent} from "./dialogs/karbantartas/operator-adatok.component";
-import {HttpParams} from "@angular/common/http";
-import {Jogok} from "../../models/Jogok";
+import {MatDialog} from "@angular/material/dialog";
+
+import {GlobalsService as __GlobalsService} from "../../services/globals.service";
+import {HttpParams as __HttpParams} from "@angular/common/http";
+import {Operator as __Operator} from "../../models/Operator";
+import {OperatorService as __OperatorService} from "../../services/operator.service";
+import {Router as __Router} from "@angular/router";
 
 @Component({
   selector: 'app-operatorok',
@@ -17,21 +17,21 @@ import {Jogok} from "../../models/Jogok";
 })
 export class OperatorokComponent implements OnInit {
 
-  private _operatorokLista =  new MatTableDataSource<Operator>();
+  private _operatorokLista =  new MatTableDataSource<__Operator>();
   private _isBelepve: boolean;
   private _operatorok = [] as any;
   private _felhasznaloId: string;
   private _felhasznaloJoga: string;
-  private _params: HttpParams;
+  private _params: __HttpParams;
   private _displayedHeadColums: string[] = ['id', 'vezeteknev', 'keresztnev', 'username', 'password', 'aktiv', 'edit', 'delete'];
   private _displayedRowColums: string[] = ['id', 'vezeteknev', 'keresztnev', 'username', 'password', 'aktiv', 'edit', 'delete'];
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  constructor(private operatorService: OperatorService,
-              private global: GlobalsService,
-              private router: Router,
+  constructor(private operatorService: __OperatorService,
+              private global: __GlobalsService,
+              private router: __Router,
               private dialog: MatDialog) { }
 
   /**
@@ -82,7 +82,7 @@ export class OperatorokComponent implements OnInit {
    * Megjeleníti az operátor törlés megerősítéséhez szükséges dialóg ablakot.
    * @param _operator
    */
-  private operatorTorlese(_operator: Operator) {
+  private operatorTorlese(_operator: __Operator) {
     let dialogRef = this.dialog.open(OperatorTorlesComponent, {data: _operator});
 
     dialogRef.afterClosed().subscribe(result => {
@@ -94,7 +94,7 @@ export class OperatorokComponent implements OnInit {
    * A kiválasztott operátor adatait jeleníti meg.
     * @param _operator
    */
-  private operatorKarbantartasa(_operator: Operator) {
+  private operatorKarbantartasa(_operator: __Operator) {
     let dialogRef = this.dialog.open(OperatorAdatokComponent, {data: _operator});
 
     dialogRef.afterClosed().subscribe(result => {
@@ -102,8 +102,8 @@ export class OperatorokComponent implements OnInit {
     })
   }
 
-  private setParameters(id: string): HttpParams {
-    const params = new HttpParams()
+  private setParameters(id: string): __HttpParams {
+    const params = new __HttpParams()
       .set('id', id);
     return params;
   }

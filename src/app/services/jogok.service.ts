@@ -1,30 +1,33 @@
 import { Injectable } from '@angular/core';
-import {__BaseService} from "./base-service";
-import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Operator} from "../models/Operator";
-import {Jogok} from "../models/Jogok";
+import {__BaseService} from "./base-service";
+import {HttpClient as __HttpClient, HttpParams as __HttpParams} from "@angular/common/http";
+import {Jogok as __Jogok} from "../models/Jogok";
 
 @Injectable({
   providedIn: 'root'
 })
 export class JogokService extends __BaseService {
-  _urlJogok:string = 'http://localhost:8099/jogok';
-  _urlJog:string = 'http://localhost:8099/jog';
+  private _urlJogok: string = 'http://localhost:8099/jogok';
+  private _urlJog: string = 'http://localhost:8099/jog';
 
-  constructor(http:HttpClient) {
+  constructor(http:__HttpClient) {
     super(http);
   }
 
   /**
    * Összes jogot visszadja
    */
-  getJogok():Observable<Jogok[]> {
-    return this.http.get<Jogok[]>(this._urlJogok);
+  getJogok():Observable<__Jogok[]> {
+    return this.http.get<__Jogok[]>(this._urlJogok);
   }
 
-  getJogGET(params: HttpParams):Observable<Jogok> {
-    return this.http.get<Jogok>(this._urlJog + '/' + params.get('id'));
+  /**
+   * Az id által meghatározott jog objektúmot adja vissza
+   * @param params
+   */
+  getJogGET(params: __HttpParams):Observable<__Jogok> {
+    return this.http.get<__Jogok>(this._urlJog + '/' + params.get('id'));
   }
 
 }
