@@ -27,6 +27,8 @@ export class OperatorAdatokComponent implements OnInit {
   private _ujJelszo1: string;
   private _ujJelszo2: string;
   private _params: HttpParams;
+  private _aktivFelhasznalo: boolean;
+  private _disabled: boolean;
 
   constructor(@Inject(MAT_DIALOG_DATA) private operator: __Operator,
               private __operatorService: OperatorService,
@@ -39,6 +41,9 @@ export class OperatorAdatokComponent implements OnInit {
   }
   ngOnInit() {
     this.__global._felhasznaloJoga.subscribe(felhasznaloJoga => this._felhasznaloJoga = felhasznaloJoga.toString());
+    this._aktivFelhasznalo = this._operator.aktiv == 'A' ? true : false;
+    this._disabled = this._felhasznaloJoga === 'ADMIN' ? false : true;
+    console.log(this._disabled);
     this.felhasznaloiJogokBeolvasas();
   }
 
@@ -72,15 +77,9 @@ export class OperatorAdatokComponent implements OnInit {
     if (this.mezokEllenorzese()) {
       this._params = this.setParameters(this._aktualisJog);
       this.__jogokService.getJogGET(this._params).subscribe(jog => {
-        console.log('jog ******************* jog');
-        console.log(jog);
-        console.log('jog ******************* jog');
-        console.log(jog);
         this._jog = jog
         this._operator.jogok[0] = this._jog;
-        console.log('oper ------------------------------------');
-        console.log(this._operator);
-        console.log('oper ------------------------------------');
+        this._operator.aktiv = this._aktivFelhasznalo ? 'A' : 'P';
         this.__operatorService.updateOperatorPUT(this.operator).subscribe(operator => {
           this._operator = operator;
           console.log(this._operator)});

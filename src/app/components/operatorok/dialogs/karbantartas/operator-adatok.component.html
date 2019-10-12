@@ -19,13 +19,19 @@
             <input [(ngModel)] = "_operator.username" class="input_text" matInput placeholder="Felhasználó név:" >
           </mat-form-field>
         </mat-grid-tile>
+
+        <mat-grid-tile class="mat-grid-tit">
+<!--          {{ _operator.aktiv=='A'?'radio_button_checked':'radio_button_unchecked' }}-->
+            <mat-checkbox [(ngModel)]="_aktivFelhasznalo" [disabled]="_disabled">{{ _aktivFelhasznalo ? 'Aktív felhasználó' : 'Passzív felhasználó' }}</mat-checkbox>
+        </mat-grid-tile>
+
+
         <mat-grid-tile *ngIf="_ujOperator" class="mat-grid-tit">
             <mat-checkbox [checked]="_operator.aktiv=='A'" labelPosition="before">Aktív felhasználó</mat-checkbox>
         </mat-grid-tile>
         <mat-grid-tile *ngIf="!_ujOperator" class="mat-grid-tit">
           <button mat-raised-button (click)="jelszoValtoztatasDialogusAblakMegnyitasa(_operator)"><small class="uzenet">{{ _jelszoModositasUzenet }}</small> Jelszó változtatás</button>
         </mat-grid-tile>
-
         <mat-grid-tile *ngIf="_ujOperator" class="mat-grid-tit">
           <mat-form-field>
             <mat-label>Jogosultság</mat-label>
