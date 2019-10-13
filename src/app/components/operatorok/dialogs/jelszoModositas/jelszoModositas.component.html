@@ -4,7 +4,7 @@
   <mat-card class="dialog_ablak">
     <mat-card-content>
       <mat-grid-list cols="1" rowHeight="80px" class="mat-grid-li">
-        <mat-grid-tile class="mat-grid-tit">
+        <mat-grid-tile class="mat-grid-tit" *ngIf="_felhasznaloJoga != 'ADMIN' || (_belepettFelhasznaloId == _operator.id)">
           <mat-form-field class="form">
             <input [(ngModel)] = "_aktualisJelszo" matInput placeholder="Aktuális jelszó:" type="password" autocomplete="new-password" tabindex="1">
           </mat-form-field>

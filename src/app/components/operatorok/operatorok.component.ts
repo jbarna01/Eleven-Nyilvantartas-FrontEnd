@@ -78,6 +78,14 @@ export class OperatorokComponent implements OnInit {
     this._operatorokLista.filter = filterValue.trim().toLowerCase();
   }
 
+  private ujOperatorFelvetele() {
+    let dialogRefUj = this.dialog.open(OperatorAdatokComponent, {data: new __Operator()});
+
+    dialogRefUj.afterClosed().subscribe(result => {
+      console.log(`Dialaog válasz: ${result}`);
+    })
+  }
+
   /**
    * Megjeleníti az operátor törlés megerősítéséhez szükséges dialóg ablakot.
    * @param _operator

@@ -5,6 +5,8 @@
     <input (keyup)="applyFilter($event.target.value)" matInput placeholder="Szűkités">
   </mat-form-field>
 
+  <button class="ujFelhasznaloButton" mat-raised-button (click)="ujOperatorFelvetele()">Új operátor</button>
+
   <mat-table [dataSource]='_operatorokLista' matSort class="mat-elevation-z8">
     <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef>NO.</mat-header-cell>

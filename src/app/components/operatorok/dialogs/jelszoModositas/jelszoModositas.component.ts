@@ -11,7 +11,9 @@ import {OperatorService as __OperatorService} from '../../../../services/operato
   styleUrls: ['./jelszoModositas.component.css']
 })
 export class JelszoModositasComponent implements OnInit {
+  private _felhasznaloJoga: string;
   private _operator: __Operator;
+  private _belepettFelhasznaloId: number;
   private _aktualisJelszo: string = null;
   private _ujJelszo1: string = null;
   private _ujJelszo2: string = null;
@@ -27,6 +29,9 @@ export class JelszoModositasComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.global._felhasznaloJoga.subscribe(felhasznaloJoga => this._felhasznaloJoga = felhasznaloJoga.toString());
+    this.global._felhasznaloId.subscribe(felhasznalId => this._belepettFelhasznaloId = parseInt(felhasznalId.toString(), 10));
+
   }
 
   /**
@@ -44,6 +49,9 @@ export class JelszoModositasComponent implements OnInit {
    * @param aktualisJelszo, az űrlapon megadott aktuális jelszó.
    */
   private aktualisJelszoEllenorzese(aktualisJelszo: string):boolean {
+    if (this._felhasznaloJoga === 'ADMIN' && (this._operator.id != this._belepettFelhasznaloId)) {
+      return true;
+    }
     if (this._operator.password === aktualisJelszo) {
       return true;
     } else {

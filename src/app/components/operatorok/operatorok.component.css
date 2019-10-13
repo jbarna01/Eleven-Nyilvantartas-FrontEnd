@@ -15,11 +15,17 @@ mat-cell {
 }
 
 mat-form-field {
-  width: 80%;
+  width: 60%;
   margin-top: 20px;
   margin-left: 10%;
 }
  .mat-column-edit, .mat-column-delete {
    color: #f0f0f0;
    width: 20px;
+ }
+
+ .ujFelhasznaloButton {
+   margin-right: 10%;
+   margin-top: 20px;
+   float: right;
  }
