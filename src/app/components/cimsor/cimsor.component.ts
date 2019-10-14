@@ -20,7 +20,7 @@ export class CimsorComponent implements OnInit {
 
   ngOnInit() {
     this.global._isBelepve.subscribe(isBelepve => this._isBelepve = isBelepve);
-    this.global._teljesNev.subscribe(teljesNev => this._teljesNev = teljesNev);
+    this.global._belepettTeljesNev.subscribe(teljesNev => this._teljesNev = teljesNev);
     if (!this._isBelepve) {
       this.router.navigate(['']);
     }

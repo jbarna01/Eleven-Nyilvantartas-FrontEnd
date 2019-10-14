@@ -20,34 +20,32 @@
           </mat-form-field>
         </mat-grid-tile>
 
-        <mat-grid-tile class="mat-grid-tit">
+        <mat-grid-tile class="mat-grid-tit" *ngIf="!_ujOperator">
             <mat-checkbox [(ngModel)]="_aktivFelhasznalo" [disabled]="_disabled">{{ _aktivFelhasznalo ? 'Aktív felhasználó' : 'Passzív felhasználó' }}</mat-checkbox>
         </mat-grid-tile>
+<!--        <mat-grid-tile *ngIf="_ujOperator" class="mat-grid-tit">-->
+<!--            <mat-checkbox [checked]="_operator.aktiv=='A'" labelPosition="before">Aktív felhasználó</mat-checkbox>-->
+<!--        </mat-grid-tile>-->
 
-
-        <mat-grid-tile *ngIf="_ujOperator" class="mat-grid-tit">
-            <mat-checkbox [checked]="_operator.aktiv=='A'" labelPosition="before">Aktív felhasználó</mat-checkbox>
-        </mat-grid-tile>
         <mat-grid-tile *ngIf="!_ujOperator" class="mat-grid-tit">
           <button mat-raised-button (click)="jelszoValtoztatasDialogusAblakMegnyitasa(_operator)"><small class="uzenet">{{ _jelszoModositasUzenet }}</small> Jelszó változtatás</button>
         </mat-grid-tile>
-        <mat-grid-tile *ngIf="_ujOperator" class="mat-grid-tit">
-          <mat-form-field>
-            <mat-label>Jogosultság</mat-label>
-            <mat-select>
-              <mat-option *ngFor="let jog of operator.jogok" [value]="jog.code">
-                {{jog.megnevezes}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </mat-grid-tile>
 
+<!--        <mat-grid-tile *ngIf="_ujOperator" class="mat-grid-tit">-->
+<!--          <mat-form-field>-->
+<!--            <mat-label>Jogosultság1</mat-label>-->
+<!--            <mat-select>-->
+<!--              <mat-option *ngFor="let jog of operator.jogok[0]" [value]="jog.code">-->
+<!--                {{ jog.megnevezes }}-->
+<!--              </mat-option>-->
+<!--            </mat-select>-->
+<!--          </mat-form-field>-->
+<!--        </mat-grid-tile>-->
         <mat-grid-tile *ngIf="!_ujOperator && _felhasznaloJoga != 'ADMIN'" class="mat-grid-tit">
           <mat-form-field>
             <input [(ngModel)] = "_operator.jogok[0].megnevezes" class="input_text" readonly matInput placeholder="Jogosultság:" >
           </mat-form-field>
         </mat-grid-tile>
-
         <mat-grid-tile *ngIf="_ujOperator || _felhasznaloJoga==='ADMIN'" class="mat-grid-tit">
           <mat-form-field>
             <mat-label>Jogosultság</mat-label>

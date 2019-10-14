@@ -21,14 +21,15 @@ export class OperatorAdatokComponent implements OnInit {
   private _felhasznaloJoga: string;
   private _aktualisJog: string;
   private _jogokLista: Jogok[];
+  private _ujFelhasznaloJoga: Jogok[];
   private _jog: Jogok = new Jogok();
-  private _jelszoModositasUzenet: string;
   private _ujOperator: boolean;
+  private _aktivFelhasznalo: boolean;
   private _ujJelszo1: string;
   private _ujJelszo2: string;
   private _params: HttpParams;
-  private _aktivFelhasznalo: boolean;
   private _disabled: boolean;
+  private _jelszoModositasUzenet: string;
 
   constructor(@Inject(MAT_DIALOG_DATA) private operator: __Operator,
               private __operatorService: OperatorService,
@@ -36,13 +37,22 @@ export class OperatorAdatokComponent implements OnInit {
               private __router: Router,
               private __global: GlobalsService,
               private __dialog: MatDialog) {
-    this._operator = operator;
-    this._ujOperator = this._operator.id == null;
+    if (operator.id == null) {
+      this._ujOperator = true;
+      this._operator = new __Operator();
+    } else {
+      this._ujOperator = false;
+      this._operator = operator;
+    }
+
+    // this._operator = operator;
+    // this._ujOperator = this._operator.id == null;
   }
   ngOnInit() {
-    this.__global._felhasznaloJoga.subscribe(felhasznaloJoga => this._felhasznaloJoga = felhasznaloJoga.toString());
+    this.__global._belepettFelhasznaloJoga.subscribe(felhasznaloJoga => this._felhasznaloJoga = felhasznaloJoga.toString());
     this._aktivFelhasznalo = this._operator.aktiv == 'A' ? true : false;
     this._disabled = this._felhasznaloJoga === 'ADMIN' ? false : true;
+    if (this._ujOperator) { this.mezokUritese(); }
     this.felhasznaloiJogokBeolvasas();
   }
 
@@ -51,7 +61,8 @@ export class OperatorAdatokComponent implements OnInit {
    */
   felhasznaloiJogokBeolvasas() {
     if (this._felhasznaloJoga === 'ADMIN') {
-      this._aktualisJog = this._operator.jogok[0].id;
+      if (!this._ujOperator) {
+        this._aktualisJog = (this._operator.jogok[0].id).toString();}
       this.__jogokService.getJogok().subscribe( jogok => {
         this._jogokLista = jogok;
       });
@@ -77,10 +88,19 @@ export class OperatorAdatokComponent implements OnInit {
       this._params = this.setParameters(this._aktualisJog);
       this.__jogokService.getJogGET(this._params).subscribe(jog => {
         this._jog = jog
-        this._operator.jogok[0] = this._jog;
-        this._operator.aktiv = this._aktivFelhasznalo ? 'A' : 'P';
-        this.__operatorService.updateOperatorPUT(this.operator).subscribe(operator => {
-          this._operator = operator;});
+        if (this._ujOperator) {
+          this._operator.aktiv = 'A';
+          this._ujFelhasznaloJoga = new Array(this._jog);
+          this._operator.jogok = this._ujFelhasznaloJoga;
+          this.__operatorService.saveOperatorPOST(this._operator).subscribe(result => {
+            console.log(result);
+          });
+        } else {
+          this._operator.jogok[0] = this._jog;
+          this._operator.aktiv = this._aktivFelhasznalo ? 'A' : 'P';
+          this.__operatorService.updateOperatorPUT(this.operator).subscribe(operator => {
+            this._operator = operator;});
+        }
       });
     }
   }
@@ -92,6 +112,13 @@ export class OperatorAdatokComponent implements OnInit {
    */
   private mezokEllenorzese(): boolean {
     return true;
+  }
+
+  private mezokUritese() {
+    this._operator.vezetekNev = '';
+    this._operator.keresztNev = '';
+    this._operator.username = '';
+    this._ujJelszo1 = '';
   }
 
 

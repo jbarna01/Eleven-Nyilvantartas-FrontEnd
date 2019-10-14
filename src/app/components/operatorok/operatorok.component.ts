@@ -52,7 +52,7 @@ export class OperatorokComponent implements OnInit {
    * ADMIN vagy nem. Nem ADMIN felhasználó esetén csak a belépet felhasználó adatait adja vissza.
    */
   private operatorListaFeltoltese() {
-    this.global._felhasznaloJoga.subscribe(felhasznaloJoga => this._felhasznaloJoga = felhasznaloJoga.toString());
+    this.global._belepettFelhasznaloJoga.subscribe(felhasznaloJoga => this._felhasznaloJoga = felhasznaloJoga.toString());
     if (this._felhasznaloJoga === 'ADMIN') {
       this.operatorService.getOperatorokGET().subscribe(operatorok => {
         this._operatorokLista = new MatTableDataSource(operatorok);

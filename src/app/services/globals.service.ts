@@ -13,11 +13,11 @@ export class GlobalsService {
   private isBelepveStatus = new BehaviorSubject<boolean>(false);
   _isBelepve = this.isBelepveStatus.asObservable();
 
-  private _felhasznaloTeljesNeve = new BehaviorSubject<string>('');
-  _teljesNev = this._felhasznaloTeljesNeve.asObservable();
+  private _belepetFelhasznaloTeljesNeve = new BehaviorSubject<string>('');
+  _belepettTeljesNev = this._belepetFelhasznaloTeljesNeve.asObservable();
 
-  private _felhasznaloAlapJoga = new BehaviorSubject<string>('');
-  _felhasznaloJoga = this._felhasznaloAlapJoga.asObservable();
+  private _belepettFelhasznaloAlapJoga = new BehaviorSubject<string>('');
+  _belepettFelhasznaloJoga = this._belepettFelhasznaloAlapJoga.asObservable();
 
   constructor() { }
 
@@ -30,10 +30,10 @@ export class GlobalsService {
   }
 
   setTeljesNev(teljesNev: string) {
-    this._felhasznaloTeljesNeve.next(teljesNev);
+    this._belepetFelhasznaloTeljesNeve.next(teljesNev);
   }
 
   setFelhasznaloJoga(felhasznaloJoga: string) {
-    this._felhasznaloAlapJoga.next(felhasznaloJoga);
+    this._belepettFelhasznaloAlapJoga.next(felhasznaloJoga);
   }
 }

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import {Observable} from "rxjs";
+import {Observable, of} from "rxjs";
 import {__BaseService} from "./base-service";
-import {HttpClient as __HttpClient, HttpParams as __HttpParams} from "@angular/common/http";
+import {HttpClient as __HttpClient, HttpHeaders as __HttpHeaders, HttpParams as __HttpParams} from "@angular/common/http";
 import {Operator as __Operator} from "../models/Operator";
+import {catchError} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,13 @@ export class OperatorService extends __BaseService{
   private _urlOperatorok: string = 'http://localhost:8099/operatorok';
   private _urlOperator: string = 'http://localhost:8099/operator';
   private _urlLoginOperetor: string = 'http://localhost:8099/loginOperator';
+
+  private httpOptions = {
+    headers: new __HttpHeaders({
+      'Content-Type':  'application/xml',
+      'Authorization': 'jwt-token'
+    })
+  };
 
   constructor(http: __HttpClient) {
     super(http);
@@ -49,10 +57,28 @@ export class OperatorService extends __BaseService{
     return this.http.put<__Operator>(this._urlOperator + '/' + operator.id, operator);
   }
 
-  // saveOperatorPOST(operator: Operator) {
-  //   return this.http.post(this._urlOperator, operator);
-  // }
+  saveOperatorPOST(operator: __Operator) {
+    return this.http.post(this._urlOperator, operator)
+      .pipe(
+        catchError(this.handleError('operator', operator))
+      );
+  }
+
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error);
+      this.log(`${operation} failed: ${error.message}`);
+
+      return of(result as T);
+    };
+  }
+
+  private log(message: string) {
+    console.log(message);
+  }
+
 }
+
 
 
 module OperatorService {

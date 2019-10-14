@@ -29,7 +29,7 @@ export class JelszoModositasComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.global._felhasznaloJoga.subscribe(felhasznaloJoga => this._felhasznaloJoga = felhasznaloJoga.toString());
+    this.global._belepettFelhasznaloJoga.subscribe(felhasznaloJoga => this._felhasznaloJoga = felhasznaloJoga.toString());
     this.global._felhasznaloId.subscribe(felhasznalId => this._belepettFelhasznaloId = parseInt(felhasznalId.toString(), 10));
 
   }
