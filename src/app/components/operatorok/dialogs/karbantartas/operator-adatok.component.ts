@@ -44,10 +44,8 @@ export class OperatorAdatokComponent implements OnInit {
       this._ujOperator = false;
       this._operator = operator;
     }
-
-    // this._operator = operator;
-    // this._ujOperator = this._operator.id == null;
   }
+
   ngOnInit() {
     this.__global._belepettFelhasznaloJoga.subscribe(felhasznaloJoga => this._felhasznaloJoga = felhasznaloJoga.toString());
     this._aktivFelhasznalo = this._operator.aktiv == 'A' ? true : false;
@@ -62,7 +60,7 @@ export class OperatorAdatokComponent implements OnInit {
   felhasznaloiJogokBeolvasas() {
     if (this._felhasznaloJoga === 'ADMIN') {
       if (!this._ujOperator) {
-        this._aktualisJog = (this._operator.jogok[0].id).toString();}
+        this._aktualisJog = (this._operator.jogok.id).toString();}
       this.__jogokService.getJogok().subscribe( jogok => {
         this._jogokLista = jogok;
       });
@@ -91,7 +89,7 @@ export class OperatorAdatokComponent implements OnInit {
         if (this._ujOperator) {
           this._operator.aktiv = 'A';
           this._ujFelhasznaloJoga = new Array(this._jog);
-          this._operator.jogok = this._ujFelhasznaloJoga;
+          this._operator.jogok = this._jog;
           this.__operatorService.saveOperatorPOST(this._operator).subscribe(result => {
             console.log(result);
           });

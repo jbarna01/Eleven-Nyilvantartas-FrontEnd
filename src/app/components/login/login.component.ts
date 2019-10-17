@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
             this._teljesNev = this._operator.vezetekNev + ' ' + this._operator.keresztNev;
             this.__global.setTeljesNev(this._teljesNev);
             this.__global.setFelhasznaloId(this._operator.id);
-            this.__global.setFelhasznaloJoga(this._operator.jogok[0].code);
+            this.__global.setFelhasznaloJoga(this._operator.jogok.code);
             this.__router.navigate(['/cimsor']);
           } else {
             this.uzenetek('Csak akítv felhasználó léphet be! Kérem vegye fel a kapcsolatott az adminisztrátorral!');

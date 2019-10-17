@@ -9,6 +9,6 @@ export class Operator {
   password:   string;
   aktiv:      string;
   modositas:  Date;
-  jogok:      Jogok[];
+  jogok:      Jogok;
 
 }

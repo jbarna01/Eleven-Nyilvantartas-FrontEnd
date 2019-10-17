@@ -8,7 +8,6 @@ import {Jogok as __Jogok} from "../models/Jogok";
   providedIn: 'root'
 })
 export class JogokService extends __BaseService {
-  private _urlJogok: string = 'http://localhost:8099/jogok';
   private _urlJog: string = 'http://localhost:8099/jog';
 
   constructor(http:__HttpClient) {
@@ -19,7 +18,7 @@ export class JogokService extends __BaseService {
    * Összes jogot visszadja
    */
   getJogok():Observable<__Jogok[]> {
-    return this.http.get<__Jogok[]>(this._urlJogok);
+    return this.http.get<__Jogok[]>(this._urlJog);
   }
 
   /**

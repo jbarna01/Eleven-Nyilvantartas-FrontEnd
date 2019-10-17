@@ -10,7 +10,6 @@ import {catchError} from "rxjs/operators";
 })
 export class OperatorService extends __BaseService{
 
-  private _urlOperatorok: string = 'http://localhost:8099/operatorok';
   private _urlOperator: string = 'http://localhost:8099/operator';
   private _urlLoginOperetor: string = 'http://localhost:8099/loginOperator';
 
@@ -37,7 +36,7 @@ export class OperatorService extends __BaseService{
    * Összes operatort visszadja
    */
   getOperatorokGET():Observable<__Operator[]> {
-    return this.http.get<__Operator[]>(this._urlOperatorok);
+    return this.http.get<__Operator[]>(this._urlOperator);
   }
 
   /**
