@@ -18,7 +18,7 @@ export class OperatorAdatokComponent implements OnInit {
 
   private _operator: __Operator;
   private _felhasznaloJoga: string;
-  private _aktualisJog: string;
+  private _aktualisJog: number;
   private _jogokLista: Jogok[];
   private _jog: Jogok = new Jogok();
   private _ujOperator: boolean;
@@ -58,7 +58,7 @@ export class OperatorAdatokComponent implements OnInit {
   felhasznaloiJogokBeolvasas() {
     if (this._felhasznaloJoga === 'ADMIN') {
       if (!this._ujOperator) {
-        this._aktualisJog = (this._operator.jogok.id).toString();}
+        this._aktualisJog = this._operator.jogok.id;}
       this.__jogokService.getJogok().subscribe( jogok => {
         this._jogokLista = jogok;
       });
@@ -81,7 +81,7 @@ export class OperatorAdatokComponent implements OnInit {
    */
   operatorMentese() {
     if (this.mezokEllenorzese()) {
-      this._params = this.setParameters(this._aktualisJog);
+      this._params = this.setParameters(this._aktualisJog.toString());
       this.__jogokService.getJogGET(this._params).subscribe(jog => {
         this._jog = jog
         if (this._ujOperator) {

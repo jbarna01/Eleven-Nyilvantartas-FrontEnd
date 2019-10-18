@@ -43,7 +43,7 @@
 <!--        </mat-grid-tile>-->
         <mat-grid-tile *ngIf="!_ujOperator && _felhasznaloJoga != 'ADMIN'" class="mat-grid-tit">
           <mat-form-field>
-            <input [(ngModel)] = "_operator.jogok[0].megnevezes" class="input_text" readonly matInput placeholder="Jogosultság:" >
+            <input [(ngModel)] = "_operator.jogok.megnevezes" class="input_text" readonly matInput placeholder="Jogosultság:" >
           </mat-form-field>
         </mat-grid-tile>
         <mat-grid-tile *ngIf="_ujOperator || _felhasznaloJoga==='ADMIN'" class="mat-grid-tit">
