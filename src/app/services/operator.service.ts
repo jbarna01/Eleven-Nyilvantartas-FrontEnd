@@ -49,18 +49,30 @@ export class OperatorService extends __BaseService{
   }
 
   /**
-   * A felhasználó jlszóváltoztatása.
+   * A felhasználó jelszóváltoztatásának REST service hívása
    * @param operator
    */
   updateOperatorPUT(operator: __Operator):Observable<__Operator> {
     return this.http.put<__Operator>(this._urlOperator + '/' + operator.id, operator);
   }
 
+  /**
+   * Új operátor mentésének REST service hívása.
+   * @param operator
+   */
   saveOperatorPOST(operator: __Operator) {
     return this.http.post(this._urlOperator, operator)
       .pipe(
         catchError(this.handleError('operator', operator))
       );
+  }
+
+  /**
+   * Kiválasztott operátor-t törlő REST service hívása.
+   * @param params
+   */
+  deleteOperatorDELETE(params: __HttpParams) {
+    return this.http.delete(this._urlOperator + '/' + params.get('id'));
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
@@ -77,8 +89,6 @@ export class OperatorService extends __BaseService{
   }
 
 }
-
-
 
 module OperatorService {
 }

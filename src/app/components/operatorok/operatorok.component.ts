@@ -83,6 +83,9 @@ export class OperatorokComponent implements OnInit {
 
     dialogRefUj.afterClosed().subscribe(result => {
       console.log(`Dialaog válasz: ${result}`);
+      if (result) {
+        this.ngOnInit()
+      }
     })
   }
 
@@ -94,7 +97,8 @@ export class OperatorokComponent implements OnInit {
     let dialogRef = this.dialog.open(OperatorTorlesComponent, {data: _operator});
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialaog válasz: ${result}`);
+      if (result) { this.ngOnInit(); }
+      console.log(result);
     })
   }
 

@@ -7,7 +7,6 @@ import {GlobalsService} from "../../../../services/globals.service";
 import {OperatorService} from "../../../../services/operator.service";
 import {JogokService} from "../../../../services/jogok.service";
 import {Jogok} from "../../../../models/Jogok";
-import {MatTableDataSource} from "@angular/material/table";
 import {HttpParams} from "@angular/common/http";
 
 @Component({
@@ -21,7 +20,6 @@ export class OperatorAdatokComponent implements OnInit {
   private _felhasznaloJoga: string;
   private _aktualisJog: string;
   private _jogokLista: Jogok[];
-  private _ujFelhasznaloJoga: Jogok[];
   private _jog: Jogok = new Jogok();
   private _ujOperator: boolean;
   private _aktivFelhasznalo: boolean;
@@ -88,13 +86,13 @@ export class OperatorAdatokComponent implements OnInit {
         this._jog = jog
         if (this._ujOperator) {
           this._operator.aktiv = 'A';
-          this._ujFelhasznaloJoga = new Array(this._jog);
+          this._operator.password = this._ujJelszo1;
           this._operator.jogok = this._jog;
           this.__operatorService.saveOperatorPOST(this._operator).subscribe(result => {
             console.log(result);
           });
         } else {
-          this._operator.jogok[0] = this._jog;
+          this._operator.jogok = this._jog;
           this._operator.aktiv = this._aktivFelhasznalo ? 'A' : 'P';
           this.__operatorService.updateOperatorPUT(this.operator).subscribe(operator => {
             this._operator = operator;});
