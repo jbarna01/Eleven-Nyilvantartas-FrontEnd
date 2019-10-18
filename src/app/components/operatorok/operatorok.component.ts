@@ -23,8 +23,8 @@ export class OperatorokComponent implements OnInit {
   private _felhasznaloId: string;
   private _felhasznaloJoga: string;
   private _params: __HttpParams;
-  private _displayedHeadColums: string[] = ['vezeteknev', 'keresztnev', 'username', 'aktiv', 'edit', 'delete'];
-  private _displayedRowColums: string[] = ['vezeteknev', 'keresztnev', 'username', 'aktiv', 'edit', 'delete'];
+  private _displayedHeadColums: string[] = ['vezeteknev', 'keresztnev', 'username', 'szerepkor', 'aktiv', 'edit', 'delete'];
+  private _displayedRowColums: string[] = ['vezeteknev', 'keresztnev', 'username', 'szerepkor', 'aktiv', 'edit', 'delete'];
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -82,10 +82,7 @@ export class OperatorokComponent implements OnInit {
     let dialogRefUj = this.dialog.open(OperatorAdatokComponent, {data: new __Operator()});
 
     dialogRefUj.afterClosed().subscribe(result => {
-      console.log(`Dialaog válasz: ${result}`);
-      if (result) {
-        this.ngOnInit()
-      }
+      this.ngOnInit();
     })
   }
 
@@ -97,8 +94,7 @@ export class OperatorokComponent implements OnInit {
     let dialogRef = this.dialog.open(OperatorTorlesComponent, {data: _operator});
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result) { this.ngOnInit(); }
-      console.log(result);
+      this.ngOnInit();
     })
   }
 

@@ -33,3 +33,11 @@ mat-form-field {
 .mat-column-aktiv, .mat-column-edit, .mat-column-delete {
   flex: 0 0 5%;
 }
+
+.mat-row:nth-child(even){
+  background-color:#ffffff;
+}
+
+.mat-row:nth-child(odd){
+  background-color:#f0f0f0;
+}

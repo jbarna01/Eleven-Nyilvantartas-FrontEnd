@@ -8,10 +8,6 @@
   <button class="ujFelhasznaloButton" mat-raised-button (click)="ujOperatorFelvetele()">Új operátor</button>
 
   <mat-table [dataSource]='_operatorokLista' matSort class="mat-elevation-z8">
-<!--    <ng-container matColumnDef="id">-->
-<!--      <mat-header-cell *matHeaderCellDef>NO.</mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element">{{ element.id }}</mat-cell>-->
-<!--    </ng-container>-->
 
     <ng-container matColumnDef="vezeteknev">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Vezetéknév</mat-header-cell>
@@ -24,14 +20,14 @@
     </ng-container>
 
     <ng-container matColumnDef="username">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>UserName</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Felhasználónév</mat-header-cell>
       <mat-cell *matCellDef="let element">{{ element.username }}</mat-cell>
     </ng-container>
 
-<!--    <ng-container matColumnDef="password">-->
-<!--      <mat-header-cell *matHeaderCellDef>Jelszó</mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element">{{ element.password }}</mat-cell>-->
-<!--    </ng-container>-->
+    <ng-container matColumnDef="szerepkor">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Szerepkör</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.jogok.megnevezes }}</mat-cell>
+    </ng-container>
 
     <ng-container matColumnDef="aktiv">
       <mat-header-cell *matHeaderCellDef>Aktív</mat-header-cell>
