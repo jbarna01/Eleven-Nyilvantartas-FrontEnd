@@ -23,8 +23,8 @@ export class OperatorokComponent implements OnInit {
   private _felhasznaloId: string;
   private _felhasznaloJoga: string;
   private _params: __HttpParams;
-  private _displayedHeadColums: string[] = ['id', 'vezeteknev', 'keresztnev', 'username', 'password', 'aktiv', 'edit', 'delete'];
-  private _displayedRowColums: string[] = ['id', 'vezeteknev', 'keresztnev', 'username', 'password', 'aktiv', 'edit', 'delete'];
+  private _displayedHeadColums: string[] = ['vezeteknev', 'keresztnev', 'username', 'aktiv', 'edit', 'delete'];
+  private _displayedRowColums: string[] = ['vezeteknev', 'keresztnev', 'username', 'aktiv', 'edit', 'delete'];
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;

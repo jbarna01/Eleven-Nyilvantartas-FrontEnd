@@ -1,5 +1,5 @@
 mat-table {
-  width: 80%;
+  width: 60%;
   margin: 20px auto;
 }
 
@@ -15,9 +15,9 @@ mat-cell {
 }
 
 mat-form-field {
-  width: 60%;
+  width: 40%;
   margin-top: 20px;
-  margin-left: 10%;
+  margin-left: 20%;
 }
  .mat-column-edit, .mat-column-delete {
    color: #f0f0f0;
@@ -25,7 +25,11 @@ mat-form-field {
  }
 
  .ujFelhasznaloButton {
-   margin-right: 10%;
+   margin-right: 20%;
    margin-top: 20px;
    float: right;
  }
+
+.mat-column-aktiv, .mat-column-edit, .mat-column-delete {
+  flex: 0 0 5%;
+}
