@@ -1,4 +1,5 @@
 import { HttpClient, HttpParameterCodec, HttpParams } from '@angular/common/http';
+import {StarterConfiguration} from "./StarterConfiguration";
 
 /**
  * Custom parameter codec to correctly handle the plus sign in parameter
@@ -27,7 +28,24 @@ const PARAMETER_CODEC = new ParameterCodec();
  * Base class for API services
  */
 export class __BaseService {
-  constructor(protected http: HttpClient) {}
+  constructor(protected config: StarterConfiguration, protected http: HttpClient) {}
+
+  private _rootUrl: string = '';
+
+  /**
+   * Returns the root url for API operations. If not set directly in this
+   * service, will fallback to ApiConfiguration.rootUrl.
+   */
+  get rootUrl(): string {
+    return this._rootUrl || this.config.rootUrl;
+  }
+
+  /**
+   * Sets the root URL for API operations in this service.
+   */
+  set rootUrl(rootUrl: string) {
+    this._rootUrl = rootUrl;
+  }
 
   /**
    * Creates a new `HttpParams` with the correct codec
