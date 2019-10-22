@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
-import {Observable, of} from "rxjs";
 import {__BaseService} from "./base-service";
-import {HttpClient as __HttpClient, HttpHeaders as __HttpHeaders, HttpParams as __HttpParams} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpRequest, HttpResponse, HttpParams} from "@angular/common/http";
 import {Operator as __Operator} from "../models/Operator";
 import {catchError} from "rxjs/operators";
+import {StarterConfiguration as __Configuration} from "./StarterConfiguration";
+import {Observable, of} from "rxjs";
+import { map as __map, filter as __filter } from 'rxjs/operators';
+import {StrictHttpResponse as __StrictHttpResponse} from "./strict-http-response";
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -14,29 +19,52 @@ export class OperatorService extends __BaseService{
   private _urlLoginOperetor: string = 'http://localhost:8099/loginOperator';
 
   private httpOptions = {
-    headers: new __HttpHeaders({
+    headers: new HttpHeaders({
       'Content-Type':  'application/xml',
       'Authorization': 'jwt-token'
     })
   };
 
-  constructor(http: __HttpClient) {
-    super(http);
+  constructor(config: __Configuration, http:HttpClient) {
+    super(config, http);
   }
 
   /**
    * A parametérben megadott ID által meghatározott operátort adja vissza.
    * @param params
    */
-  getOperator(params: __HttpParams):Observable<__Operator[]> {
+  getOperator(params: HttpParams):Observable<__Operator[]> {
     return this.http.get<__Operator[]>(this._urlOperator + '/' + params.get('id'));
   }
 
   /**
    * Összes operatort visszadja
    */
+  // getOperatorokGET():Observable<__Operator[]> {
+  //   return this.http.get<__Operator[]>(this._urlOperator);
+  // }
+
+  getAllOperatorokGETResponse(): Observable<__StrictHttpResponse<Array<__Operator>>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    let req = new HttpRequest<any>('GET', this.rootUrl + `/operator`, __body, {
+      headers: __headers,
+      params: __params,
+      responseType: 'json'
+    });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map(_r => {
+        return _r as __StrictHttpResponse<Array<__Operator>>;
+      })
+    );
+}
+
+
   getOperatorokGET():Observable<__Operator[]> {
-    return this.http.get<__Operator[]>(this._urlOperator);
+    return this.getAllOperatorokGETResponse().pipe(__map(_r => _r.body as Array<__Operator>));
   }
 
   /**
@@ -44,7 +72,7 @@ export class OperatorService extends __BaseService{
    * felhasználónév és jelszó alapján.
    * @param params
    */
-  loginOperatorGET(params: __HttpParams):Observable<__Operator> {
+  loginOperatorGET(params: HttpParams):Observable<__Operator> {
     return this.http.get<__Operator>(this._urlLoginOperetor + '/' + params.get('username') + '/' + params.get('password'));
   }
 
@@ -71,7 +99,7 @@ export class OperatorService extends __BaseService{
    * Kiválasztott operátor-t törlő REST service hívása.
    * @param params
    */
-  deleteOperatorDELETE(params: __HttpParams) {
+  deleteOperatorDELETE(params: HttpParams) {
     return this.http.delete(this._urlOperator + '/' + params.get('id'));
   }
 

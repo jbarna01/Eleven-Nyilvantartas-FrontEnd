@@ -3,6 +3,7 @@ import {Observable} from "rxjs";
 import {__BaseService} from "./base-service";
 import {HttpClient as __HttpClient, HttpParams as __HttpParams} from "@angular/common/http";
 import {Jogok as __Jogok} from "../models/Jogok";
+import {StarterConfiguration as __Configuration} from "./StarterConfiguration";
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,8 @@ import {Jogok as __Jogok} from "../models/Jogok";
 export class JogokService extends __BaseService {
   private _urlJog: string = 'http://localhost:8099/jog';
 
-  constructor(http:__HttpClient) {
-    super(http);
+  constructor(config: __Configuration, http:__HttpClient) {
+    super(config, http);
   }
 
   /**
