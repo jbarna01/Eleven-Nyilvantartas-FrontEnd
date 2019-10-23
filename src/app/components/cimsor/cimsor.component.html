@@ -1,5 +1,5 @@
 <mat-toolbar color="primary" class="navbar">
-  <div *ngIf="!_isBelepve">Eleven nyílvántartó rendszer</div>
+  <div *ngIf="!_isBelepve">Eleven nyílvántartó rendszer {{ HOME.TITLE | translate}}</div>
   <div style="cursor:pointer;" *ngIf="_isBelepve" (click)="hallgatoiLista()">
     <span (click)="hallgatoiLista()" >Hallgatók</span>
     <span (click)="torzs()" >Törzs</span>
