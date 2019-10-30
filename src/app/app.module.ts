@@ -15,6 +15,7 @@ import { HallgatokComponent } from './components/hallgatok/hallgatok.component';
 import {OperatorTorlesComponent} from "./components/operatorok/dialogs/torles/operator-torles.component";
 import { OperatorAdatokComponent } from './components/operatorok/dialogs/karbantartas/operator-adatok.component';
 import { JelszoModositasComponent } from './components/operatorok/dialogs/jelszoModositas/jelszoModositas.component';
+import {TranslateModule} from "@ngx-translate/core";
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { JelszoModositasComponent } from './components/operatorok/dialogs/jelszo
     BrowserAnimationsModule,
     HttpClientModule,
     MaterialModule,
-    FormsModule
+    FormsModule,
+    TranslateModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

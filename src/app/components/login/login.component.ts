@@ -1,10 +1,9 @@
 import {Component, OnInit } from '@angular/core';
 import {ActivatedRoute as __ActivatedRoute, Router as __Router} from '@angular/router';
 import {GlobalsService as __GlobalsService} from '../../services/globals.service';
-import {OperatorService as __OperatorService} from '../../services/operator.service';
-import {Operator as __Operator} from '../../models/Operator';
 import {MatSnackBar as __MatSnackBar} from '@angular/material';
 import {HttpParams as __HttpParams} from '@angular/common/http';
+import {OperatorService as __OperatorService} from '../../services/operator.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +15,7 @@ export class LoginComponent implements OnInit {
 
   private _userName = '';
   private _password = '';
-  private _operator: __Operator;
+  private _operator: any;
   private _isBelepve: boolean;
   private _params: __HttpParams;
   private _teljesNev: string;
@@ -36,13 +35,8 @@ export class LoginComponent implements OnInit {
    * Belépteti a felhasználót
    */
   private belepes() {
-    this._operator = new __Operator();
     if (this._userName) {
-      this._operator.username = this._userName;
-      this._operator.password = this._password;
-      this._params = this.setParameters(this._userName, this._password);
-
-      this.__operatorService.loginOperatorGET(this._params).subscribe( operator => {
+      this.__operatorService.loginOperatorGET( {username: this._userName, password: this._password}).subscribe( operator => {
         this._operator = operator;
         if (this._operator != null) {
           if (this._operator.aktiv == 'A')
@@ -71,13 +65,6 @@ export class LoginComponent implements OnInit {
    * @param uzenet, a kiírandó üzenet.
    */
   private uzenetek(uzenet: string) {
-  this.__snackBar.open(uzenet, 'Bezár')._dismissAfter(2000);
-}
-
-  private setParameters(username: string, password: string): __HttpParams {
-    const params = new __HttpParams()
-      .set('username', username)
-      .set('password', password);
-    return params;
+    this.__snackBar.open(uzenet, 'Bezár')._dismissAfter(2000);
   }
 }

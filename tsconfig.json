@@ -12,6 +12,7 @@
     "resolveJsonModule": true,
     "importHelpers": true,
     "target": "es2015",
+    "allowSyntheticDefaultImports": true,
     "typeRoots": [
       "node_modules/@types"
     ],
@@ -22,6 +23,7 @@
     "baseUrl": "src",
     "paths": {
       "@translations/*": ["translations/*"]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

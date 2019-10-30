@@ -13,10 +13,11 @@ import {StrictHttpResponse as __StrictHttpResponse} from "./strict-http-response
 @Injectable({
   providedIn: 'root'
 })
-export class OperatorService extends __BaseService{
+class OperatorService extends __BaseService{
 
-  private _urlOperator: string = 'http://localhost:8099/operator';
-  private _urlLoginOperetor: string = 'http://localhost:8099/loginOperator';
+  private _urlOperator: string = 'http://localhost:8099/operator/';
+  private _urlOperator1: string = '/operator/';
+  private _urlLoginOperetor: string = '/loginOperator/';
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -33,38 +34,51 @@ export class OperatorService extends __BaseService{
    * A parametérben megadott ID által meghatározott operátort adja vissza.
    * @param params
    */
-  getOperator(params: HttpParams):Observable<__Operator[]> {
-    return this.http.get<__Operator[]>(this._urlOperator + '/' + params.get('id'));
+  getOperatorGETResponse(
+    params: OperatorService.OperatorGETParams
+  ): Observable<__StrictHttpResponse<Array<__Operator>>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    let req = new HttpRequest<any>('GET', this.rootUrl + this._urlOperator1 + `${params.id}`, __body, {
+      headers: __headers,
+      params: __params,
+      responseType: 'json'
+    });
+    return this.http.request<any>(req).pipe(
+      __filter(_response => _response instanceof HttpResponse),
+      __map(_response => {
+        return _response as __StrictHttpResponse<Array<__Operator>>;
+      })
+    );
+  }
+
+  getOperatorGET(params: OperatorService.OperatorGETParams):Observable<__Operator[]> {
+    return this.getOperatorGETResponse(params).pipe(__map(_response => _response.body as Array<__Operator>));
   }
 
   /**
    * Összes operatort visszadja
    */
-  // getOperatorokGET():Observable<__Operator[]> {
-  //   return this.http.get<__Operator[]>(this._urlOperator);
-  // }
-
   getAllOperatorokGETResponse(): Observable<__StrictHttpResponse<Array<__Operator>>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
-    let req = new HttpRequest<any>('GET', this.rootUrl + `/operator`, __body, {
+    let req = new HttpRequest<any>('GET', this.rootUrl + this._urlOperator1, __body, {
       headers: __headers,
       params: __params,
       responseType: 'json'
     });
-
     return this.http.request<any>(req).pipe(
-      __filter(_r => _r instanceof HttpResponse),
-      __map(_r => {
-        return _r as __StrictHttpResponse<Array<__Operator>>;
+      __filter(_response => _response instanceof HttpResponse),
+      __map(_response => {
+        return _response as __StrictHttpResponse<Array<__Operator>>;
       })
     );
-}
-
+  }
 
   getOperatorokGET():Observable<__Operator[]> {
-    return this.getAllOperatorokGETResponse().pipe(__map(_r => _r.body as Array<__Operator>));
+    return this.getAllOperatorokGETResponse().pipe(__map(_response => _response.body as Array<__Operator>));
   }
 
   /**
@@ -72,8 +86,29 @@ export class OperatorService extends __BaseService{
    * felhasználónév és jelszó alapján.
    * @param params
    */
-  loginOperatorGET(params: HttpParams):Observable<__Operator> {
-    return this.http.get<__Operator>(this._urlLoginOperetor + '/' + params.get('username') + '/' + params.get('password'));
+  loginOperatorGETResponse(
+    params: OperatorService.LoginOperatorGETParams
+  ): Observable<__StrictHttpResponse<Array<__Operator>>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    if (params.username != null) __params = __params.set('username', params.username.toString());
+    if (params.password != null) __params = __params.set('password', params.password.toString());
+    let req = new HttpRequest<any>('GET', this.rootUrl + this._urlLoginOperetor, __body, {
+      headers: __headers,
+      params: __params,
+      responseType: 'json'
+    });
+    return this.http.request<any>(req).pipe(
+      __filter(_response => _response instanceof HttpResponse),
+      __map(_response => {
+        return _response as __StrictHttpResponse<Array<__Operator>>;
+      })
+    );
+  }
+
+  loginOperatorGET(params: OperatorService.LoginOperatorGETParams):Observable<__Operator[]> {
+    return this.loginOperatorGETResponse(params).pipe(__map(_response => _response.body as Array<__Operator>));
   }
 
   /**
@@ -119,4 +154,15 @@ export class OperatorService extends __BaseService{
 }
 
 module OperatorService {
+  export interface OperatorGETParams {
+    id: string;
+  }
+
+  export interface LoginOperatorGETParams {
+    username?: string;
+    password?: string;
+  }
 }
+
+export { OperatorService };
+

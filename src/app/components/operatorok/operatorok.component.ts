@@ -3,12 +3,12 @@ import {MatTableDataSource, MatSort, MatPaginator} from "@angular/material";
 import {OperatorTorlesComponent} from "./dialogs/torles/operator-torles.component";
 import {OperatorAdatokComponent} from "./dialogs/karbantartas/operator-adatok.component";
 import {MatDialog} from "@angular/material/dialog";
-
 import {GlobalsService as __GlobalsService} from "../../services/globals.service";
 import {HttpParams as __HttpParams} from "@angular/common/http";
 import {Operator as __Operator} from "../../models/Operator";
-import {OperatorService as __OperatorService} from "../../services/operator.service";
 import {Router as __Router} from "@angular/router";
+
+import {OperatorService as __OperatorService} from "../../services/operator.service";
 
 @Component({
   selector: 'app-operatorok',
@@ -61,8 +61,8 @@ export class OperatorokComponent implements OnInit {
       }) ;
     } else {
       this.global._felhasznaloId.subscribe(felhasznalId => this._felhasznaloId = felhasznalId.toString());
-      this._params = this.setParameters(this._felhasznaloId);
-      this.operatorService.getOperator(this._params).subscribe( operatorok => {
+      this.operatorService.getOperatorGET({id: this._felhasznaloId.toString()}
+      ).subscribe(operatorok => {
         this._operatorok.push(operatorok);
         this._operatorokLista = new MatTableDataSource(this._operatorok);
         this._operatorokLista.sort = this.sort;
@@ -108,11 +108,5 @@ export class OperatorokComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialaog válasz: ${result}`);
     })
-  }
-
-  private setParameters(id: string): __HttpParams {
-    const params = new __HttpParams()
-      .set('id', id);
-    return params;
   }
 }
