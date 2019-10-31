@@ -1,12 +1,12 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {Operator, Operator as __Operator} from "../../../../models/Operator";
+import {Operator, Operator as __Operator} from "../../../../api/nyilvantartas/models/Operator";
 import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
 import {Router} from "@angular/router";
 import {JelszoModositasComponent} from "../jelszoModositas/jelszoModositas.component";
-import {GlobalsService} from "../../../../services/globals.service";
-import {OperatorService} from "../../../../services/operator.service";
-import {JogokService} from "../../../../services/jogok.service";
-import {Jogok} from "../../../../models/Jogok";
+import {GlobalsService} from "../../../../api/nyilvantartas/services/globals.service";
+import {OperatorService} from "../../../../api/nyilvantartas/services/operator.service";
+import {JogokService} from "../../../../api/nyilvantartas/services/jogok.service";
+import {Jogok} from "../../../../api/nyilvantartas/models/Jogok";
 import {HttpParams} from "@angular/common/http";
 
 @Component({

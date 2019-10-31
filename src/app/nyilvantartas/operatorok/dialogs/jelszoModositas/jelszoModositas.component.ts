@@ -1,9 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef as __MatDialogRef} from "@angular/material/dialog";
-import {GlobalsService as __GlobalsService} from '../../../../services/globals.service';
+import {GlobalsService as __GlobalsService} from '../../../../api/nyilvantartas/services/globals.service';
 import {MatSnackBar as __MatSnackBar} from '@angular/material';
-import {Operator as __Operator} from "../../../../models/Operator";
-import {OperatorService as __OperatorService} from '../../../../services/operator.service';
+import {Operator as __Operator} from "../../../../api/nyilvantartas/models/Operator";
+import {OperatorService as __OperatorService} from '../../../../api/nyilvantartas/services/operator.service';
 
 @Component({
   selector: 'app-jelszo-modositas',

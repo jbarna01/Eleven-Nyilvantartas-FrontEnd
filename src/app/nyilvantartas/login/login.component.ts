@@ -1,9 +1,9 @@
 import {Component, OnInit } from '@angular/core';
 import {ActivatedRoute as __ActivatedRoute, Router as __Router} from '@angular/router';
-import {GlobalsService as __GlobalsService} from '../../services/globals.service';
+import {GlobalsService as __GlobalsService} from '../../api/nyilvantartas/services/globals.service';
 import {MatSnackBar as __MatSnackBar} from '@angular/material';
 import {HttpParams as __HttpParams} from '@angular/common/http';
-import {OperatorService as __OperatorService} from '../../services/operator.service';
+import {OperatorService as __OperatorService} from '../../api/nyilvantartas/services/operator.service';
 
 @Component({
   selector: 'app-login',

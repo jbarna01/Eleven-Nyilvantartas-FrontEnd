@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {OperatorokComponent} from "./components/operatorok/operatorok.component";
+import {OperatorokComponent} from "./nyilvantartas/operatorok/operatorok.component";
 import {AppComponent} from "./app.component";
-import {LoginComponent} from "./components/login/login.component";
-import {CimsorComponent} from "./components/cimsor/cimsor.component";
-import {HallgatokComponent} from "./components/hallgatok/hallgatok.component";
+import {LoginComponent} from "./nyilvantartas/login/login.component";
+import {CimsorComponent} from "./nyilvantartas/cimsor/cimsor.component";
+import {HallgatokComponent} from "./nyilvantartas/hallgatok/hallgatok.component";
 
 
 const routes: Routes = [

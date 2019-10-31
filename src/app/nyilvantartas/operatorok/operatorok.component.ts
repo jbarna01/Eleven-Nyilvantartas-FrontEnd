@@ -3,12 +3,12 @@ import {MatTableDataSource, MatSort, MatPaginator} from "@angular/material";
 import {OperatorTorlesComponent} from "./dialogs/torles/operator-torles.component";
 import {OperatorAdatokComponent} from "./dialogs/karbantartas/operator-adatok.component";
 import {MatDialog} from "@angular/material/dialog";
-import {GlobalsService as __GlobalsService} from "../../services/globals.service";
+import {GlobalsService as __GlobalsService} from "../../api/nyilvantartas/services/globals.service";
 import {HttpParams as __HttpParams} from "@angular/common/http";
-import {Operator as __Operator} from "../../models/Operator";
+import {Operator as __Operator} from "../../api/nyilvantartas/models/Operator";
 import {Router as __Router} from "@angular/router";
 
-import {OperatorService as __OperatorService} from "../../services/operator.service";
+import {OperatorService as __OperatorService} from "../../api/nyilvantartas/services/operator.service";
 
 @Component({
   selector: 'app-operatorok',

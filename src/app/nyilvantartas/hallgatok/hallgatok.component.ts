@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {GlobalsService as __GlobalsService} from "../../services/globals.service";
+import {GlobalsService as __GlobalsService} from "../../api/nyilvantartas/services/globals.service";
 import {Router as __Router} from "@angular/router";
 
 @Component({

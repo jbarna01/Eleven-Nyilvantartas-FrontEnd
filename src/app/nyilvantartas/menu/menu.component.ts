@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {AppModule} from "../../app.module";
 import {AppComponent} from "../../app.component";
-import {CoreService} from "../../services/core.service";
+import {CoreService} from "../../api/nyilvantartas/services/core.service";
 
 @Component({
   selector: 'app-menu',
