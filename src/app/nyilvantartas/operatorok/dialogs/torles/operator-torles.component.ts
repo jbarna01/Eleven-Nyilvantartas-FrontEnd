@@ -2,7 +2,6 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {Operator as __Operator} from "../../../../api/nyilvantartas/models/Operator";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {OperatorService} from "../../../../api/nyilvantartas/services/operator.service";
-import {HttpParams as __HttpParams} from "@angular/common/http";
 
 @Component({
   selector: 'app-operator-torles',

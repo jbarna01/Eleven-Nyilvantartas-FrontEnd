@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import {__BaseService} from "./base-service";
-import {HttpClient, HttpHeaders, HttpRequest, HttpResponse, HttpParams} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpRequest, HttpResponse} from "@angular/common/http";
 import {Operator as __Operator} from "../models/Operator";
 import {catchError} from "rxjs/operators";
 import {StarterConfiguration as __Configuration} from "./StarterConfiguration";
 import {Observable as __Observable, of} from "rxjs";
 import { map as __map, filter as __filter } from 'rxjs/operators';
 import {StrictHttpResponse as __StrictHttpResponse} from "./strict-http-response";
-
+import { LoginOperatorGETRequest as LoginOperatorGETParams } from "../models/LoginOperatorGETRequest";
 
 
 @Injectable({
@@ -87,7 +87,7 @@ class OperatorService extends __BaseService{
    * @param params
    */
   loginOperatorGETResponse(
-    params: OperatorService.LoginOperatorGETParams
+    params: LoginOperatorGETParams
   ): __Observable<__StrictHttpResponse<Array<__Operator>>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
@@ -107,7 +107,7 @@ class OperatorService extends __BaseService{
     );
   }
 
-  loginOperatorGET(params: OperatorService.LoginOperatorGETParams):__Observable<__Operator[]> {
+  loginOperatorGET(params: LoginOperatorGETParams):__Observable<__Operator[]> {
     return this.loginOperatorGETResponse(params).pipe(__map(_response => _response.body as Array<__Operator>));
   }
 
@@ -154,7 +154,6 @@ class OperatorService extends __BaseService{
   }
 
   deleteOperatorDELETE(id: string): __Observable<null> {
-    // return this.http.delete(this._urlOperator + '/' + params.get('id'));
     return this.deleteOperatorDELETEResponse(id).pipe(__map(_response => _response.body as null));
   }
 
@@ -176,11 +175,6 @@ class OperatorService extends __BaseService{
 module OperatorService {
   export interface OperatorGETParams {
     id: string;
-  }
-
-  export interface LoginOperatorGETParams {
-    username?: string;
-    password?: string;
   }
 }
 
