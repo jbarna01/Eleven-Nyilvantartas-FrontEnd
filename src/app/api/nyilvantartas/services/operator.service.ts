@@ -176,6 +176,11 @@ module OperatorService {
   export interface OperatorGETParams {
     id: string;
   }
+
+  // export interface LoginOperatorGETRequest {
+  //   username?: string;
+  //   password?: string;
+  // }
 }
 
 export { OperatorService };
