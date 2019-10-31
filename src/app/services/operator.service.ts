@@ -4,7 +4,7 @@ import {HttpClient, HttpHeaders, HttpRequest, HttpResponse, HttpParams} from "@a
 import {Operator as __Operator} from "../models/Operator";
 import {catchError} from "rxjs/operators";
 import {StarterConfiguration as __Configuration} from "./StarterConfiguration";
-import {Observable, of} from "rxjs";
+import {Observable as __Observable, of} from "rxjs";
 import { map as __map, filter as __filter } from 'rxjs/operators';
 import {StrictHttpResponse as __StrictHttpResponse} from "./strict-http-response";
 
@@ -36,7 +36,7 @@ class OperatorService extends __BaseService{
    */
   getOperatorGETResponse(
     params: OperatorService.OperatorGETParams
-  ): Observable<__StrictHttpResponse<Array<__Operator>>> {
+  ): __Observable<__StrictHttpResponse<Array<__Operator>>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -53,14 +53,14 @@ class OperatorService extends __BaseService{
     );
   }
 
-  getOperatorGET(params: OperatorService.OperatorGETParams):Observable<__Operator[]> {
+  getOperatorGET(params: OperatorService.OperatorGETParams):__Observable<__Operator[]> {
     return this.getOperatorGETResponse(params).pipe(__map(_response => _response.body as Array<__Operator>));
   }
 
   /**
    * Összes operatort visszadja
    */
-  getAllOperatorokGETResponse(): Observable<__StrictHttpResponse<Array<__Operator>>> {
+  getAllOperatorokGETResponse(): __Observable<__StrictHttpResponse<Array<__Operator>>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -77,7 +77,7 @@ class OperatorService extends __BaseService{
     );
   }
 
-  getOperatorokGET():Observable<__Operator[]> {
+  getOperatorokGET():__Observable<__Operator[]> {
     return this.getAllOperatorokGETResponse().pipe(__map(_response => _response.body as Array<__Operator>));
   }
 
@@ -88,7 +88,7 @@ class OperatorService extends __BaseService{
    */
   loginOperatorGETResponse(
     params: OperatorService.LoginOperatorGETParams
-  ): Observable<__StrictHttpResponse<Array<__Operator>>> {
+  ): __Observable<__StrictHttpResponse<Array<__Operator>>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -107,7 +107,7 @@ class OperatorService extends __BaseService{
     );
   }
 
-  loginOperatorGET(params: OperatorService.LoginOperatorGETParams):Observable<__Operator[]> {
+  loginOperatorGET(params: OperatorService.LoginOperatorGETParams):__Observable<__Operator[]> {
     return this.loginOperatorGETResponse(params).pipe(__map(_response => _response.body as Array<__Operator>));
   }
 
@@ -115,7 +115,7 @@ class OperatorService extends __BaseService{
    * A felhasználó jelszóváltoztatásának REST service hívása
    * @param operator
    */
-  updateOperatorPUT(operator: __Operator):Observable<__Operator> {
+  updateOperatorPUT(operator: __Operator):__Observable<__Operator> {
     return this.http.put<__Operator>(this._urlOperator + '/' + operator.id, operator);
   }
 
@@ -134,12 +134,32 @@ class OperatorService extends __BaseService{
    * Kiválasztott operátor-t törlő REST service hívása.
    * @param params
    */
-  deleteOperatorDELETE(params: HttpParams) {
-    return this.http.delete(this._urlOperator + '/' + params.get('id'));
+  deleteOperatorDELETEResponse(id: string): __Observable<__StrictHttpResponse<null>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    let req = new HttpRequest<any>('DELETE', this.rootUrl + this._urlOperator1 + `${id}`, __body, {
+      headers: __headers,
+      params: __params,
+      responseType: 'json'
+    });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map(_r => {
+        return _r as __StrictHttpResponse<null>;
+      })
+    );
+  }
+
+  deleteOperatorDELETE(id: string): __Observable<null> {
+    // return this.http.delete(this._urlOperator + '/' + params.get('id'));
+    return this.deleteOperatorDELETEResponse(id).pipe(__map(_response => _response.body as null));
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
+    return (error: any): __Observable<T> => {
       console.error(error);
       this.log(`${operation} failed: ${error.message}`);
 

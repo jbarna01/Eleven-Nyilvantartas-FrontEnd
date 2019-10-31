@@ -12,7 +12,7 @@ import {HttpParams as __HttpParams} from "@angular/common/http";
 export class OperatorTorlesComponent implements OnInit {
 
   private _operator: __Operator;
-  private _params: __HttpParams;
+  // private _params: __HttpParams;
 
   constructor(@Inject(MAT_DIALOG_DATA) private operator: __Operator,
               private __operatorService: OperatorService) {
@@ -27,18 +27,18 @@ export class OperatorTorlesComponent implements OnInit {
    * @param operator
    */
   private operatorTorlese(operator: __Operator) {
-    this._params = this.setParameters(operator.id.toString());
-    this.__operatorService.deleteOperatorDELETE(this._params).subscribe();
+    // this._params = this.setParameters(operator.id.toString());
+    this.__operatorService.deleteOperatorDELETE(operator.id.toString()).subscribe();
   }
 
   /**
    * Törléshez tartozó paraméterek beállítása.
    * @param id
    */
-  private setParameters(id: string): __HttpParams {
-    const params = new __HttpParams()
-      .set('id', id);
-    return params;
-  }
+  // private setParameters(id: string): __HttpParams {
+  //   const params = new __HttpParams()
+  //     .set('id', id);
+  //   return params;
+  // }
 
 }
