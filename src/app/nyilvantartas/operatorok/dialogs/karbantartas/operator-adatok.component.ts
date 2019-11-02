@@ -1,13 +1,14 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {Operator, Operator as __Operator} from "../../../../api/nyilvantartas/models/Operator";
-import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
-import {Router} from "@angular/router";
-import {JelszoModositasComponent} from "../jelszoModositas/jelszoModositas.component";
-import {GlobalsService} from "../../../../api/nyilvantartas/services/globals.service";
-import {OperatorService} from "../../../../api/nyilvantartas/services/operator.service";
-import {JogokService} from "../../../../api/nyilvantartas/services/jogok.service";
-import {Jogok} from "../../../../api/nyilvantartas/models/Jogok";
-import {HttpParams} from "@angular/common/http";
+import {Component, Inject, OnInit, Optional} from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
+import { Router } from "@angular/router";
+import { JelszoModositasComponent } from "../jelszoModositas/jelszoModositas.component";
+import { GlobalsService } from "../../../../api/nyilvantartas/services/globals.service";
+import { OperatorService } from "../../../../api/nyilvantartas/services/operator.service";
+import { JogokService } from "../../../../api/nyilvantartas/services/jogok.service";
+import { Jogok } from "../../../../api/nyilvantartas/models/Jogok";
+import { HttpParams } from "@angular/common/http";
+import { Operator, Operator as __Operator } from "../../../../api/nyilvantartas/models/Operator";
+import { OperatorCreateModel } from "../../../../api/nyilvantartas/models/operator-create-model";
 
 @Component({
   selector: 'app-operator-adatok',
@@ -84,20 +85,35 @@ export class OperatorAdatokComponent implements OnInit {
       this._params = this.setParameters(this._aktualisJog.toString());
       this.__jogokService.getJogGET(this._params).subscribe(jog => {
         this._jog = jog
+        const model = this.operatorCreateRequestModel();
         if (this._ujOperator) {
-          this._operator.aktiv = 'A';
-          this._operator.password = this._ujJelszo1;
-          this._operator.jogok = this._jog;
-          this.__operatorService.saveOperatorPOST(this._operator).subscribe(result => {
-            console.log(result);
+          this.__operatorService.saveOperatorPOST(model).subscribe(operator => {
+            console.log(operator);
+            this._operator = (<Operator>operator);
           });
         } else {
           this._operator.jogok = this._jog;
           this._operator.aktiv = this._aktivFelhasznalo ? 'A' : 'P';
-          this.__operatorService.updateOperatorPUT(this.operator).subscribe(operator => {
-            this._operator = operator;});
+          this.__operatorService.updateOperatorPUT( {id: this._operator.id.toString(), request: model}).subscribe(operator => {
+            this._operator = (<Operator>operator);
+          });
         }
       });
+    }
+  }
+
+  /**
+   * Összeállítja a POST és a PUT Rest híváshoz az Opertátor objektúmot.
+   */
+  private operatorCreateRequestModel(): OperatorCreateModel {
+    return {
+      id: this.operator.id,
+      vezetekNev: this._operator.vezetekNev,
+      keresztNev: this._operator.keresztNev,
+      username: this._operator.username,
+      password: (this._ujOperator? this._ujJelszo1 : this._operator.password),
+      aktiv: (this._ujOperator? 'A' : (this._aktivFelhasznalo ? 'A' : 'P')),
+      jogok: this._jog
     }
   }
 

@@ -88,7 +88,7 @@ export class JelszoModositasComponent implements OnInit {
    */
   private ujJelszoMentese() {
     this._operator.password = this._ujJelszo1;
-    this.operatorService.updateOperatorPUT(this._operator).subscribe(operator => {
+    this.operatorService.updateOperatorPUT( {id: this._operator.id.toString(), request: this._operator} ).subscribe(operator => {
       this.uzenetek('Jelszó módosítás sikerült!');
       this.dialogRef.close({data: 'true'});
     },

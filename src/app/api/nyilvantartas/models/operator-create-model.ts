@@ -1,6 +1,6 @@
 import {Jogok} from "./Jogok";
 
-export interface OperatorResponse {
+export interface OperatorCreateModel {
 
   id?:         number;
   vezetekNev?: string;
