@@ -2,35 +2,35 @@
 
 <div>
   <mat-form-field>
-    <input (keyup)="applyFilter($event.target.value)" matInput placeholder="Szűkités">
+    <input (keyup)="applyFilter($event.target.value)" matInput placeholder="{{ 'OPERATOROK.SZUKITES_PLACEHOLDER' | translate }}">
   </mat-form-field>
 
-  <button class="ujFelhasznaloButton" mat-raised-button (click)="ujOperatorFelvetele()">Új operátor</button>
+  <button class="ujFelhasznaloButton" mat-raised-button (click)="ujOperatorFelvetele()">{{ 'NYILVANTARTAS.BUTTON.NEW_OPERATOR' | translate }}</button>
 
   <mat-table [dataSource]='_operatorokLista' matSort class="mat-elevation-z8">
 
     <ng-container matColumnDef="vezeteknev">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Vezetéknév</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'OPERATOROK.TABLA.VEZETEKNEV' | translate }}</mat-header-cell>
       <mat-cell *matCellDef="let element">{{ element.vezetekNev }}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="keresztnev">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Keresztnév</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'OPERATOROK.TABLA.KERESZTNEV' | translate }}</mat-header-cell>
       <mat-cell *matCellDef="let element">{{ element.keresztNev }}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="username">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Felhasználónév</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'OPERATOROK.TABLA.USERNAME' | translate }}</mat-header-cell>
       <mat-cell *matCellDef="let element">{{ element.username }}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="szerepkor">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Szerepkör</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'OPERATOROK.TABLA.SZEREPKOR' | translate }}</mat-header-cell>
       <mat-cell *matCellDef="let element">{{ element.jogok.megnevezes }}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="aktiv">
-      <mat-header-cell *matHeaderCellDef>Státusz</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>{{ 'OPERATOROK.TABLA.STATUS' | translate }}</mat-header-cell>
       <mat-cell *matCellDef="let element">
         <mat-icon style="color: green">{{ element.aktiv=='A'?'radio_button_checked':'radio_button_unchecked' }}</mat-icon>
       </mat-cell>
@@ -39,14 +39,14 @@
     <ng-container matColumnDef="edit">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let element" (click)="operatorKarbantartasa(element)">
-        <mat-icon color="primary" matTooltip="Operátor módosítás" matTooltipShowDelay="500" matTooltipHideDelay="500" matTooltipPosition="right">create</mat-icon>
+        <mat-icon color="primary" matTooltip="{{'OPERATOROK.TABLA.OPERATOR_MODOSITASA_TOOLTIP' | translate}}" matTooltipShowDelay="500" matTooltipHideDelay="500" matTooltipPosition="right">create</mat-icon>
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="delete">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <mat-icon *ngIf="_felhasznaloJoga == 'ADMIN'" style="color: red"  (click)="operatorTorlese(element)" matTooltip="Operátor törlése({{element.vezetekNev + ' ' + element.keresztNev}})" matTooltipShowDelay="500" matTooltipHideDelay="500" matTooltipPosition="right">highlight_off</mat-icon>
+        <mat-icon *ngIf="_felhasznaloJoga == 'ADMIN'" style="color: red"  (click)="operatorTorlese(element)" matTooltip="{{'OPERATOROK.TABLA.OPERATOR_TORLES_TOOLTIP' | translate}}({{element.vezetekNev + ' ' + element.keresztNev}})" matTooltipShowDelay="500" matTooltipHideDelay="500" matTooltipPosition="right">highlight_off</mat-icon>
       </mat-cell>
     </ng-container>
 

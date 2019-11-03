@@ -1,12 +1,12 @@
 <mat-toolbar color="primary" class="navbar">
-  <div *ngIf="!_isBelepve">Eleven nyílvántartó rendszer {{ CIM | translate }}</div>
+  <div *ngIf="!_isBelepve"> {{ 'NYILVANTARTAS.PAGE_TITLE' | translate }}</div>
   <div style="cursor:pointer;" *ngIf="_isBelepve" (click)="hallgatoiLista()">
     <span (click)="hallgatoiLista()" >Hallgatók</span>
     <span (click)="torzs()" >Törzs</span>
   </div>
   <div *ngIf="_isBelepve">
     <span>{{ '(' + _teljesNev + ')' }}</span>
-    <span (click)="logout()">Kilépés</span>
+    <span (click)="logout()">{{ 'NYILVANTARTAS.BUTTON.LOGOUT' | translate }}</span>
   </div>
 </mat-toolbar>
 

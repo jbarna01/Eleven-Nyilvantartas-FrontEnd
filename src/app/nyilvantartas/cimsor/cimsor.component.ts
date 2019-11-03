@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import {GlobalsService} from "../../api/nyilvantartas/services/globals.service";
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-cimsor',
