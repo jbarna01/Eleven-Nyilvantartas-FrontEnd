@@ -45,8 +45,8 @@
 
     <ng-container matColumnDef="delete">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
-      <mat-cell *matCellDef="let element" (click)="operatorTorlese(element)">
-        <mat-icon style="color: red" matTooltip="Operátor törlése({{element.vezetekNev + ' ' + element.keresztNev}})" matTooltipShowDelay="500" matTooltipHideDelay="500" matTooltipPosition="right">highlight_off</mat-icon>
+      <mat-cell *matCellDef="let element">
+        <mat-icon *ngIf="_felhasznaloJoga == 'ADMIN'" style="color: red"  (click)="operatorTorlese(element)" matTooltip="Operátor törlése({{element.vezetekNev + ' ' + element.keresztNev}})" matTooltipShowDelay="500" matTooltipHideDelay="500" matTooltipPosition="right">highlight_off</mat-icon>
       </mat-cell>
     </ng-container>
 
