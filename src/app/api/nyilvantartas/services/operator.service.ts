@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {__BaseService} from "./base-service";
 import {HttpClient, HttpHeaders, HttpRequest, HttpResponse} from "@angular/common/http";
 import {Operator as __Operator} from "../models/Operator";
-import {catchError} from "rxjs/operators";
 import {StarterConfiguration as __Configuration} from "./StarterConfiguration";
 import {Observable as __Observable, of} from "rxjs";
 import { map as __map, filter as __filter } from 'rxjs/operators';
@@ -16,7 +15,6 @@ import {OperatorCreateModel} from "../models/operator-create-model";
 })
 class OperatorService extends __BaseService{
 
-  // private _urlOperator: string = 'http://localhost:8099/operator/';
   private _urlOperator: string = '/operator/';
   private _urlLoginOperetor: string = '/loginOperator/';
 
@@ -138,7 +136,6 @@ class OperatorService extends __BaseService{
 
   }
 
-
   updateOperatorPUT(params: OperatorService.updateOperatorPUTParams): __Observable<OperatorCreateModel> {
     // return this.http.put<__Operator>(this._urlOperator + '/' + operator.id, operator);
     return this.updateOperatorPUTResponse(params).pipe(__map(_r => _r.body as OperatorCreateModel));
@@ -169,11 +166,8 @@ class OperatorService extends __BaseService{
       })
     );
   }
+
   saveOperatorPOST(request: OperatorCreateModel): __Observable<OperatorCreateModel> {
-    // return this.http.post(this._urlOperator, operator)
-    //   .pipe(
-    //     catchError(this.handleError('operator', operator))
-    //   );
     return this.saveOperatorPOSTResponse(request).pipe(__map(_r => _r.body as OperatorCreateModel));
   }
 
@@ -229,6 +223,9 @@ module OperatorService {
     request: OperatorCreateModel;
   }
 
+  export interface JogGETParams {
+    id: string;
+  }
 }
 
 export { OperatorService };

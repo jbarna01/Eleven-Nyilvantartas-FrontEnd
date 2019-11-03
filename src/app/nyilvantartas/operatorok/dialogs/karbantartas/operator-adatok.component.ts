@@ -5,9 +5,9 @@ import { JelszoModositasComponent } from "../jelszoModositas/jelszoModositas.com
 import { GlobalsService } from "../../../../api/nyilvantartas/services/globals.service";
 import { OperatorService } from "../../../../api/nyilvantartas/services/operator.service";
 import { JogokService } from "../../../../api/nyilvantartas/services/jogok.service";
-import { Jogok } from "../../../../api/nyilvantartas/models/Jogok";
 import { HttpParams } from "@angular/common/http";
-import { Operator, Operator as __Operator } from "../../../../api/nyilvantartas/models/Operator";
+import { Jogok as __Jogok} from "../../../../api/nyilvantartas/models/Jogok";
+import { Operator as __Operator } from "../../../../api/nyilvantartas/models/Operator";
 import { OperatorCreateModel } from "../../../../api/nyilvantartas/models/operator-create-model";
 
 @Component({
@@ -20,8 +20,8 @@ export class OperatorAdatokComponent implements OnInit {
   private _operator: __Operator;
   private _felhasznaloJoga: string;
   private _aktualisJog: number;
-  private _jogokLista: Jogok[];
-  private _jog: Jogok = new Jogok();
+  private _jogokLista: __Jogok[];
+  private _jog = [] as any;
   private _ujOperator: boolean;
   private _aktivFelhasznalo: boolean;
   private _ujJelszo1: string;
@@ -60,7 +60,7 @@ export class OperatorAdatokComponent implements OnInit {
     if (this._felhasznaloJoga === 'ADMIN') {
       if (!this._ujOperator) {
         this._aktualisJog = this._operator.jogok.id;}
-      this.__jogokService.getJogok().subscribe( jogok => {
+      this.__jogokService.getJogokGET().subscribe(jogok => {
         this._jogokLista = jogok;
       });
     }
@@ -82,20 +82,20 @@ export class OperatorAdatokComponent implements OnInit {
    */
   operatorMentese() {
     if (this.mezokEllenorzese()) {
-      this._params = this.setParameters(this._aktualisJog.toString());
-      this.__jogokService.getJogGET(this._params).subscribe(jog => {
-        this._jog = jog
+      // this._params = this.setParameters(this._aktualisJog.toString());
+      this.__jogokService.getJogGET( {id: this._aktualisJog.toString()} ).subscribe(jog => {
+        this._jog = jog;
         const model = this.operatorCreateRequestModel();
         if (this._ujOperator) {
           this.__operatorService.saveOperatorPOST(model).subscribe(operator => {
             console.log(operator);
-            this._operator = (<Operator>operator);
+            this._operator = (<__Operator>operator);
           });
         } else {
           this._operator.jogok = this._jog;
           this._operator.aktiv = this._aktivFelhasznalo ? 'A' : 'P';
           this.__operatorService.updateOperatorPUT( {id: this._operator.id.toString(), request: model}).subscribe(operator => {
-            this._operator = (<Operator>operator);
+            this._operator = (<__Operator>operator);
           });
         }
       });
@@ -131,16 +131,5 @@ export class OperatorAdatokComponent implements OnInit {
     this._operator.keresztNev = '';
     this._operator.username = '';
     this._ujJelszo1 = '';
-  }
-
-
-  /**
-   * Beállítja a hívásokhoz szükséges PATH paramétereket állítja be.
-   * @param id
-   */
-  private setParameters(id: string): HttpParams {
-    const params = new HttpParams()
-      .set('id', id);
-    return params;
   }
 }
