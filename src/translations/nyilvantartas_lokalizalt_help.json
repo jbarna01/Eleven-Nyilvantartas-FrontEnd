@@ -1,0 +1,22 @@
+{
+  "KER_ADMIN_HELP": {
+    "NAME": "",
+    "WORKERNAME": "",
+    "SERVICETYPEID": "",
+    "SERVICEPOINTID": "",
+    "MODAL": {
+      "NAME": "",
+      "DESCRIPTION": "",
+      "SERVICEPOINTID": "",
+      "SERVICETYPEID": "",
+      "WORKERID": "",
+      "KUBATURAID": "",
+      "CONSULTINGSTARTAT": "",
+      "CONSULTINGENDAT": "",
+      "SERVICETIME": "",
+      "PATIENTCOUNT": "",
+      "PATIENTPERTIME": ""
+    },
+    "DAYS": ""
+  }
+}

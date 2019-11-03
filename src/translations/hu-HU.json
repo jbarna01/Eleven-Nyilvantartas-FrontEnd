@@ -1,3 +1,47 @@
 {
-    "CIM": "nYIL"
+  "NYILVANTARTAS": {
+    "NO": "Nem",
+    "YES": "Igen",
+    "PAGE_TITLE": "Eleven nyílvántartó rendszer",
+    "BUTTON": {
+      "SAVE": "Mentés",
+      "CANCEL": "Mégse",
+      "CLOSE": "Bezár",
+      "LOGIN": "Belépés",
+      "LOGOUT": "Kilépés",
+      "NEW_OPERATOR": "Új operátor",
+      "CHANGEPASSWORD": "Jelszóváltoztatás"
+    },
+    "LOGIN_ABLAK": {
+      "TITLE": "Belépés a programba",
+      "USERNAME_PACEHOLDER": "Felhasználó név:",
+      "PASSWORD_PACEHOLDER": "Jelszó"
+    }
+  },
+  "OPERATOROK": {
+    "TABLA": {
+      "VEZETEKNEV": "Vezetéknév",
+      "KERESZTNEV": "Keresztnév",
+      "USERNAME": "Felhasználónév",
+      "SZEREPKOR": "Szerepkör",
+      "STATUS": "Státusz",
+      "OPERATOR_MODOSITASA_TOOLTIP": "Operátor módosítása...",
+      "OPERATOR_TORLES_TOOLTIP": "Operátor törlése..."
+    },
+    "DIALOG_OPERATOR_MODOSITAS": {
+      "TITLE": "",
+      "VEZETEKNEV_PLACEHOLDER": "Vezetéknév:",
+      "KERESZTNEV_PLACEHOLDER": "Keresztnév",
+      "USERNAME_PLACEHOLDER": "Felhasználónév",
+      "AKTIV_FELHASZNALO": "Aktív felhasználó",
+      "PASSZIV_FELHASZNALO": "Passzív felhasználó",
+      "JOGOSULTSAG_PLACEHOLDER": "Jogosultság:"
+    },
+    "DIALOG_PASSWORD_MODOSITAS": {
+      "AKTUALIS_PLACEHOLDER": "Aktuális jelszó:",
+      "UJ_JELSZO_PLACEHOLDER": "Új jelszó:",
+      "UJ_JELSZO_ISMETLES_PLACEHOLDER": "Új jelszó ismét:"
+    },
+    "SZUKITES_PLACEHOLDER": "Szükítés"
+  }
 }
