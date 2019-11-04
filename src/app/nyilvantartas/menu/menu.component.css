@@ -1,11 +1,17 @@
-.menu-gomb {
-  margin: 0px 10px;
-  width: 100px;
-  color: #595959;
-  font-weight: bold;
+.fomenu {
+  font-size: 1em;
 }
 
-.kilepes-gomb {
-  float: right;
-  margin-right: 40px;
+.almenu {
+  font-size: 1em;
+  font-weight: bold;
+  color: #595959;
 }
+.almenu:not([disabled]):hover {
+  font-weight: bold;
+  color: #292929;
+}
+.almenu[disabled] {
+  color: lightslategray;
+}
+

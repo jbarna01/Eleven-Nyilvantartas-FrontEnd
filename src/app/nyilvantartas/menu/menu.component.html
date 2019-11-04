@@ -1,28 +1,11 @@
-<mat-card class="prg_fejlec">
-  <button *ngIf="isBelepve" class="menu-gomb" mat-stroked-button [matMenuTriggerFor]="aboveMenu">Első</button>
-  <mat-menu #aboveMenu="matMenu" yPosition="above">
-    <button mat-menu-item>Item 1</button>
-    <button mat-menu-item>Item 2</button>
+<button class="fomenu" mat-button [matMenuTriggerFor]="hallagtokMenu">{{ 'MENU.HALLGATOK_MENU' | translate }}</button>
+  <mat-menu #hallagtokMenu="matMenu" yPosition="below">
+    <button class="almenu" mat-menu-item>{{ 'MENU.HALLGATOK.UJ_HALLGATO' | translate }}</button>
+    <button class="almenu" mat-menu-item>{{ 'MENU.HALLGATOK.HALGATOK_LISTA' | translate }}</button>
   </mat-menu>
 
-  <button class="menu-gomb" mat-stroked-button="" [matMenuTriggerFor]="belowMenu">Második</button>
-  <mat-menu #belowMenu="matMenu" yPosition="below">
-    <button mat-menu-item>Item 1</button>
-    <button mat-menu-item>Item 2</button>
+<button class="fomenu mat-menu-content" mat-button [matMenuTriggerFor]="torzsMenu">{{ 'MENU.TORZS_MENU' | translate }}</button>
+  <mat-menu style="background: red" #torzsMenu="matMenu" yPosition="below">
+    <button class="almenu" mat-menu-item (click)="torzs()" >{{ 'MENU.TORZS.OPERATOR_TORZS' | translate }}</button>
+    <button class="almenu" mat-menu-item>{{ 'MENU.TORZS.NYELV_TORZS' | translate }}</button>
   </mat-menu>
-
-  <button class="menu-gomb" mat-stroked-button [matMenuTriggerFor]="beforeMenu">Harmadik</button>
-  <mat-menu #beforeMenu="matMenu" xPosition="before">
-    <button mat-menu-item>Item 1</button>
-    <button mat-menu-item>Item 2</button>
-  </mat-menu>
-
-  <button
-        *ngIf="isMenuLathato"
-        (click)="valtas()"
-        class="menu-gomb kilepes-gomb"
-        [routerLink]="menuUrl['kilepes']"
-        mat-stroked-button>
-    {{ menuNev['kilepes'] }}
-  </button>
-</mat-card>

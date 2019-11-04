@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {AppModule} from "../../app.module";
 import {AppComponent} from "../../app.component";
 import {CoreService} from "../../api/nyilvantartas/services/core.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {GlobalsService} from "../../api/nyilvantartas/services/globals.service";
 
 @Component({
   selector: 'app-menu',
@@ -17,7 +19,10 @@ export class MenuComponent implements OnInit {
   @Input('paramData') public isBelepve ;
 
 
-  constructor(private core: CoreService) {
+  constructor(private core: CoreService,
+              private route: ActivatedRoute,
+              private router: Router,
+              private global: GlobalsService) {
     this.menuNev['kilepes'] = 'Kilépés';
     this.menuUrl['kilepes'] = 'login';
   }
@@ -36,5 +41,8 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
   }
 
+  torzs() {
+    this.router.navigate(['operatorok']);
+  }
 
 }

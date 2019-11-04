@@ -1,8 +1,10 @@
 <mat-toolbar color="primary" class="navbar">
   <div *ngIf="!_isBelepve"> {{ 'NYILVANTARTAS.PAGE_TITLE' | translate }}</div>
-  <div style="cursor:pointer;" *ngIf="_isBelepve" (click)="hallgatoiLista()">
-    <span (click)="hallgatoiLista()" >Hallgatók</span>
-    <span (click)="torzs()" >Törzs</span>
+<!--  <div style="cursor:pointer;" *ngIf="_isBelepve" (click)="hallgatoiLista()">-->
+  <div style="cursor:pointer;" *ngIf="_isBelepve">
+<!--    <span (click)="hallgatoiLista()" >Hallgatók</span>-->
+<!--    <span (click)="torzs()" >Törzs</span>-->
+    <app-menu *ngIf="_isBelepve"></app-menu>
   </div>
   <div *ngIf="_isBelepve">
     <span>{{ '(' + _teljesNev + ')' }}</span>

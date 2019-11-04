@@ -43,5 +43,18 @@
       "UJ_JELSZO_ISMETLES_PLACEHOLDER": "Új jelszó ismét:"
     },
     "SZUKITES_PLACEHOLDER": "Szükítés"
+  },
+  "MENU": {
+    "HALLGATOK_MENU": "Hallgatok",
+    "HALLGATOK": {
+      "UJ_HALLGATO": "Új hallgató",
+      "HALGATOK_LISTA": "Halgatók lista"
+
+    },
+    "TORZS_MENU": "Törzs",
+    "TORZS": {
+      "OPERATOR_TORZS": "Operátor törzs",
+      "NYELV_TORZS": "Nyelv törzs"
+    }
   }
 }
