@@ -54,7 +54,7 @@ export class OperatorokComponent implements OnInit {
   private operatorListaFeltoltese() {
     this.global._belepettFelhasznaloJoga.subscribe(felhasznaloJoga => this._felhasznaloJoga = felhasznaloJoga.toString());
     if (this._felhasznaloJoga === 'ADMIN') {
-      this.operatorService.getOperatorokGET().subscribe(operatorok => {
+      this.operatorService.getAllOperatorokGET().subscribe(operatorok => {
         this._operatorokLista = new MatTableDataSource(operatorok);
         this._operatorokLista.sort = this.sort;
         this._operatorokLista.paginator = this.paginator;

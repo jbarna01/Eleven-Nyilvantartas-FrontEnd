@@ -7,8 +7,9 @@ import { OperatorService } from "../../../../api/nyilvantartas/services/operator
 import { JogokService } from "../../../../api/nyilvantartas/services/jogok.service";
 import { HttpParams } from "@angular/common/http";
 import { Jogok as __Jogok} from "../../../../api/nyilvantartas/models/Jogok";
-import { Operator as __Operator } from "../../../../api/nyilvantartas/models/Operator";
+import { Operator as __Operator} from "../../../../api/nyilvantartas/models/Operator";
 import { OperatorCreateModel } from "../../../../api/nyilvantartas/models/operator-create-model";
+import {MatSnackBar as __MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-operator-adatok',
@@ -26,14 +27,17 @@ export class OperatorAdatokComponent implements OnInit {
   private _aktivFelhasznalo: boolean;
   private _ujJelszo1: string;
   private _ujJelszo2: string;
-  private _params: HttpParams;
+  private _mentettUsername: string;
   private _disabled: boolean;
   private _jelszoModositasUzenet: string;
+  private _egyediUsername: boolean = true;
+  private _nemMentheto: boolean = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) private operator: __Operator,
               private __operatorService: OperatorService,
               private __jogokService: JogokService,
               private __router: Router,
+              private snackBar: __MatSnackBar,
               private __global: GlobalsService,
               private __dialog: MatDialog) {
     if (operator.id == null) {
@@ -42,6 +46,7 @@ export class OperatorAdatokComponent implements OnInit {
     } else {
       this._ujOperator = false;
       this._operator = operator;
+      this._mentettUsername = operator.username;
     }
   }
 
@@ -81,24 +86,27 @@ export class OperatorAdatokComponent implements OnInit {
    * Operátor adatok mentése.
    */
   operatorMentese() {
-    if (this.mezokEllenorzese()) {
-      // this._params = this.setParameters(this._aktualisJog.toString());
-      this.__jogokService.getJogGET( {id: this._aktualisJog.toString()} ).subscribe(jog => {
-        this._jog = jog;
-        const model = this.operatorCreateRequestModel();
-        if (this._ujOperator) {
-          this.__operatorService.saveOperatorPOST(model).subscribe(operator => {
-            console.log(operator);
-            this._operator = (<__Operator>operator);
-          });
-        } else {
-          this._operator.jogok = this._jog;
-          this._operator.aktiv = this._aktivFelhasznalo ? 'A' : 'P';
-          this.__operatorService.updateOperatorPUT( {id: this._operator.id.toString(), request: model}).subscribe(operator => {
-            this._operator = (<__Operator>operator);
-          });
-        }
-      });
+    this.userneveEllenorzes();
+    if (this._egyediUsername) {
+      if (this.mezokEllenorzese()) {
+        // this._params = this.setParameters(this._aktualisJog.toString());
+        this.__jogokService.getJogGET({id: this._aktualisJog.toString()}).subscribe(jog => {
+          this._jog = jog;
+          const model = this.operatorCreateRequestModel();
+          if (this._ujOperator) {
+            this.__operatorService.saveOperatorPOST(model).subscribe(operator => {
+              console.log(operator);
+              this._operator = (<__Operator>operator);
+            });
+          } else {
+            this._operator.jogok = this._jog;
+            this._operator.aktiv = this._aktivFelhasznalo ? 'A' : 'P';
+            this.__operatorService.updateOperatorPUT({id: this._operator.id.toString(), request: model}).subscribe(operator => {
+              this._operator = (<__Operator>operator);
+            });
+          }
+        });
+      }
     }
   }
 
@@ -131,5 +139,46 @@ export class OperatorAdatokComponent implements OnInit {
     this._operator.keresztNev = '';
     this._operator.username = '';
     this._ujJelszo1 = '';
+  }
+
+  private userneveEllenorzes() {
+    let checkOperator: any;
+    let checkUsername = this._operator.username;
+    let checkId = this._operator.id.toString();
+    let ujUsername: boolean = false;
+    this.__operatorService.getUsernameGET({username: checkUsername}).subscribe(operator => {
+      checkOperator = operator;
+      if (checkOperator != null) {
+        if (checkOperator.id.toString() != checkId) {
+          this._egyediUsername = false;
+          this._nemMentheto = true;
+          this.uzenetek("Az felhasználónév már foglalt!");
+          if (this._ujOperator) {
+            this._operator.username = "";
+          } else {
+            this._operator.username = this._mentettUsername;
+          }
+        } else {
+          this._egyediUsername = true;
+          this._nemMentheto = false;
+        }
+      } else {
+        this._egyediUsername = true;
+        this._nemMentheto = false;
+        ujUsername = true;
+      }
+    });
+  }
+
+  private disableMentes() {
+    this._nemMentheto = true;
+  }
+  /**
+   * Kiírja az uzenet változóban lévő üzenetett a képernyőre.
+   * 2 másodperc múlva autómatikusan eltünteti!
+   * @param uzenet, a kiírandó üzenet.
+   */
+  private uzenetek(uzenet: string) {
+    this.snackBar.open(uzenet, 'Bezár')._dismissAfter(2000);
   }
 }

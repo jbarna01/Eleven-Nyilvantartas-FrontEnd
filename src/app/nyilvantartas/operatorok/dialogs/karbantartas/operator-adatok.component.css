@@ -1,25 +1,7 @@
-mat-grid-list {
-  padding: 0px;
-  margin: 0px;
-}
-mat-grid-tile {
-  padding: 0px;
-  margin: 0px;
-  width: 80%;
-}
-mat-dialog-actions {
-  float: right;
-}
-
 .uzenet {
   color: brown;
   font-weight: bold;
   font-size: small;
-}
-
-input {
-  width: 90%;
-  padding: 2px;
 }
 
 .dialog_ablak {
@@ -27,13 +9,11 @@ input {
   padding: 0px;
   margin: 0px;
 }
-
 .form {
   width: 80%;
   padding: 0px;
   margin: 0px;
 }
 
-.gombok {
-  width: 40%;
-}
+
+

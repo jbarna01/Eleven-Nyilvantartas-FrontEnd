@@ -2,3 +2,39 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+/*Globális HTML elemeg*/
+input {
+  width: 90%;
+  padding: 2px;
+  color: #004735;
+}
+.mat-focused .placeholder {
+  color: #004735;
+}
+.mat-form-field.mat-focused .mat-form-field-ripple {
+  background-color: #004735 !important;
+}
+
+
+/*Globális gomb*/
+.mat-raised-button {
+  background-color: #004735;
+  color: #ffab13;
+  min-width: 100px;
+}
+
+/*DIALOG PANEL*/
+.mat-dialog-title {
+  padding: 10px 5px;
+  text-align: center;
+  background-color: #004735;
+  color: #ffab13;
+}
+.mat-dialog-content {}
+
+.mat-dialog-actions {
+  float: right;
+}
+
