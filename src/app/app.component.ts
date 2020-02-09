@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     // Setup translations
     this.translateService.setTranslation('hu-HU', huHU, true);
-    this.i18nService.init(environment.defaultLanguage, environment.supportedLanguages);
+    // this.i18nService.init(environment.defaultLanguage, environment.supportedLanguages);
     this.i18nService.initHelpTranslation(helpLocalizations);
 
     const onNavigationEnd = this.router.events.pipe(filter(event => event instanceof NavigationEnd));

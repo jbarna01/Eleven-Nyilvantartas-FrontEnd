@@ -9,8 +9,8 @@ import {GlobalsService} from "../../api/nyilvantartas/services/globals.service";
 })
 export class CimsorComponent implements OnInit {
 
-  private _isBelepve: boolean;
-  private _teljesNev: string;
+  _isBelepve: boolean;
+  _teljesNev: string;
 
   constructor(
           private route: ActivatedRoute,

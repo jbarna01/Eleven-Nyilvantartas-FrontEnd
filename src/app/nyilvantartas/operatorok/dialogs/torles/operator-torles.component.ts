@@ -10,7 +10,7 @@ import {OperatorService} from "../../../../api/nyilvantartas/services/operator.s
 })
 export class OperatorTorlesComponent implements OnInit {
 
-  private _operator: __Operator;
+  _operator: __Operator;
 
   constructor(@Inject(MAT_DIALOG_DATA) private operator: __Operator,
               private __operatorService: OperatorService) {
@@ -24,7 +24,7 @@ export class OperatorTorlesComponent implements OnInit {
    * Kiválasztott operátor törlése.
    * @param operator
    */
-  private operatorTorlese(operator: __Operator) {
+  operatorTorlese(operator: __Operator) {
     this.__operatorService.deleteOperatorDELETE(operator.id.toString()).subscribe();
   }
 }

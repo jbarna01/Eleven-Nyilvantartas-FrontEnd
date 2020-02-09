@@ -18,20 +18,20 @@ import {MatSnackBar as __MatSnackBar} from "@angular/material/snack-bar";
 })
 export class OperatorAdatokComponent implements OnInit {
 
-  private _operator: __Operator;
-  private _felhasznaloJoga: string;
-  private _aktualisJog: number;
-  private _jogokLista: __Jogok[];
+  _operator: __Operator;
+  _felhasznaloJoga: string;
+  _aktualisJog: number;
+  _jogokLista: __Jogok[];
   private _jog = [] as any;
-  private _ujOperator: boolean;
-  private _aktivFelhasznalo: boolean;
-  private _ujJelszo1: string;
-  private _ujJelszo2: string;
+  _ujOperator: boolean;
+  _aktivFelhasznalo: boolean;
+  _ujJelszo1: string;
+  _ujJelszo2: string;
   private _mentettUsername: string;
-  private _disabled: boolean;
-  private _jelszoModositasUzenet: string;
+  _disabled: boolean;
+  _jelszoModositasUzenet: string;
   private _egyediUsername: boolean = true;
-  private _nemMentheto: boolean = false;
+  _nemMentheto: boolean = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) private operator: __Operator,
               private __operatorService: OperatorService,
@@ -141,7 +141,7 @@ export class OperatorAdatokComponent implements OnInit {
     this._ujJelszo1 = '';
   }
 
-  private userneveEllenorzes() {
+  userneveEllenorzes() {
     let checkOperator: any;
     let checkUsername = this._operator.username;
     let checkId = this._operator.id.toString();
@@ -170,7 +170,7 @@ export class OperatorAdatokComponent implements OnInit {
     });
   }
 
-  private disableMentes() {
+  disableMentes() {
     this._nemMentheto = true;
   }
   /**

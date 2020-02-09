@@ -17,14 +17,14 @@ import {OperatorService as __OperatorService} from "../../api/nyilvantartas/serv
 })
 export class OperatorokComponent implements OnInit {
 
-  private _operatorokLista =  new MatTableDataSource<__Operator>();
-  private _isBelepve: boolean;
+  _operatorokLista =  new MatTableDataSource<__Operator>();
+  _isBelepve: boolean;
   private _operatorok = [] as any;
   private _felhasznaloId: string;
-  private _felhasznaloJoga: string;
+  _felhasznaloJoga: string;
   private _params: __HttpParams;
-  private _displayedHeadColums: string[] = ['vezeteknev', 'keresztnev', 'username', 'szerepkor', 'aktiv', 'edit', 'delete'];
-  private _displayedRowColums: string[] = ['vezeteknev', 'keresztnev', 'username', 'szerepkor', 'aktiv', 'edit', 'delete'];
+  _displayedHeadColums: string[] = ['vezeteknev', 'keresztnev', 'username', 'szerepkor', 'aktiv', 'edit', 'delete'];
+  _displayedRowColums: string[] = ['vezeteknev', 'keresztnev', 'username', 'szerepkor', 'aktiv', 'edit', 'delete'];
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -74,11 +74,11 @@ export class OperatorokComponent implements OnInit {
    * Táblázat szűrő mezőjének metódusa.
    * @param filterValue
    */
-  private applyFilter(filterValue: string) {
+  applyFilter(filterValue: string) {
     this._operatorokLista.filter = filterValue.trim().toLowerCase();
   }
 
-  private ujOperatorFelvetele() {
+  ujOperatorFelvetele() {
     let dialogRefUj = this.dialog.open(OperatorAdatokComponent, {data: new __Operator()});
 
     dialogRefUj.afterClosed().subscribe(result => {
@@ -90,7 +90,7 @@ export class OperatorokComponent implements OnInit {
    * Megjeleníti az operátor törlés megerősítéséhez szükséges dialóg ablakot.
    * @param _operator
    */
-  private operatorTorlese(_operator: __Operator) {
+  operatorTorlese(_operator: __Operator) {
     let dialogRef = this.dialog.open(OperatorTorlesComponent, {data: _operator});
 
     dialogRef.afterClosed().subscribe(result => {
@@ -102,7 +102,7 @@ export class OperatorokComponent implements OnInit {
    * A kiválasztott operátor adatait jeleníti meg.
     * @param _operator
    */
-  private operatorKarbantartasa(_operator: __Operator) {
+  operatorKarbantartasa(_operator: __Operator) {
     let dialogRef = this.dialog.open(OperatorAdatokComponent, {data: _operator});
 
     dialogRef.afterClosed().subscribe(result => {

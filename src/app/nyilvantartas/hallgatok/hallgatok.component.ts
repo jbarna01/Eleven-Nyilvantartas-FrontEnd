@@ -9,7 +9,7 @@ import {Router as __Router} from "@angular/router";
 })
 export class HallgatokComponent implements OnInit {
 
-  private _isBelepve: boolean;
+  _isBelepve: boolean;
 
   constructor(private global: __GlobalsService,
               private router: __Router) { }

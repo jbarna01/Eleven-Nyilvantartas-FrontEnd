@@ -11,12 +11,12 @@ import {OperatorService as __OperatorService} from '../../../../api/nyilvantarta
   styleUrls: ['./jelszoModositas.component.css']
 })
 export class JelszoModositasComponent implements OnInit {
-  private _felhasznaloJoga: string;
-  private _operator: __Operator;
-  private _belepettFelhasznaloId: number;
-  private _aktualisJelszo: string = null;
-  private _ujJelszo1: string = null;
-  private _ujJelszo2: string = null;
+  _felhasznaloJoga: string;
+  _operator: __Operator;
+  _belepettFelhasznaloId: number;
+  _aktualisJelszo: string = null;
+  _ujJelszo1: string = null;
+  _ujJelszo2: string = null;
   private _dialogRef: __MatDialogRef<JelszoModositasComponent>;
 
   constructor(@Inject(MAT_DIALOG_DATA) private operator: __Operator,
@@ -38,7 +38,7 @@ export class JelszoModositasComponent implements OnInit {
    * A jelszó mentését indítja.
    * Első lépésben a megkötéseket ellenörzi le, majd utána történik a jelszó mentése.
    */
-  private jelszoMentese() {
+  jelszoMentese() {
     if (this.aktualisJelszoEllenorzese(this._aktualisJelszo) && this.ujJelszoEllenorzese(this._ujJelszo1, this._ujJelszo2)) {
       this.ujJelszoMentese();
     }

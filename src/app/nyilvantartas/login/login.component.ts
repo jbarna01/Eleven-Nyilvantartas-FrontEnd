@@ -13,8 +13,8 @@ import {OperatorService as __OperatorService} from '../../api/nyilvantartas/serv
 
 export class LoginComponent implements OnInit {
 
-  private _userName = '';
-  private _password = '';
+  _userName = '';
+  _password = '';
   private _operator: any;
   private _isBelepve: boolean;
   private _params: __HttpParams;
@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
   /**
    * Belépteti a felhasználót
    */
-  private belepes() {
+  belepes() {
     if (this._userName) {
       this.__operatorService.loginOperatorGET( {username: this._userName, password: this._password}).subscribe( operator => {
         this._operator = operator;
