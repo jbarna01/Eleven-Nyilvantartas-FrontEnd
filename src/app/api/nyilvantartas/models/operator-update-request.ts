@@ -1,13 +1,13 @@
-import {Jogok} from "./Jogok";
+import {Jogok} from './Jogok';
 
 export interface OperatorUpdateRequest {
 
-  id:         number;
+  id: number;
   vezetekNev: string;
   keresztNev: string;
-  username:   string;
-  password:   string;
-  aktiv:      string;
-  jogok:      Jogok;
+  username: string;
+  password: string;
+  status: string;
+  jogok: Jogok;
 
 }

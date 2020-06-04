@@ -5,60 +5,13 @@
 export const environment = {
   envName: 'local-dev',
   production: false,
-  // version: env.npm_package_version + '-dev',
-  // appId: E1AppId.ElojegyzesMenedzsment,
-  serverUrl: 'api/nyilvantartas',
-  // authServerUrl: 'http://e1virtual.nextval.hu:8000/auth-server/login',
+  setTimeoutInSeconds: 600,
+  setIdleInSeconds: 10,
+  serverUrl: 'api/ticket',
+  rootUrl: 'http://localhost:8099',
   defaultLanguage: 'hu-HU',
-  supportedLanguages: ['hu-HU']
-  // menuItemLinks: [
-  //   {
-  //     id: 'home',
-  //     link: '/ker'
-  //   },
-  //   {
-  //     id: 'admin',
-  //     link: '/admin'
-  //   },
-  //   {
-  //     id: 'kontrolling',
-  //     link: '/kontrolling'
-  //   },
-  //   {
-  //     id: 'pem',
-  //     link: '/pem'
-  //   },
-  //   {
-  //     id: 'pbt',
-  //     link: '/paciens-behivo-tamogatas'
-  //   },
-  //   {
-  //     id: 'belepteto-rendszer',
-  //     link: '/belepteto-rendszer'
-  //   },
-  //   {
-  //     id: 'rik',
-  //     link: '/rendelesi-ido-kezeles'
-  //   },
-  //   {
-  //     id: 'nyilvantartasok',
-  //     link: '/nyilvantartasok'
-  //   },
-  //   {
-  //     id: 'paciens-kiertekeles',
-  //     link: '/paciens-kiertekeles'
-  //   },
-  //   {
-  //     id: 'elojegyzes-menedzsment',
-  //     link: '/'
-  //   }
-  // ]
+  supportedLanguages: ['hu-HU'],
+
+  clientId: 'ct-sales-frontend',
+  clientSecret: 'ZJpEFAYmvF3BGwX95tbrBA5ENDBXMZvh',
 };
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.

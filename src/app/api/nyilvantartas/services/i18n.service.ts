@@ -1,14 +1,10 @@
-import { Injectable } from '@angular/core';
-import {LangChangeEvent, TranslateService} from "@ngx-translate/core";
-import { includes } from 'lodash';
-
-// import { Logger } from './logger.service';
-import { huHU } from '../../../../translations/hu-HU';
-import { DateTimeAdapter } from 'ng-pick-datetime';
+import {registerLocaleData} from '@angular/common';
 import localeHu from '@angular/common/locales/hu';
-import {registerLocaleData} from "@angular/common";
+import { Injectable } from '@angular/core';
+import {LangChangeEvent, TranslateService} from '@ngx-translate/core';
+import { includes } from 'lodash';
+import { huHU } from '../../../../translations/hu-HU';
 
-// const log = new Logger('I18nService');
 const languageKey = 'language';
 
 /**
@@ -22,8 +18,8 @@ export function extract(s: string) {
 }
 
 @Injectable({
-  providedIn: 'root'
-})
+  providedIn: 'root'})
+
 export class I18nService {
   defaultLanguage: string;
   supportedLanguages: string[];
@@ -58,7 +54,7 @@ export class I18nService {
     this.translateService.translations['hu-HU'] = extendedHuHU;
   }
 
-  initHelpTranslation(translation: Object) {
+  initHelpTranslation(translation: object) {
     delete translation['COMMON'];
     this.translateService.translations['hu-HU'] = Object.assign(translation, this.translateService.translations['hu-HU']);
   }
@@ -96,6 +92,4 @@ export class I18nService {
   get language(): string {
     return this.translateService.currentLang;
   }
-
-
 }

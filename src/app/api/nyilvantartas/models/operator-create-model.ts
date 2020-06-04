@@ -1,14 +1,14 @@
-import {Jogok} from "./Jogok";
+import {Jogok} from './Jogok';
 
 export interface OperatorCreateModel {
 
-  id?:         number;
+  id?: number;
   vezetekNev?: string;
   keresztNev?: string;
-  username?:   string;
-  password?:   string;
-  aktiv?:      string;
-  modositas?:  Date;
-  jogok?:      Jogok;
+  username?: string;
+  password?: string;
+  status?: string;
+  modositas?: Date;
+  jogok?: Jogok;
 
 }

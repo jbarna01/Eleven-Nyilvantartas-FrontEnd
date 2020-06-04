@@ -1,21 +1,20 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule} from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { HttpClientModule} from "@angular/common/http";
-import { FormsModule} from "@angular/forms";
-
+import { FormsModule} from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {TranslateModule} from '@ngx-translate/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from "./core/material.module";
-import { MenuComponent } from './nyilvantartas/menu/menu.component';
-import { LoginComponent } from './nyilvantartas/login/login.component';
-import { OperatorokComponent } from './nyilvantartas/operatorok/operatorok.component';
+import {authInterceptorProviders} from './auth/auth.interceptor';
+import { MaterialModule } from './core/material.module';
 import { CimsorComponent } from './nyilvantartas/cimsor/cimsor.component';
 import { HallgatokComponent } from './nyilvantartas/hallgatok/hallgatok.component';
-import {OperatorTorlesComponent} from "./nyilvantartas/operatorok/dialogs/torles/operator-torles.component";
-import { OperatorAdatokComponent } from './nyilvantartas/operatorok/dialogs/karbantartas/operator-adatok.component';
+import { LoginComponent } from './nyilvantartas/login/login.component';
+import { MenuComponent } from './nyilvantartas/menu/menu.component';
 import { JelszoModositasComponent } from './nyilvantartas/operatorok/dialogs/jelszoModositas/jelszoModositas.component';
-import {TranslateModule} from "@ngx-translate/core";
+import { OperatorAdatokComponent } from './nyilvantartas/operatorok/dialogs/karbantartas/operator-adatok.component';
+import { OperatorokComponent } from './nyilvantartas/operatorok/operatorok.component';
 
 @NgModule({
   declarations: [
@@ -25,11 +24,10 @@ import {TranslateModule} from "@ngx-translate/core";
     OperatorokComponent,
     CimsorComponent,
     HallgatokComponent,
-    OperatorTorlesComponent,
     OperatorAdatokComponent,
-    JelszoModositasComponent
+    JelszoModositasComponent,
   ],
-  entryComponents: [OperatorTorlesComponent, OperatorAdatokComponent, JelszoModositasComponent],
+  entryComponents: [OperatorAdatokComponent, JelszoModositasComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -37,10 +35,10 @@ import {TranslateModule} from "@ngx-translate/core";
     HttpClientModule,
     MaterialModule,
     FormsModule,
-    TranslateModule.forRoot()
+    TranslateModule.forRoot(),
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [authInterceptorProviders],
+  bootstrap: [AppComponent],
 })
 export class AppModule {
 

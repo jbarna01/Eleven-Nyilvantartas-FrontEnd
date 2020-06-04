@@ -1,27 +1,26 @@
 import {Component, OnInit} from '@angular/core';
-import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { filter, map, mergeMap } from 'rxjs/operators';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import {environment} from "../environments/environment";
-import {merge} from "rxjs";
-import {I18nService} from "./api/nyilvantartas/services/i18n.service";
 import huHU from '@translations/hu-HU.json';
 import helpLocalizations from '@translations/nyilvantartas_lokalizalt_help.json';
+import {merge} from 'rxjs';
+import { filter, map, mergeMap } from 'rxjs/operators';
+import {I18nService} from './api/nyilvantartas/services/i18n.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
-})
+  styleUrls: ['./app.component.css']})
+
 export class AppComponent implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private titleService: Title,
     private translateService: TranslateService,
-    private i18nService: I18nService
-  ) {}
+    private i18nService: I18nService) {}
+
   ngOnInit() {
     // Setup translations
     this.translateService.setTranslation('hu-HU', huHU, true);
@@ -41,8 +40,7 @@ export class AppComponent implements OnInit {
           return route;
         }),
         filter(route => route.outlet === 'primary'),
-        mergeMap(route => route.data)
-      )
+        mergeMap(route => route.data))
       .subscribe(event => {
         const title = event['title'];
         if (title) {
@@ -55,6 +53,3 @@ export class AppComponent implements OnInit {
   }
 
 }
-
-
-

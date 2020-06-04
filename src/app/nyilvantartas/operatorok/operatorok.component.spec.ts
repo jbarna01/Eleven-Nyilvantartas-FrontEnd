@@ -8,8 +8,7 @@ describe('OperatorokComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OperatorokComponent ]
-    })
+      declarations: [ OperatorokComponent ]})
     .compileComponents();
   }));
 

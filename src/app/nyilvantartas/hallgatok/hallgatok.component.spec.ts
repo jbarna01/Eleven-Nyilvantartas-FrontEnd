@@ -8,8 +8,7 @@ describe('HallgatokComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HallgatokComponent ]
-    })
+      declarations: [ HallgatokComponent ]})
     .compileComponents();
   }));
 

@@ -1,23 +1,22 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable} from "rxjs/index";
-
+import {BehaviorSubject, Observable} from 'rxjs/index';
 
 @Injectable({
-  providedIn: 'root'
-})
+  providedIn: 'root'})
+
 export class GlobalsService {
 
-  private _belepettFelhasznaloId = new BehaviorSubject<number>(0);
-  _felhasznaloId = this._belepettFelhasznaloId.asObservable();
+  public _belepettFelhasznaloId = new BehaviorSubject<number>(0);
+  public _felhasznaloId = this._belepettFelhasznaloId.asObservable();
 
-  private isBelepveStatus = new BehaviorSubject<boolean>(false);
-  _isBelepve = this.isBelepveStatus.asObservable();
+  public isBelepveStatus = new BehaviorSubject<boolean>(false);
+  public _isBelepve = this.isBelepveStatus.asObservable();
 
-  private _belepetFelhasznaloTeljesNeve = new BehaviorSubject<string>('');
-  _belepettTeljesNev = this._belepetFelhasznaloTeljesNeve.asObservable();
+  public _belepetFelhasznaloTeljesNeve = new BehaviorSubject<string>('');
+  public _belepettTeljesNev = this._belepetFelhasznaloTeljesNeve.asObservable();
 
-  private _belepettFelhasznaloAlapJoga = new BehaviorSubject<string>('');
-  _belepettFelhasznaloJoga = this._belepettFelhasznaloAlapJoga.asObservable();
+  public _belepettFelhasznaloAlapJoga = new BehaviorSubject<string>('');
+  public _belepettFelhasznaloJoga = this._belepettFelhasznaloAlapJoga.asObservable();
 
   constructor() { }
 
@@ -25,6 +24,9 @@ export class GlobalsService {
     this.isBelepveStatus.next(loginStatus);
   }
 
+  getFelhasznaloId() {
+    return this._belepettFelhasznaloId;
+  }
   setFelhasznaloId(felhasznloId: number) {
     this._belepettFelhasznaloId.next(felhasznloId);
   }

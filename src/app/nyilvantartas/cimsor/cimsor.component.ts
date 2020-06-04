@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from "@angular/router";
-import {GlobalsService} from "../../api/nyilvantartas/services/globals.service";
+import { ActivatedRoute, Router } from '@angular/router';
+import {GlobalsService} from '../../api/nyilvantartas/services/globals.service';
 
 @Component({
   selector: 'app-cimsor',
   templateUrl: './cimsor.component.html',
-  styleUrls: ['./cimsor.component.css']
-})
+  styleUrls: ['./cimsor.component.css']})
+
 export class CimsorComponent implements OnInit {
 
   _isBelepve: boolean;
@@ -36,8 +36,6 @@ export class CimsorComponent implements OnInit {
 
   logout() {
     this.global.changeLogin(false);
-    this.router.navigate([''])
+    this.router.navigate(['']);
   }
-
-
 }

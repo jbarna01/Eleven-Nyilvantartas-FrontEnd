@@ -1,5 +1,5 @@
 import { HttpClient, HttpParameterCodec, HttpParams } from '@angular/common/http';
-import {StarterConfiguration} from "./StarterConfiguration";
+import {StarterConfiguration} from './StarterConfiguration';
 
 /**
  * Custom parameter codec to correctly handle the plus sign in parameter
@@ -27,10 +27,11 @@ const PARAMETER_CODEC = new ParameterCodec();
 /**
  * Base class for API services
  */
-export class __BaseService {
-  constructor(protected config: StarterConfiguration, protected http: HttpClient) {}
+// tslint:disable-next-line:max-classes-per-file
+export class BaseService {
+  private _rootUrl = '';
 
-  private _rootUrl: string = '';
+  constructor(protected config: StarterConfiguration, protected http: HttpClient) {}
 
   /**
    * Returns the root url for API operations. If not set directly in this
@@ -52,7 +53,6 @@ export class __BaseService {
    */
   protected newParams(): HttpParams {
     return new HttpParams({
-      encoder: PARAMETER_CODEC
-    });
+      encoder: PARAMETER_CODEC});
   }
 }

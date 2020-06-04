@@ -1,14 +1,15 @@
-import { Jogok } from "./Jogok";
+import { Jogok } from './Jogok';
 
 export class Operator {
 
-  id:         number;
+  id: number;
   vezetekNev: string;
   keresztNev: string;
-  username:   string;
-  password:   string;
-  aktiv:      string;
-  modositas:  Date;
-  jogok:      Jogok;
+  username: string;
+  password: string;
+  status: string;
+  modosito_id: number;
+  modositas: Date;
+  jogok: Jogok;
 
 }

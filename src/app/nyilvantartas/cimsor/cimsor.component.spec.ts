@@ -8,8 +8,7 @@ describe('CimsorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CimsorComponent ]
-    })
+      declarations: [ CimsorComponent ]})
     .compileComponents();
   }));
 

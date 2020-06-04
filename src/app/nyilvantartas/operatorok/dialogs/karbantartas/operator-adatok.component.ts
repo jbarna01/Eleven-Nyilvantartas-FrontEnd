@@ -1,37 +1,36 @@
 import {Component, Inject, OnInit, Optional} from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
-import { Router } from "@angular/router";
-import { JelszoModositasComponent } from "../jelszoModositas/jelszoModositas.component";
-import { GlobalsService } from "../../../../api/nyilvantartas/services/globals.service";
-import { OperatorService } from "../../../../api/nyilvantartas/services/operator.service";
-import { JogokService } from "../../../../api/nyilvantartas/services/jogok.service";
-import { HttpParams } from "@angular/common/http";
-import { Jogok as __Jogok} from "../../../../api/nyilvantartas/models/Jogok";
-import { Operator as __Operator} from "../../../../api/nyilvantartas/models/Operator";
-import { OperatorCreateModel } from "../../../../api/nyilvantartas/models/operator-create-model";
-import {MatSnackBar as __MatSnackBar} from "@angular/material/snack-bar";
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import {MatSnackBar as __MatSnackBar} from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { Jogok as __Jogok} from '../../../../api/nyilvantartas/models/Jogok';
+import { Operator as __Operator} from '../../../../api/nyilvantartas/models/Operator';
+import { OperatorCreateModel } from '../../../../api/nyilvantartas/models/operator-create-model';
+import { GlobalsService } from '../../../../api/nyilvantartas/services/globals.service';
+import { JogokService } from '../../../../api/nyilvantartas/services/jogok.service';
+import { OperatorService } from '../../../../api/nyilvantartas/services/operator.service';
+import { JelszoModositasComponent } from '../jelszoModositas/jelszoModositas.component';
 
 @Component({
   selector: 'app-operator-adatok',
   templateUrl: './operator-adatok.component.html',
-  styleUrls: ['./operator-adatok.component.css']
-})
+  styleUrls: ['./operator-adatok.component.css']})
+
 export class OperatorAdatokComponent implements OnInit {
 
   _operator: __Operator;
   _felhasznaloJoga: string;
   _aktualisJog: number;
   _jogokLista: __Jogok[];
-  private _jog = [] as any;
   _ujOperator: boolean;
   _aktivFelhasznalo: boolean;
   _ujJelszo1: string;
   _ujJelszo2: string;
-  private _mentettUsername: string;
   _disabled: boolean;
   _jelszoModositasUzenet: string;
-  private _egyediUsername: boolean = true;
-  _nemMentheto: boolean = false;
+  _nemMentheto = false;
+  private _jog = [] as any;
+  private _mentettUsername: string;
+  private _egyediUsername = true;
 
   constructor(@Inject(MAT_DIALOG_DATA) private operator: __Operator,
               private __operatorService: OperatorService,
@@ -52,7 +51,7 @@ export class OperatorAdatokComponent implements OnInit {
 
   ngOnInit() {
     this.__global._belepettFelhasznaloJoga.subscribe(felhasznaloJoga => this._felhasznaloJoga = felhasznaloJoga.toString());
-    this._aktivFelhasznalo = this._operator.aktiv == 'A' ? true : false;
+    this._aktivFelhasznalo = this._operator.status === 'A' ? true : false;
     this._disabled = this._felhasznaloJoga === 'ADMIN' ? false : true;
     if (this._ujOperator) { this.mezokUritese(); }
     this.felhasznaloiJogokBeolvasas();
@@ -64,22 +63,21 @@ export class OperatorAdatokComponent implements OnInit {
   felhasznaloiJogokBeolvasas() {
     if (this._felhasznaloJoga === 'ADMIN') {
       if (!this._ujOperator) {
-        this._aktualisJog = this._operator.jogok.id;}
+        this._aktualisJog = this._operator.jogok.id; }
       this.__jogokService.getJogokGET().subscribe(jogok => {
-        this._jogokLista = jogok;
+        this._jogokLista = jogok.data;
       });
     }
   }
 
   /**
    * Megjeleníti a jelszóváltoztató ablakot.
-   * @param operator
    */
   jelszoValtoztatasDialogusAblakMegnyitasa(operator: __Operator) {
-    let dialogRef = this.__dialog.open(JelszoModositasComponent, {data: operator, disableClose: true});
+    const dialogRef = this.__dialog.open(JelszoModositasComponent, {data: operator, disableClose: true});
     dialogRef.afterClosed().subscribe(result => {
-     result.data?this._jelszoModositasUzenet = '#':null;
-    })
+     // result.data ? this._jelszoModositasUzenet = '#' : null;
+    });
   }
 
   /**
@@ -96,14 +94,14 @@ export class OperatorAdatokComponent implements OnInit {
           if (this._ujOperator) {
             this.__operatorService.saveOperatorPOST(model).subscribe(operator => {
               console.log(operator);
-              this._operator = (<__Operator>operator);
+              // this._operator = (<__Operator>operator);
             });
           } else {
             this._operator.jogok = this._jog;
-            this._operator.aktiv = this._aktivFelhasznalo ? 'A' : 'P';
-            this.__operatorService.updateOperatorPUT({id: this._operator.id.toString(), request: model}).subscribe(operator => {
-              this._operator = (<__Operator>operator);
-            });
+            this._operator.status = this._aktivFelhasznalo ? 'A' : 'P';
+            // this.__operatorService.updateOperatorPUT({id: this._operator.id.toString(), request: model}).subscribe(operator => {
+            //   this._operator = (<__Operator>operator);
+            // });
           }
         });
       }
@@ -119,10 +117,9 @@ export class OperatorAdatokComponent implements OnInit {
       vezetekNev: this._operator.vezetekNev,
       keresztNev: this._operator.keresztNev,
       username: this._operator.username,
-      password: (this._ujOperator? this._ujJelszo1 : this._operator.password),
-      aktiv: (this._ujOperator? 'A' : (this._aktivFelhasznalo ? 'A' : 'P')),
-      jogok: this._jog
-    }
+      password: (this._ujOperator ? this._ujJelszo1 : this._operator.password),
+      status: (this._ujOperator ? 'A' : (this._aktivFelhasznalo ? 'A' : 'P')),
+      jogok: this._jog };
   }
 
   /**
@@ -141,36 +138,36 @@ export class OperatorAdatokComponent implements OnInit {
     this._ujJelszo1 = '';
   }
 
-  userneveEllenorzes() {
-    let checkOperator: any;
-    let checkUsername = this._operator.username;
-    let checkId = this._operator.id.toString();
-    let ujUsername: boolean = false;
-    this.__operatorService.getUsernameGET({username: checkUsername}).subscribe(operator => {
-      checkOperator = operator;
-      if (checkOperator != null) {
-        if (checkOperator.id.toString() != checkId) {
-          this._egyediUsername = false;
-          this._nemMentheto = true;
-          this.uzenetek("Az felhasználónév már foglalt!");
-          if (this._ujOperator) {
-            this._operator.username = "";
-          } else {
-            this._operator.username = this._mentettUsername;
-          }
-        } else {
-          this._egyediUsername = true;
-          this._nemMentheto = false;
-        }
-      } else {
-        this._egyediUsername = true;
-        this._nemMentheto = false;
-        ujUsername = true;
-      }
-    });
+  private userneveEllenorzes() {
+    // let checkOperator: any;
+    const checkUsername = this._operator.username;
+    const checkId = this._operator.id.toString();
+    // let ujUsername = false;
+    // this.__operatorService.getUsernameGET({username: checkUsername}).subscribe(operator => {
+    //   checkOperator = operator;
+    //   if (checkOperator != null) {
+    //     if (checkOperator.id.toString() !== checkId) {
+    //       this._egyediUsername = false;
+    //       this._nemMentheto = true;
+    //       this.uzenetek('Az felhasználónév már foglalt!');
+    //       if (this._ujOperator) {
+    //         this._operator.username = '';
+    //       } else {
+    //         this._operator.username = this._mentettUsername;
+    //       }
+    //     } else {
+    //       this._egyediUsername = true;
+    //       this._nemMentheto = false;
+    //     }
+    //   } else {
+    //     this._egyediUsername = true;
+    //     this._nemMentheto = false;
+    //     ujUsername = true;
+    //   }
+    // });
   }
 
-  disableMentes() {
+  private disableMentes() {
     this._nemMentheto = true;
   }
   /**
