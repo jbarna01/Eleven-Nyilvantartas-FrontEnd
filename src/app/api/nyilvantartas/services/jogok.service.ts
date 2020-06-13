@@ -13,6 +13,7 @@ import {StrictHttpResponse as __StrictHttpResponse} from './strict-http-response
 
 export class JogokService extends BaseService {
   private _urlJog = '/jog/';
+  private _urlJogok = 'jogok';
 
   constructor(config: __Configuration, http: __HttpClient) {
     super(config, http);
@@ -25,7 +26,7 @@ export class JogokService extends BaseService {
     const __params = this.newParams();
     const __headers = new HttpHeaders();
     const __body: any = null;
-    const req = new HttpRequest<any>('GET', this.rootUrl + this._urlJog, __body, {
+    const req = new HttpRequest<any>('GET', this.rootUrl + this._urlJog + this._urlJogok, __body, {
       headers: __headers,
       params: __params,
       responseType: 'json'});
@@ -44,10 +45,11 @@ export class JogokService extends BaseService {
    * Az id által meghatározott jog objektúmot adja vissza
    */
   getJogGETResponse(params: JogGETParams): __Observable<__StrictHttpResponse<Result<__Jogok[]>>> {
-    const __params = this.newParams();
+    let __params = this.newParams();
     const __headers = new HttpHeaders();
     const __body: any = null;
-    const req = new HttpRequest<any>('GET', this.rootUrl + this._urlJog + `${params.id}`, __body, {
+    if (params.id != null) { __params = __params.set('id', params.id.toString()); }
+    const req = new HttpRequest<any>('GET', this.rootUrl + this._urlJog , __body, {
       headers: __headers,
       params: __params,
       responseType: 'json'});

@@ -38,7 +38,7 @@
             <mat-form-field>
               <mat-label>Jogosultság</mat-label>
               <mat-select [(value)]="_aktualisJog">
-                <mat-option *ngFor="let jog of _jogokLista" [value]="jog.id">
+                <mat-option *ngFor="let jog of _jogokLista" [value]="jog">
                   {{ jog.megnevezes }}
                 </mat-option>
               </mat-select>

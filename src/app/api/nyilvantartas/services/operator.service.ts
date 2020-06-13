@@ -4,7 +4,6 @@ import {Observable as __Observable, of} from 'rxjs';
 import { filter as __filter, map as __map } from 'rxjs/operators';
 import { LoginOperatorGETRequest as LoginOperatorGETParams } from '../models/LoginOperatorGETRequest';
 import {Operator as __Operator} from '../models/Operator';
-import {OperatorCreateModel} from '../models/operator-create-model';
 import {Result} from '../models/Result';
 import {BaseService} from './base-service';
 import {StarterConfiguration as __Configuration} from './StarterConfiguration';
@@ -16,8 +15,9 @@ import {StrictHttpResponse as __StrictHttpResponse} from './strict-http-response
 export class OperatorService extends BaseService {
 
   private _urlOperator = '/operator/';
-  private _urlUsername = '/operator/username/';
-  private _urlLoginOperetor = '/loginOperator/';
+  private _urlOperatorok = 'operatorok';
+  private _urlUsername = 'operator/username/';
+  private _urlLoginOperetor = 'loginOperator/';
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -32,10 +32,11 @@ export class OperatorService extends BaseService {
    * A parametérben megadott ID által meghatározott operátort adja vissza.
    */
   getOperatorGETResponse(params: OperatorGETParams): __Observable<__StrictHttpResponse<Result<__Operator[]>>> {
-    const __params = this.newParams();
+    let __params = this.newParams();
     const __headers = new HttpHeaders();
     const __body: any = null;
-    const req = new HttpRequest<any>('GET', this.rootUrl + this._urlOperator + `${params.id}`, __body, {
+    if (params.id != null) { __params = __params.set('id', params.id.toString()); }
+    const req = new HttpRequest<any>('GET', this.rootUrl + this._urlOperator, __body, {
       headers: __headers,
       params: __params,
       responseType: 'json'});
@@ -57,7 +58,7 @@ export class OperatorService extends BaseService {
     const __params = this.newParams();
     const __headers = new HttpHeaders();
     const __body: any = null;
-    const req = new HttpRequest<any>('GET', this.rootUrl + this._urlOperator, __body, {
+    const req = new HttpRequest<any>('GET', this.rootUrl + this._urlOperator + this._urlOperatorok, __body, {
       headers: __headers,
       params: __params,
       responseType: 'json'});
@@ -102,7 +103,7 @@ export class OperatorService extends BaseService {
    * Új operátor mentésének REST service hívása.
    */
   saveOperatorPOSTResponse(
-    request: OperatorCreateModel): __Observable<__StrictHttpResponse<OperatorCreateModel>> {
+    request: __Operator): __Observable<__StrictHttpResponse<__Operator>> {
     const __params = this.newParams();
     const __headers = new HttpHeaders();
     let __body: any = null;
@@ -115,12 +116,12 @@ export class OperatorService extends BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map(_r => {
-        return _r as __StrictHttpResponse<OperatorCreateModel>;
+        return _r as __StrictHttpResponse<__Operator>;
       }));
   }
 
-  saveOperatorPOST(request: OperatorCreateModel): __Observable<OperatorCreateModel> {
-    return this.saveOperatorPOSTResponse(request).pipe(__map(_r => _r.body as OperatorCreateModel));
+  saveOperatorPOST(request: __Operator): __Observable<__Operator> {
+    return this.saveOperatorPOSTResponse(request).pipe(__map(_r => _r.body as __Operator));
   }
 }
 
