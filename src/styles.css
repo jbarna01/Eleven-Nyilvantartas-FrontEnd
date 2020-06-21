@@ -77,7 +77,7 @@ mat-card-title {
 .mat-dialog-title {
   padding: 10px 5px;
   text-align: center;
-  background-color: red;
+  background-color: #DAAD86;
   color: #FBEEC1;
 }
 .mat-dialog-content {}
@@ -85,6 +85,35 @@ mat-card-title {
 .mat-dialog-actions {
   float: right;
 }
+
+mat-table {
+  width: 60%;
+  margin: 20px auto;
+}
+
+mat-header-cell {
+  background-color: #DAAD86;
+  font-weight: bold;
+  color: #FBEEC1;
+  font-size: 14px;
+}
+
+mat-cell {
+  cursor: pointer;
+}
+
+mat-form-field {
+  width: 40%;
+  margin-top: 20px;
+  margin-left: 20%;
+}
+.mat-column-edit, .mat-column-delete {
+  color: #FBEEC1;
+  width: 20px;
+}
+
+
+
 
 .alap-gomb, .alap-gomb-120, .alap-gomb-140 {
   background-color: inherit;

@@ -1,34 +1,42 @@
-mat-table {
+/*mat-table {*/
+/*  width: 60%;*/
+/*  margin: 20px auto;*/
+/*}*/
+
+/*mat-header-cell {*/
+/*  background-color: cornflowerblue;*/
+/*  font-weight: bold;*/
+/*  color: darkblue;*/
+/*  font-size: 14px;*/
+/*}*/
+
+/*mat-cell {*/
+/*  cursor: pointer;*/
+/*}*/
+
+/*mat-form-field {*/
+/*  width: 40%;*/
+/*  margin-top: 20px;*/
+/*  margin-left: 20%;*/
+/*}*/
+/* .mat-column-edit, .mat-column-delete {*/
+/*   color: #f0f0f0;*/
+/*   width: 20px;*/
+/* }*/
+
+ /*.ujFelhasznaloButton {*/
+ /*  margin-right: 20%;*/
+ /*  margin-top: 20px;*/
+ /*  float: right;*/
+ /*}*/
+.filter-div {
+  display: block;
   width: 60%;
-  margin: 20px auto;
+  background-color: #DAAD86;
+  margin: 1em auto;
+  border-radius: 20px 0px 50px 0px;
+  box-shadow: 5px 5px 5px #A0A0A0;
 }
-
-mat-header-cell {
-  background-color: cornflowerblue;
-  font-weight: bold;
-  color: darkblue;
-  font-size: 14px;
-}
-
-mat-cell {
-  cursor: pointer;
-}
-
-mat-form-field {
-  width: 40%;
-  margin-top: 20px;
-  margin-left: 20%;
-}
- .mat-column-edit, .mat-column-delete {
-   color: #f0f0f0;
-   width: 20px;
- }
-
- .ujFelhasznaloButton {
-   margin-right: 20%;
-   margin-top: 20px;
-   float: right;
- }
 
 .mat-column-aktiv, .mat-column-edit, .mat-column-delete {
   flex: 0 0 5%;
