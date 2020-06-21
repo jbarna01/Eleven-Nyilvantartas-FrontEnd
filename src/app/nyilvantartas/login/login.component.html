@@ -2,21 +2,23 @@
 <div>
   <mat-card class="login_ablak">
     <mat-card-header>
-      <mat-card-title class="login_fejlec">{{ 'NYILVANTARTAS.LOGIN_ABLAK.TITLE' | translate }}</mat-card-title>
+      <mat-card-title>{{ 'NYILVANTARTAS.LOGIN_ABLAK.TITLE' | translate }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <mat-grid-list [cols]="1">
         <mat-form-field class="form">
-          <input [(ngModel)] = "_userName" class="input_text" matInput placeholder="{{ 'NYILVANTARTAS.LOGIN_ABLAK.USERNAME_PACEHOLDER' | translate }}" >
+          <input [(ngModel)] = "_userName" matInput />
+          <mat-placeholder>{{ 'NYILVANTARTAS.LOGIN_ABLAK.USERNAME_PACEHOLDER' | translate }}</mat-placeholder>
         </mat-form-field>
         <mat-form-field class="form">
-          <input [(ngModel)] = "_password" matInput placeholder="{{ 'NYILVANTARTAS.LOGIN_ABLAK.PASSWORD_PACEHOLDER' | translate }}" type="password">
+          <input [(ngModel)] = "_password" matInput type="password">
+          <mat-placeholder>{{ 'NYILVANTARTAS.LOGIN_ABLAK.PASSWORD_PACEHOLDER' | translate }}</mat-placeholder>
         </mat-form-field>
       </mat-grid-list>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button class="gombok">{{ 'NYILVANTARTAS.BUTTON.CANCEL' | translate }}</button>
-      <button mat-raised-button class="gombok" (click)="belepes()">{{ 'NYILVANTARTAS.BUTTON.LOGIN' | translate }}</button>
+      <button class="alap-gomb">{{ 'NYILVANTARTAS.BUTTON.CANCEL' | translate }}</button>
+      <button class="alap-gomb" (click)="belepes()">{{ 'NYILVANTARTAS.BUTTON.LOGIN' | translate }}</button>
     </mat-card-actions>
   </mat-card>
 </div>

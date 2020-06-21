@@ -1,5 +1,5 @@
   <h2 mat-dialog-title>{{ _ujOperator?'Új operátor létrehozása':'Operátor módosítása'}}</h2>
-  <mat-dialog-content>
+  <mat-dialog-content style="background-color: #EAE7DC">
 
     <mat-card>
       <mat-card-content class="dialog_ablak">
@@ -62,6 +62,6 @@
 
   </mat-dialog-content>
   <mat-dialog-actions>
-    <button mat-raised-button mat-dialog-close="false">Mégse</button>
-    <button mat-raised-button mat-dialog-close="true" [disabled]="_nemMentheto" (click)="operatorMentese()">Mentés</button>
+    <button class="alap-gomb" (click)="megseClick()">Mégse</button>
+    <button class="alap-gomb" [disabled]="_nemMentheto" (click)="operatorMentese()">Mentés</button>
   </mat-dialog-actions>

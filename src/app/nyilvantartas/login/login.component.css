@@ -1,26 +1,47 @@
-input {
-  width: 80%;
-  padding: 5px;
+mat-card {
+  padding: 0px;
+  border-radius: 50px 50px 50px 50px;
+  box-shadow: 7px 7px 7px #595959;
 }
 
+mat-card-header {
+  display: flex;
+  justify-content: center;
+  padding: 1em;
+  background-color: #BC986A;
+  border-radius: 50px 50px 0px 0px;
+}
+mat-card-content {
+  padding: 1em;
+}
+mat-card-actions {
+  display: flex;
+  justify-content: center;
+  margin: 1em;
+}
+.mat-card>.mat-card-actions:last-child {
+  padding-bottom: 1em;
+}
 .login_ablak {
-  width: 300px;
+  width: 350px;
   margin: 100px auto;
+  background-color: #DAAD86;
+  box-shadow: 7px 7px 7px #595959;
 }
 
-.login_fejlec {
-  font-weight: bold;
-  font-size: 16px;
-  color: darkslategray;
-  width: 100%;
-  text-align: center;
+.mat-card-header .mat-card-title {
+  margin-bottom: 0px;
 }
+
+/*.login_fejlec {*/
+/*  font-weight: bold;*/
+/*  font-size: 16px;*/
+/*  color: #FFFFFF;*/
+/*  width: 100%;*/
+/*  text-align: center;*/
+/*}*/
 
 .form {
   width: 100%;
   margin: 5px 0px;
 }
-
-.gombok {
-  width: 40%;
-  }

@@ -1,36 +1,84 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: #FBEEC1}
 
 
 /*Globális HTML elemeg*/
 input {
   width: 90%;
-  padding: 2px;
-  color: #004735;
+  margin: 0px auto;
+  height: 2em;
+  box-shadow: 3px 4px 3px #595959;
 }
-.mat-focused .placeholder {
-  color: #004735;
+input:focus {
+  display: block;
+  width: 90%;
+  margin: 0px auto;
+  border: 1px solid white;
+  background-color: #FBEEC1;
+  color: #DAAD86;
+  padding: 2px 5px;
 }
-.mat-form-field.mat-focused .mat-form-field-ripple {
-  background-color: #004735 !important;
+
+input:not(:focus) {
+  display: block;
+  width: 90%;
+  margin: 0px auto;
+  border: 1px solid white;
+  background-color: #DAAD86;
+  color: #FBEEC1;
+  padding: 2px 5px;
+}
+
+input:placeholder-shown {
+  border: 1px solid white; /* Red border only if the input is empty */
+}
+mat-placeholder {
+  color: #FBEEC1;
+  padding-left: 1em;
+  padding-top: 1em;
+}
+::ng-deep input .mat-form-field-label{
+  padding-left: 20px;
+}
+
+.mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: #FBEEC1 !important;
+}
+
+.mat-form-field-underline {
+  /*change color of underline*/
+  background-color: #DAAD86 !important;
+}
+
+.mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: #DAAD86 !important;;
+}
+
+mat-card-title {
+  font-size: 1.5em;
+  color: #FFFFFF;
+  font-weight: bolder;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0px;
 }
 
 
-/*Globális gomb*/
-.mat-raised-button {
-  background-color: #004735;
-  color: #ffab13;
-  min-width: 100px;
+/* Change label color on focused */
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+  color: green !important;
 }
 
 /*DIALOG PANEL*/
 .mat-dialog-title {
   padding: 10px 5px;
   text-align: center;
-  background-color: #004735;
-  color: #ffab13;
+  background-color: red;
+  color: #FBEEC1;
 }
 .mat-dialog-content {}
 
@@ -38,3 +86,17 @@ input {
   float: right;
 }
 
+.alap-gomb, .alap-gomb-120, .alap-gomb-140 {
+  background-color: inherit;
+  border: 1px solid #ffffff;
+  padding: 8px 8px 8px 2px;
+  width: 100px;
+  color: #FFFFFF;
+  font-weight: bolder;
+  font-size: 1em;
+  margin: 10px 10px;
+  text-align: center;
+  box-shadow: 3px 7px 3px #595959;
+  border-radius: 20px 20px 20px 20px;
+  cursor: pointer;
+}

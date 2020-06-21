@@ -1,6 +1,8 @@
 .navbar {
   justify-content: space-between;
   font-size: 1em;
+  background-color: #BC986A;
+  color: #FBEEC1;
 }
 
 span {

@@ -1,12 +1,12 @@
-import {HttpParams as __HttpParams} from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog as __MatDialog} from '@angular/material/dialog';
+import {MatSnackBar as __MatSnackBar} from '@angular/material/snack-bar';
 import {Router as __Router} from '@angular/router';
 import {Operator as __Operator} from '../../api/nyilvantartas/models/Operator';
 import {GlobalsService as __GlobalsService} from '../../api/nyilvantartas/services/globals.service';
 import {OperatorService as __OperatorService} from '../../api/nyilvantartas/services/operator.service';
-import {OperatorAdatokComponent} from './dialogs/karbantartas/operator-adatok.component';
+import {OperatorAdatokComponent as __OperatorAdatokComponent} from './dialogs/karbantartas/operator-adatok.component';
 
 @Component({
   selector: 'app-operatorok',
@@ -26,21 +26,21 @@ export class OperatorokComponent implements OnInit {
   private _felhasznaloId: string;
 
   private _operatorok = [] as any;
-  private _params: __HttpParams;
 
-  constructor(private operatorService: __OperatorService,
-              private global: __GlobalsService,
-              private router: __Router,
-              private dialog: MatDialog) { }
+  constructor(private __operatorService: __OperatorService,
+              private __global: __GlobalsService,
+              private __snackBar: __MatSnackBar,
+              private __router: __Router,
+              private __dialog: __MatDialog) { }
 
   /**
    * Ellenörzi, vhogy van-e belépet felhasználó.
    * Amennyiben nincs meghívja a operatorLista-t feltöltő metódust.
    */
   ngOnInit() {
-    this.global._isBelepve.subscribe(isBelepve => this._isBelepve = isBelepve);
+    this.__global._isBelepve.subscribe(isBelepve => this._isBelepve = isBelepve);
     if (!this._isBelepve) {
-      this.router.navigate(['']);
+      this.__router.navigate(['']);
     } else {
         this.operatorListaFeltoltese();
     }
@@ -51,19 +51,27 @@ export class OperatorokComponent implements OnInit {
    * ADMIN vagy nem. Nem ADMIN felhasználó esetén csak a belépet felhasználó adatait adja vissza.
    */
   private operatorListaFeltoltese() {
-    this.global._belepettFelhasznaloJoga.subscribe(felhasznaloJoga => this._felhasznaloJoga = felhasznaloJoga.toString());
+    this.__global._belepettFelhasznaloJoga.subscribe(felhasznaloJoga => this._felhasznaloJoga = felhasznaloJoga.toString());
     if (this._felhasznaloJoga === 'ADMIN') {
-      this.operatorService.getAllOperatorokGET().subscribe(operatorok => {
-        this._operatorokLista = new MatTableDataSource(operatorok.data);
-        this._operatorokLista.sort = this.sort;
-        this._operatorokLista.paginator = this.paginator;
+      this.__operatorService.getAllOperatorokGET().subscribe(response => {
+        if (response.status.toUpperCase() === 'OK') {
+          this._operatorokLista = new MatTableDataSource(response.data);
+          this._operatorokLista.sort = this.sort;
+          this._operatorokLista.paginator = this.paginator;
+        } else {
+          this.uzenetek('Nem lehet a felhasználó listát betölteni', 3000);
+        }
       }) ;
     } else {
-      this.global._felhasznaloId.subscribe(felhasznalId => this._felhasznaloId = felhasznalId.toString());
-      this.operatorService.getOperatorGET({id: this._felhasznaloId.toString()}).subscribe(operatorok => {
-        this._operatorok.push(operatorok);
-        this._operatorokLista = new MatTableDataSource(this._operatorok);
-        this._operatorokLista.sort = this.sort;
+      this.__global._felhasznaloId.subscribe(felhasznalId => this._felhasznaloId = felhasznalId.toString());
+      this.__operatorService.getOperatorGET({id: this._felhasznaloId.toString()}).subscribe(response => {
+        if (response.status.toUpperCase() === 'OK') {
+          this._operatorok.push(response);
+          this._operatorokLista = new MatTableDataSource(this._operatorok);
+          this._operatorokLista.sort = this.sort;
+        } else {
+          this.uzenetek('Nem lehet a felhasználó listát betölteni', 3000);
+        }
       });
     }
   }
@@ -76,10 +84,12 @@ export class OperatorokComponent implements OnInit {
   }
 
   private ujOperatorFelvetele() {
-    const dialogRefUj = this.dialog.open(OperatorAdatokComponent, {data: new __Operator()});
+    const dialogRefUj = this.__dialog.open(__OperatorAdatokComponent, {data: new __Operator()});
 
     dialogRefUj.afterClosed().subscribe(result => {
-      this.ngOnInit();
+      if (result) {
+        this.operatorListaFeltoltese();
+      }
     });
   }
 
@@ -87,10 +97,19 @@ export class OperatorokComponent implements OnInit {
    * A kiválasztott operátor adatait jeleníti meg.
    */
   private operatorKarbantartasa(_operator: __Operator) {
-    const dialogRef = this.dialog.open(OperatorAdatokComponent, {data: _operator});
+    const dialogRef = this.__dialog.open(__OperatorAdatokComponent, {data: _operator});
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialaog válasz: ${result}`);
+      this.operatorListaFeltoltese();
     });
+  }
+
+  /**
+   * A váltózóban kapott üzenetett kiírja a képernyőre
+   * @param uzenet a kiírandó üzenet.
+   * @param autoBezar ennyi idő után az üzenet automatikusan bezáródik.
+   */
+  private uzenetek(uzenet: string, autoBezar: number) {
+    return this.__snackBar.open(uzenet, 'Bezár', {duration: autoBezar} );
   }
 }

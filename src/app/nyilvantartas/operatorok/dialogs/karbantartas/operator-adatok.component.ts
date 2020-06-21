@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef as __MatDialogRef} from '@angular/material/dialog';
 import {MatSnackBar as __MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
 import {Jogok as __Jogok} from '../../../../api/nyilvantartas/models/Jogok';
@@ -7,6 +7,7 @@ import {Operator as __Operator} from '../../../../api/nyilvantartas/models/Opera
 import {GlobalsService} from '../../../../api/nyilvantartas/services/globals.service';
 import {JogokService} from '../../../../api/nyilvantartas/services/jogok.service';
 import {OperatorService} from '../../../../api/nyilvantartas/services/operator.service';
+import {OperatorokComponent as __OperatorokComponent} from '../../operatorok.component';
 import {JelszoModositasComponent} from '../jelszoModositas/jelszoModositas.component';
 
 @Component({
@@ -30,28 +31,32 @@ export class OperatorAdatokComponent implements OnInit {
   private _jog = [] as any;
   private _mentettUsername: string;
   private _egyediUsername = true;
+  private _dialogRef: __MatDialogRef<__OperatorokComponent>;
 
   constructor(@Inject(MAT_DIALOG_DATA) private operator: __Operator,
               private __operatorService: OperatorService,
               private __jogokService: JogokService,
               private __router: Router,
-              private snackBar: __MatSnackBar,
+              private __snackBar: __MatSnackBar,
               private __global: GlobalsService,
-              private __dialog: MatDialog) {
+              private __dialog: MatDialog,
+              private __dialogRef: __MatDialogRef<__OperatorokComponent>) {
+    this._dialogRef = __dialogRef;
     if (operator.id == null) {
       this._ujOperator = true;
       this._operator = new __Operator();
     } else {
       this._ujOperator = false;
       this._operator = operator;
+      this._ujJelszo1 = this._operator.password;
       this._mentettUsername = operator.username;
     }
   }
 
   ngOnInit() {
     this.__global._belepettFelhasznaloJoga.subscribe(felhasznaloJoga => this._felhasznaloJoga = felhasznaloJoga.toString());
-    this._aktivFelhasznalo = this._operator.status === 'A' ? true : false;
-    this._disabled = this._felhasznaloJoga === 'ADMIN' ? false : true;
+    this._aktivFelhasznalo = this._operator.status === 'A';
+    this._disabled = this._felhasznaloJoga === 'ADMIN';
     if (this._ujOperator) {
       this.mezokUritese();
     }
@@ -93,31 +98,16 @@ export class OperatorAdatokComponent implements OnInit {
         this._operator.status = this._ujOperator ? 'A' : (this._aktivFelhasznalo ? 'A' : 'P');
         this._operator.jogok = this._aktualisJog;
         this.__operatorService.saveOperatorPOST(this._operator).subscribe(operator => {
-          console.log(operator);
-          // this._operator = (<__Operator>operator);
+            this._dialogRef.close({data: operator});
         });
 
-        // // this._params = this.setParameters(this._aktualisJog.toString());
-        // this.__jogokService.getJogGET({id: this._aktualisJog.toString()}).subscribe(jog => {
-        //   this._jog = jog;
-        //   const model = this.operatorCreateRequestModel();
-        //   if (this._ujOperator) {
-        //     this.__operatorService.saveOperatorPOST(model).subscribe(operator => {
-        //       console.log(operator);
-        //       // this._operator = (<__Operator>operator);
-        //     });
-        //   } else {
-        //     this._operator.jogok = this._jog;
-        //     this._operator.status = this._aktivFelhasznalo ? 'A' : 'P';
-        //     // this.__operatorService.updateOperatorPUT({id: this._operator.id.toString(), request: model}).subscribe(operator => {
-        //     //   this._operator = (<__Operator>operator);
-        //     // });
-        //   }
-        // });
       }
     }
   }
 
+  private megseClick() {
+    this._dialogRef.close({data: null});
+  }
   /**
    * Mentés előtt az operátor adatainak ellenörzése.
    * Nem lehet null a következők:
@@ -168,11 +158,11 @@ export class OperatorAdatokComponent implements OnInit {
   }
 
   /**
-   * Kiírja az uzenet változóban lévő üzenetett a képernyőre.
-   * 2 másodperc múlva autómatikusan eltünteti!
-   * @param uzenet, a kiírandó üzenet.
+   * A váltózóban kapott üzenetett kiírja a képernyőre
+   * @param uzenet a kiírandó üzenet.
+   * @param autoBezar ennyi idő után az üzenet automatikusan bezáródik.
    */
-  private uzenetek(uzenet: string) {
-    this.snackBar.open(uzenet, 'Bezár')._dismissAfter(2000);
+  private uzenetek(uzenet: string, autoBezar: number) {
+    return this.__snackBar.open(uzenet, 'Bezár', {duration: autoBezar} );
   }
 }
